@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fridge/components/buttons.dart';
+import 'package:fridge/constants.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -27,47 +29,56 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 flex: 2,
-                child: new Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-                    child: new Text(
-                      'All foods that you can easily in a single app.',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Color(0xff0D1863),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Poppins'),
-                    ),
-                  ),
+                child: SvgPicture.asset(
+                  'asset/images/FirstPageImage.svg',
+                  alignment: Alignment.bottomCenter,
                 ),
               ),
               Expanded(
                 flex: 1,
-                child: new Container(
-                  decoration:
-                      new BoxDecoration(color: Color.fromRGBO(160, 77, 255, 1)),
-                ),
+                child: Stack(alignment: Alignment.center, children: [
+                  Container(
+                    decoration: BoxDecoration(color: kPrimaryColor),
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: height * 0.05,
+                      ),
+                      MainButton(
+                        onTap: () {},
+                        buttonTitle: 'Login',
+                      ),
+                      MainButton(
+                        onTap: () {},
+                        buttonTitle: 'Sign up',
+                        color: Colors.white,
+                        fontColor: kTextColor1,
+                      )
+                    ],
+                  )
+                ]),
               ),
             ],
           ),
           Positioned(
-            top: height*0.25,
-            left: width*0.1,
-            right: width*0.1,
-            child: SvgPicture.asset(
-              'asset/images/test.svg',height: height*0.55,width: width*0.5,
+            top: height * 0.075,
+            left: width * 0.1,
+            right: width * 0.1,
+            child: Container(
+              child: Text(
+                  'All foods that you can easily cook in a single app.',
+                  style: kHeading1),
             ),
           ),
         ],

@@ -34,7 +34,7 @@ class MainButton extends StatelessWidget {
           ),
         ),
         margin: EdgeInsets.all(7.0),
-        padding: EdgeInsets.all(2.0),
+        padding: EdgeInsets.all(1.0),
         width: 265,
         height: 45,
       ),

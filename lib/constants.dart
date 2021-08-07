@@ -27,21 +27,21 @@ const kHeading3 = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: 'Poppins');
 
-TextStyle kText1({color}) {
-  return TextStyle(
-    color: color,
-    fontSize: 16.0,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Poppins',
-  );
-}
+// TextStyle kText1({color: kTextColor1}) {
+//   return TextStyle(
+//     color: color,
+//     fontSize: 16.0,
+//     fontWeight: FontWeight.w500,
+//     fontFamily: 'Poppins',
+//   );
+// }
 
-// const kText1 = TextStyle(
-//   color: kTextColor1,
-//   fontSize: 16.0,
-//   fontWeight: FontWeight.w500,
-//   fontFamily: 'Poppins',
-// );
+const kText1 = TextStyle(
+  color: kTextColor1,
+  fontSize: 16.0,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Poppins',
+);
 
 // const kText1White = TextStyle(
 //   color: kTextColor2,
@@ -49,7 +49,6 @@ TextStyle kText1({color}) {
 //   fontWeight: FontWeight.w500,
 //   fontFamily: 'Poppins',
 // );
-
 
 const ktext2 = TextStyle(
     color: Color.fromRGBO(53, 76, 123, 1),

@@ -8,33 +8,35 @@ class MainButton extends StatelessWidget {
       this.color: kButtonColor,
       this.fontColor: Colors.white});
 
-  final Function onTap;
+  final VoidCallback onTap;
   final String buttonTitle;
   final Color color;
   final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: onTap(),
       child: Container(
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.white)),
         child: Center(
-          child: Text(
-            buttonTitle,
-            style: kText1(color: fontColor),
-            textAlign: TextAlign.center,
+          child: SizedBox.expand(
+            child: TextButton(
+              onPressed: onTap,
+              child: Text(buttonTitle),
+              style: TextButton.styleFrom(
+                primary: fontColor,
+                textStyle: kText1,
+              ),
+            ),
           ),
         ),
-        margin: EdgeInsets.all(10.0),
-        padding: EdgeInsets.all(10.0),
-        width: width * 0.7,
-        height: height * 0.07,
+        margin: EdgeInsets.all(7.0),
+        padding: EdgeInsets.all(2.0),
+        width: 265,
+        height: 45,
       ),
     );
   }

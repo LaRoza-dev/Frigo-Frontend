@@ -11,6 +11,7 @@ class FirstPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       body: Stack(
         children: [
           Column(
@@ -29,23 +30,27 @@ class FirstPage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(color: kPrimaryColor),
                   ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: height * 0.05,
-                      ),
-                      MainButton(
-                        onTap: () {},
-                        buttonTitle: 'Login',
-                        fontColor: kTextColor2,
-                      ),
-                      MainButton(
-                        onTap: () {},
-                        buttonTitle: 'Sign up',
-                        color: Colors.white,
-                        fontColor: kTextColor1,
-                      )
-                    ],
+                  Positioned(
+                    top: height * 0.07,
+                    child: Column(
+                      children: [
+                        MainButton(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/signin');
+                          },
+                          buttonTitle: 'Login',
+                          fontColor: kTextColor2,
+                        ),
+                        MainButton(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/signup');
+                          },
+                          buttonTitle: 'Sign up',
+                          color: Colors.white,
+                          fontColor: kTextColor1,
+                        )
+                      ],
+                    ),
                   )
                 ]),
               ),

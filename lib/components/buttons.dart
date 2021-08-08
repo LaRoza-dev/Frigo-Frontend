@@ -18,6 +18,13 @@ class MainButton extends StatelessWidget {
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 6,
+                offset: Offset(3, 6),
+              ),
+            ],
             color: color,
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.white)),

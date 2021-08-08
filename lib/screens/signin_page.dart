@@ -84,7 +84,8 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(width: 150,
+            Container(
+              width: 150,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

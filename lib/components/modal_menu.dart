@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +36,7 @@ Future<dynamic> modalMenu(BuildContext context) {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: FaIcon(FontAwesomeIcons.sortDown),
+                    icon: FaIcon(FontAwesomeIcons.chevronDown),
                   )
                 ],
               ),

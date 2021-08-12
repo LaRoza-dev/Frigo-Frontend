@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
-import 'package:fridge/components/modal_profile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -71,9 +70,7 @@ class SignInPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
-                      onTap: () {
-                        profileModal(context);
-                      },
+                      onTap: () {},
                       buttonTitle: 'Sign in',
                       fontColor: kTextColor2,
                     ),

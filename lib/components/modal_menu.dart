@@ -10,84 +10,68 @@ Future<dynamic> modalMenu(BuildContext context) {
     builder: (context) => BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25), topRight: Radius.circular(25)),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Home',
-                      style: kHeading3,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: FaIcon(FontAwesomeIcons.chevronDown),
-                  )
-                ],
-              ),
-              Divider(
-                indent: 20,
-                endIndent: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'About Us',
-                  style: kHeading3,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ModalTile(
+              title: 'Home',
+              onTap: () {},
+              trailWidget: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.chevronDown,
+                  color: kButtonColor,
                 ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              Divider(
-                indent: 20,
-                endIndent: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Contact',
-                  style: kHeading3,
-                ),
-              ),
-              Divider(
-                indent: 20,
-                endIndent: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Notification',
-                  style: kHeading3,
-                ),
-              ),
-              Divider(
-                indent: 20,
-                endIndent: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Sign Out',
-                  style: kHeading3,
-                ),
-              ),
-            ],
-          ),
+            ),
+            ModalDivider(),
+            ModalTile(title: 'About Us', onTap: () {}),
+            ModalDivider(),
+            ModalTile(title: 'Contact', onTap: () {}),
+            ModalDivider(),
+            ModalTile(title: 'Notification', onTap: () {}),
+            ModalDivider(),
+            ModalTile(title: 'َSign Out', onTap: () {}),
+          ],
         ),
       ),
     ),
   );
+}
+
+class ModalTile extends StatelessWidget {
+  final String title;
+  final Function()? onTap;
+  final Widget? trailWidget;
+  ModalTile({required this.title, required this.onTap, this.trailWidget});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onTap,
+      title: Text(
+        title,
+        style: kHeading3,
+      ),
+      trailing: trailWidget,
+    );
+  }
+}
+
+class ModalDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      indent: 20,
+      endIndent: 20,
+    );
+  }
 }

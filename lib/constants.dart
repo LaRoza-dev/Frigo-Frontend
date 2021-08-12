@@ -9,6 +9,10 @@ const kTextColor1 = Color.fromRGBO(13, 24, 99, 1);
 const kTextColor2 = Colors.white;
 const kFieldTextColor = Color.fromRGBO(204, 205, 223, 1);
 
+const kTileColor = Color.fromRGBO(146, 163, 197, 1);
+
+const kRedColor = Color.fromRGBO(238, 49, 105, 1);
+
 const kHeading1 = TextStyle(
     color: kTextColor1,
     fontSize: 28.0,
@@ -27,28 +31,12 @@ const kHeading3 = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: 'Poppins');
 
-// TextStyle kText1({color: kTextColor1}) {
-//   return TextStyle(
-//     color: color,
-//     fontSize: 16.0,
-//     fontWeight: FontWeight.w500,
-//     fontFamily: 'Poppins',
-//   );
-// }
-
 const kText1 = TextStyle(
   color: kTextColor1,
   fontSize: 16.0,
   fontWeight: FontWeight.w500,
   fontFamily: 'Poppins',
 );
-
-// const kText1White = TextStyle(
-//   color: kTextColor2,
-//   fontSize: 16.0,
-//   fontWeight: FontWeight.w500,
-//   fontFamily: 'Poppins',
-// );
 
 const ktext2 = TextStyle(
     color: Color.fromRGBO(53, 76, 123, 1),

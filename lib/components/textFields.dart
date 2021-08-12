@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 
 class InsertTextFlied extends StatelessWidget {
-  const InsertTextFlied({required this.width,required this.text}); 
+  const InsertTextFlied({required this.width,required this.text, this.textAction : TextInputAction.next}); 
 
   final double width;
   final String text;
+  final textAction;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class InsertTextFlied extends StatelessWidget {
         height: 40,
         child: TextField(
           textAlignVertical: TextAlignVertical.center,
+          textInputAction: textAction,
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(10.0),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fridge/screens/first_page.dart';
+import 'package:fridge/screens/signin_page.dart';
+import 'package:fridge/screens/signup_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -19,7 +21,12 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => FirstPage(),
+        '/signin': (context) => SignInPage(),
+        '/signup': (context) => SignUpPage(),
+      },
     );
   }
 }

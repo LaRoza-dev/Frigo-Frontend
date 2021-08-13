@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 
 class InsertTextFlied extends StatelessWidget {
-  const InsertTextFlied({required this.width,required this.text, this.textAction : TextInputAction.next}); 
+  const InsertTextFlied(
+      {required this.width,
+      required this.text,
+      this.textAction: TextInputAction.next,
+      this.onTap});
 
   final double width;
   final String text;
   final textAction;
-
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,8 +28,11 @@ class InsertTextFlied extends StatelessWidget {
               hintText: text,
               hintStyle: kFormField,
               isCollapsed: true),
+          onTap: onTap,
         ),
-        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.06),

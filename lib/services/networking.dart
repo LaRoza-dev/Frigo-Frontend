@@ -3,10 +3,17 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 const String baseUrl = 'https://api.laroza.dev';
 
 class Request {
-  static void sendRequest(String endpoint, String method, String body) async {
+  static Future<String> test() async {
+    return "Hola";
+  }
+
+  static Future<String?> sendRequest(
+      String endpoint, String method, String body) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(method, Uri.parse(baseUrl + endpoint));
 
@@ -16,38 +23,46 @@ class Request {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      return await response.stream.bytesToString();
     } else {
-      print(response.reasonPhrase);
+      return Future.error(response.reasonPhrase.toString());
     }
   }
 }
 
 class User {
+  final _storage = FlutterSecureStorage();
   User({required this.email, required this.password});
 
   final String email;
   final String password;
 
-  void login() async {
-    var reqBody = {};
-    reqBody["email"] = email;
-    reqBody["password"] = password;
+  Future<String?> login() async {
+    var reqBody = {"email": email, "password": password};
     String str = json.encode(reqBody);
-    Request.sendRequest('/login', 'POST', str);
+    // try {
+    var result = await Request.sendRequest('/login', 'POST', str);
 
-    // var headers = {'Content-Type': 'application/json'};
-    // var request = http.Request('POST', Uri.parse(baseUrl + '/login'));
+    Map<String, dynamic> decodedRes = json.decode(result!);
 
-    // request.body = json.encode({"email": email, "password": password});
-    // request.headers.addAll(headers);
+    final String? value = decodedRes["access_token"];
+    final String key = 'token';
+    await _storage.write(key: key, value: value);
 
-    // http.StreamedResponse response = await request.send();
+    final String? testRes = await _storage.read(key: key);
 
-    // if (response.statusCode == 200) {
-    //   print(await response.stream.bytesToString());
-    // } else {
-    //   print(response.reasonPhrase);
-    // }
+    return (testRes);
+  }
+
+  Future<void> logout() async {
+    await _storage.delete(key: "token");
+    print('logged out');
+  }
+
+  Future<String?> getToken() async {
+    String? token = await _storage.read(key: "token");
+    return token;
   }
 }
+
+class Recipe {}

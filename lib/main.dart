@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
-import 'package:fridge/services/networking.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Color(0xFF000000),
     statusBarColor: Colors.transparent,
@@ -13,9 +12,8 @@ void main() {
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
 
-  User user = User(email: "mehdi@laroza.dev", password: "password123");
-  user.login();
   runApp(Main());
 }
 

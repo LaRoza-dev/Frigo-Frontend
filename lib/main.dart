@@ -3,6 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
+import 'package:fridge/screens/home_page.dart';
+import 'package:fridge/constants.dart';
+import 'package:fridge/services/networking.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -13,22 +17,33 @@ void main() async {
     statusBarBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  Future<String>? initialRoute() async {
+    String? token;
+    token = await kStorage.read(key: 'token');
+    print({'token': token});
+    return (token == null ? '/' : '/home');
+  }
 
-  runApp(Main());
+  runApp(Main(initialRoute: await initialRoute()));
 }
 
 class Main extends StatelessWidget {
-  const Main({Key? key}) : super(key: key);
+  Main({this.initialRoute = '/'});
+  final initialRoute;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstPage(),
-        '/signin': (context) => SignInPage(),
-        '/signup': (context) => SignUpPage(),
-      },
+    return ChangeNotifierProvider(
+      create: (_) => User(),
+      child: MaterialApp(
+        initialRoute: initialRoute,
+        routes: {
+          '/': (context) => FirstPage(),
+          '/signin': (context) => SignInPage(),
+          '/signup': (context) => SignUpPage(),
+          '/home': (context) => HomePage(),
+        },
+      ),
     );
   }
 }

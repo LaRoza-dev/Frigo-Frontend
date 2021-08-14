@@ -47,6 +47,10 @@ class User extends ChangeNotifier {
   }
 
   String? token = "";
+  void setToken(newToken) {
+    token = newToken;
+    notifyListeners();
+  }
 
   Future<String?> login() async {
     var reqBody = {"email": email, "password": password};
@@ -68,6 +72,7 @@ class User extends ChangeNotifier {
 
   Future<void> logout() async {
     await _storage.delete(key: "token");
+    setToken("");
     print('logged out');
   }
 

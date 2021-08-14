@@ -73,7 +73,7 @@ class SignInPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
                       onTap: () async {
-                        await Provider.of<User>(context).login();
+                        await Provider.of<User>(context, listen: false).login();
                         Navigator.pushNamed(context, '/home');
                       },
                       buttonTitle: 'Sign in',

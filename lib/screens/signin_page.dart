@@ -4,10 +4,10 @@ import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:fridge/services/networking.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -61,16 +61,21 @@ class SignInPage extends StatelessWidget {
                   InsertTextFlied(
                     width: width,
                     text: 'User name',
+                    onChanged: Provider.of<User>(context).setEmail,
                   ),
                   InsertTextFlied(
                     width: width,
                     text: 'Password',
                     textAction: TextInputAction.done,
+                    onChanged: Provider.of<User>(context).setPassword,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
-                      onTap: () {},
+                      onTap: () async {
+                        await Provider.of<User>(context).login();
+                        Navigator.pushNamed(context, '/home');
+                      },
                       buttonTitle: 'Sign in',
                       fontColor: kTextColor2,
                     ),

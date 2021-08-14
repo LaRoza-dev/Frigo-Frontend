@@ -6,12 +6,14 @@ class InsertTextFlied extends StatelessWidget {
       {required this.width,
       required this.text,
       this.textAction: TextInputAction.next,
-      this.onTap});
+      this.onTap,
+      this.onChanged});
 
   final double width;
   final String text;
   final textAction;
   final VoidCallback? onTap;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,6 +24,7 @@ class InsertTextFlied extends StatelessWidget {
         child: TextField(
           textAlignVertical: TextAlignVertical.center,
           textInputAction: textAction,
+          onChanged: onChanged,
           decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(10.0),

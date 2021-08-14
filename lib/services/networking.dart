@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const String baseUrl = 'https://api.laroza.dev';
+final _storage = FlutterSecureStorage();
 
 class Request {
   static Future<String> test() async {
@@ -19,7 +21,6 @@ class Request {
 
     request.body = body;
     request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
@@ -30,17 +31,28 @@ class Request {
   }
 }
 
-class User {
-  final _storage = FlutterSecureStorage();
-  User({required this.email, required this.password});
+class User extends ChangeNotifier {
+  // User({this.email = '', this.password = ''});
 
-  final String email;
-  final String password;
+  String? email = "";
+  void setEmail(newEmail) {
+    email = newEmail;
+    notifyListeners();
+  }
+
+  String? password = "";
+  void setPassword(newPassword) {
+    password = newPassword;
+    notifyListeners();
+  }
+
+  String? token = "";
 
   Future<String?> login() async {
     var reqBody = {"email": email, "password": password};
     String str = json.encode(reqBody);
     // try {
+
     var result = await Request.sendRequest('/login', 'POST', str);
 
     Map<String, dynamic> decodedRes = json.decode(result!);
@@ -61,6 +73,7 @@ class User {
 
   Future<String?> getToken() async {
     String? token = await _storage.read(key: "token");
+    token = token;
     return token;
   }
 }

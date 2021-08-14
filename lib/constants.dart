@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+final kStorage = FlutterSecureStorage();
+
 // const kButtonColor = Color.fromRGBO(87, 45, 134, 1);
 const kButtonColor = Color(0xFF572D86);
 const kPrimaryColor = Color.fromRGBO(160, 77, 255, 1);

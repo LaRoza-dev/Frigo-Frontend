@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 DateTime selectedDate = DateTime.now();
 
 Future<dynamic> profileModalMenu(BuildContext context) {
-  double width = MediaQuery.of(context).size.width;
+  // double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
   return showModalBottomSheet(
     isScrollControlled: true,

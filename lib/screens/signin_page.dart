@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:fridge/main.dart';
 import 'package:fridge/models/user.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignInPage extends StatelessWidget {
+// class SignInPage extends ConsumerWidget {
+  class SignInPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  // Widget build(BuildContext context, ScopedReader watch) {
+    Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    // final user = watch(userProvider);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -61,19 +66,22 @@ class SignInPage extends StatelessWidget {
                   InsertTextFlied(
                     width: width,
                     text: 'User name',
-                    onChanged: Provider.of<User>(context).setEmail,
+                    // onChanged: user.state.setEmail,
+                    onChanged: context.read(userProvider).state.setEmail,
                   ),
                   InsertTextFlied(
                     width: width,
                     text: 'Password',
                     textAction: TextInputAction.done,
-                    onChanged: Provider.of<User>(context).setPassword,
+                    // onChanged: user.state.setPassword,
+                    onChanged: context.read(userProvider).state.setPassword,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
                       onTap: () async {
-                        await Provider.of<User>(context, listen: false).login();
+                        // await user.state.login();
+                        await context.read(userProvider).state.login();
                         Navigator.pushNamed(context, '/home');
                       },
                       buttonTitle: 'Sign in',

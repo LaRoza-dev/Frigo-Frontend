@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fridge/models/user.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
 import 'package:fridge/screens/home_page.dart';
 import 'package:fridge/constants.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -17,33 +17,25 @@ void main() async {
     statusBarBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();
-  Future<String>? initialRoute() async {
-    String? token;
-    token = await kStorage.read(key: 'token');
-    print({'token': token});
-    return (token == null ? '/' : '/home');
-  }
 
-  runApp(ProviderScope(child: Main(/*initialRoute: await initialRoute()*/)));
+  String? token = await kStorage.read(key: 'token');
+  String initialRoute = token != null ? '/home' : '/';
+  runApp(ProviderScope(child: Main(initialRoute: initialRoute)));
 }
 
-final initialRouteProvider = FutureProvider<String>((ref) async {
-  String? token;
-  token = await kStorage.read(key: 'token');
 
-  return (token == null ? '/' : '/home');
+final userProvider = StateProvider<User>((ref) {
+  return User();
 });
 
-class Main extends ConsumerWidget {
-  // Main({this.initialRoute = '/'});
-  // final initialRoute;
+class Main extends StatelessWidget {
+  Main({required this.initialRoute});
+  final initialRoute;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final initialRoute = watch(initialRouteProvider);
-
+  Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: initialRoute.data?.value,
+      initialRoute: initialRoute,
       routes: {
         '/': (context) => FirstPage(),
         '/signin': (context) => SignInPage(),

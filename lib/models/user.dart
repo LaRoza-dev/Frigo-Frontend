@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'dart:convert';
 import 'package:fridge/constants.dart';
 
-var dio = Dio();
 var options = BaseOptions(
   baseUrl: 'https://api.laroza.dev',
   connectTimeout: 5000,
   receiveTimeout: 3000,
 );
-// const String baseUrl = 'https://api.laroza.dev';
+Dio dio = Dio(options);
 
+//TODO: why change notifier ?
 class User extends ChangeNotifier {
   String? email = "";
   void setEmail(newEmail) {
@@ -28,15 +27,17 @@ class User extends ChangeNotifier {
 
   Future<String?> login() async {
     var reqBody = {"email": email, "password": password};
-
     var response = await dio.post('/login', data: reqBody);
 
-    Map<String, dynamic> decodedRes = json.decode(response.data.toString());
+    // Map<dynamic, dynamic> decodedRes = json.decode(response.data.toString());
+    Map<dynamic, dynamic> decodedRes = response.data;
 
     final String? value = decodedRes["access_token"];
     final String key = 'token';
     await kStorage.write(key: key, value: value);
 
+
+    //TODO: what's this ?
     final String? testRes = await kStorage.read(key: key);
 
     return (testRes);

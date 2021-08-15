@@ -29,7 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
-  http: ^0.13.3
+  dio: ^4.0.0
   flutter_secure_storage: ^4.2.1
   provider: ^5.0.0
 

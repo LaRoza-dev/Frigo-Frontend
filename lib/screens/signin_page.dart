@@ -5,7 +5,7 @@ import 'package:fridge/components/textFields.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:fridge/services/networking.dart';
+import 'package:fridge/models/user.dart';
 
 class SignInPage extends StatelessWidget {
   @override

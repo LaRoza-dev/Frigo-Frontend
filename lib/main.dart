@@ -5,7 +5,7 @@ import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
 import 'package:fridge/screens/home_page.dart';
 import 'package:fridge/constants.dart';
-import 'package:fridge/services/networking.dart';
+import 'package:fridge/models/user.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

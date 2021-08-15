@@ -42,23 +42,14 @@ class Main extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final initialRoute = watch(initialRouteProvider);
 
-    initialRoute.when(
-      data: (data) {
-        return MaterialApp(
-          initialRoute: data,
-          routes: {
-            '/': (context) => FirstPage(),
-            '/signin': (context) => SignInPage(),
-            '/signup': (context) => SignUpPage(),
-            '/home': (context) => HomePage(),
-          },
-        );
-      },
-      loading: () => CircularProgressIndicator(),
-      error: (e, st) => Text('Error: $e'),
-    );
     return MaterialApp(
-      home: Text('hey'),
+      initialRoute: initialRoute.data?.value,
+      routes: {
+        '/': (context) => FirstPage(),
+        '/signin': (context) => SignInPage(),
+        '/signup': (context) => SignUpPage(),
+        '/home': (context) => HomePage(),
+      },
     );
   }
 }

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:fridge/models/user.dart';
-import 'package:fridge/main.dart';
+import 'package:get/get.dart';
 
-
-class HomePage extends ConsumerWidget {
+class HomePage extends StatelessWidget {
+  final UserController controller = Get.find();
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final user = watch(userProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
           child: TextButton(
         child: Text('LOG OUT'),
-        onPressed: () async {
-          await user.state.logout();
-          Navigator.pushNamed(context, '/');
+        onPressed: () {
+          controller.user.value.logout();
+          Get.toNamed('/');
         },
       )),
     );

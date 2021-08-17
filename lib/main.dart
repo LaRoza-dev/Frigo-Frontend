@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fridge/models/user.dart';
+import 'package:get/get.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
 import 'package:fridge/screens/home_page.dart';
-import 'package:fridge/constants.dart';
+import 'package:get_storage/get_storage.dart';
+import 'models/user.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -17,31 +17,24 @@ void main() async {
     statusBarBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  Get.lazyPut<User>(() => User());
 
-  String? token = await kStorage.read(key: 'token');
-  String initialRoute = token != null ? '/home' : '/';
-  runApp(ProviderScope(child: Main(initialRoute: initialRoute)));
+  runApp(Main());
 }
 
-
-final userProvider = StateProvider<User>((ref) {
-  return User();
-});
-
 class Main extends StatelessWidget {
-  Main({required this.initialRoute});
-  final initialRoute;
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: initialRoute,
-      routes: {
-        '/': (context) => FirstPage(),
-        '/signin': (context) => SignInPage(),
-        '/signup': (context) => SignUpPage(),
-        '/home': (context) => HomePage(),
-      },
-    );
+    GetStorage box = GetStorage();
+
+    return GetMaterialApp(getPages: [
+      GetPage(
+          name: '/',
+          page: () {
+            return box.hasData('token') ? HomePage() : FirstPage();
+          }),
+      GetPage(name: '/signin', page: () => SignInPage()),
+      GetPage(name: '/signup', page: () => SignUpPage()),
+    ]);
   }
 }

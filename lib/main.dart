@@ -6,6 +6,7 @@ import 'package:fridge/screens/signin_page.dart';
 import 'package:fridge/screens/signup_page.dart';
 import 'package:fridge/screens/home_page.dart';
 import 'package:get_storage/get_storage.dart';
+import 'models/user.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -16,6 +17,7 @@ void main() async {
     statusBarBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  Get.lazyPut<User>(() => User());
 
   runApp(Main());
 }

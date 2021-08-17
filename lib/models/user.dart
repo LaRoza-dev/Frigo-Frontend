@@ -3,26 +3,25 @@ import 'package:fridge/constants.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  var user = User(email: "", password: "").obs;
-
+  var user = User(email: "", password: "");
   void setEmail(email) {
-    user.value.email = email;
+    user.email = email;
     update();
   }
 
   void setPassword(password) {
-    user.value.password = password;
+    user.password = password;
     update();
   }
 }
 
 class User extends GetConnect {
-  String? email = "";
-
-  String? password = "";
-
-  String? token = "";
   User({this.email, this.password});
+
+  String? email = "";
+  String? password = "";
+  String? token = "";
+
   void onInit() {
     httpClient.baseUrl = 'https://api.laroza.dev';
   }

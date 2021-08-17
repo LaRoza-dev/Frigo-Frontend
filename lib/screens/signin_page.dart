@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
-import 'package:fridge/main.dart';
-import 'package:fridge/models/user.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fridge/models/user.dart';
+import 'package:fridge/screens/home_page.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
-// class SignInPage extends ConsumerWidget {
-  class SignInPage extends StatelessWidget {
+class SignInPage extends StatelessWidget {
+  final UserController controller = Get.put(UserController());
+
   @override
-  // Widget build(BuildContext context, ScopedReader watch) {
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    // final user = watch(userProvider);
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -63,26 +63,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
                       alignment: Alignment.center,
                     ),
                   ),
-                  InsertTextFlied(
-                    width: width,
-                    text: 'User name',
-                    // onChanged: user.state.setEmail,
-                    onChanged: context.read(userProvider).state.setEmail,
-                  ),
-                  InsertTextFlied(
-                    width: width,
-                    text: 'Password',
-                    textAction: TextInputAction.done,
-                    // onChanged: user.state.setPassword,
-                    onChanged: context.read(userProvider).state.setPassword,
-                  ),
+                  GetBuilder<UserController>(builder: (_) {
+                    return InsertTextFlied(
+                      width: width,
+                      text: 'mehdi@laroza.dev',
+                      onChanged: (username) {
+                        _.setEmail(username);
+                      },
+                    );
+                  }),
+                  GetBuilder<UserController>(builder: (_) {
+                    return InsertTextFlied(
+                      width: width,
+                      text: 'Password',
+                      textAction: TextInputAction.done,
+                      // onChanged: user.state.setPassword,
+                      onChanged: (password) {
+                        _.setPassword(password);
+                        // Get.find<UserController>().setPassword(password);
+                      },
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
                       onTap: () async {
-                        // await user.state.login();
-                        await context.read(userProvider).state.login();
-                        Navigator.pushNamed(context, '/home');
+                        await Get.find<User>().login();
+                        Get.to(HomePage());
                       },
                       buttonTitle: 'Sign in',
                       fontColor: kTextColor2,

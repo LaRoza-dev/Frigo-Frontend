@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fridge/models/user.dart';
+import 'package:fridge/screens/first_page.dart';
+import 'package:fridge/screens/signin_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  final UserController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,8 +12,8 @@ class HomePage extends StatelessWidget {
           child: TextButton(
         child: Text('LOG OUT'),
         onPressed: () {
-          controller.user.value.logout();
-          Get.toNamed('/');
+          Get.find<User>().logout();
+          Get.to(FirstPage());
         },
       )),
     );

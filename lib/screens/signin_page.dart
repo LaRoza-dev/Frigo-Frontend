@@ -5,8 +5,6 @@ import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/models/user.dart';
-import 'package:fridge/screens/home_page.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:fridge/controllers/user_controller.dart';
 
@@ -86,9 +84,9 @@ class SignInPage extends StatelessWidget {
                     );
                   }),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 8, top: 35),
                     child: MainButton(
-                      onTap: () async {
+                      onPressed: () async {
                         await Get.find<User>().login();
                         Get.toNamed('/home');
                       },
@@ -96,45 +94,41 @@ class SignInPage extends StatelessWidget {
                       fontColor: kTextColor2,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot your password?',
-                      style: ktext2.copyWith(
-                        shadows: [
-                          Shadow(
-                            offset: Offset(3.0, 6.0),
-                            blurRadius: 6.0,
-                            color: Colors.black.withOpacity(0.25),
-                          ),
-                        ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Forgot your password?',
+                        style: ktext2.copyWith(
+                          shadows: [
+                            Shadow(
+                              offset: Offset(3.0, 6.0),
+                              blurRadius: 6.0,
+                              color: Colors.black.withOpacity(0.25),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    width: 150,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.facebook),
-                          iconSize: 45,
-                          color: Color.fromRGBO(13, 24, 100, 0.9),
+                  Text(
+                    'OR',
+                    style: ktext2.copyWith(
+                      shadows: [
+                        Shadow(
+                          offset: Offset(3.0, 6.0),
+                          blurRadius: 6.0,
+                          color: Colors.black.withOpacity(0.25),
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.googlePlus),
-                          iconSize: 45,
-                          color: Color.fromRGBO(13, 24, 100, 0.9),
-                        ),
-                        SizedBox(
-                          height: height * 0.02,
-                        )
                       ],
                     ),
                   ),
-                  SizedBox(height: height * 0.02),
+                  GoogleButton(
+                    text: 'Sign in with Google',
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: height * 0.05),
                 ],
               ),
             ),

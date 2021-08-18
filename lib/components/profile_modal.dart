@@ -100,7 +100,7 @@ Future<dynamic> profileModalMenu(BuildContext context) {
                       FormField(
                         text: 'Date',
                         textFieldHint: 'Tap to choose the date',
-                        onTap: () async {
+                        onPressed: () async {
                           final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: selectedDate,
@@ -174,10 +174,10 @@ class GenderButton extends StatelessWidget {
 
 class FormField extends StatelessWidget {
   const FormField(
-      {required this.text, this.textFieldHint = 'data', this.onTap});
+      {required this.text, this.textFieldHint = 'data', this.onPressed});
   final String text;
   final String textFieldHint;
-  final VoidCallback? onTap;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -190,7 +190,7 @@ class FormField extends StatelessWidget {
         InsertTextFlied(
           text: textFieldHint,
           width: 20,
-          onTap: onTap,
+          onPressed: onPressed,
         )
       ]),
     );

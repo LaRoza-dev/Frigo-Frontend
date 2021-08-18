@@ -6,13 +6,13 @@ class InsertTextFlied extends StatelessWidget {
       {required this.width,
       required this.text,
       this.textAction: TextInputAction.next,
-      this.onTap,
+      this.onPressed,
       this.onChanged});
 
   final double width;
   final String text;
   final textAction;
-  final VoidCallback? onTap;
+  final VoidCallback? onPressed;
   final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class InsertTextFlied extends StatelessWidget {
               hintText: text,
               hintStyle: kFormField,
               isCollapsed: true),
-          onTap: onTap,
+          onTap: onPressed,
         ),
         decoration: BoxDecoration(
           color: Colors.white,

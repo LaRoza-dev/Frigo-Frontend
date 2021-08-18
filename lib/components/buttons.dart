@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/constants.dart';
 
 class MainButton extends StatelessWidget {
   MainButton(
-      {required this.onTap,
+      {required this.onPressed,
       required this.buttonTitle,
       this.color: kButtonColor,
       this.fontColor: Colors.white});
 
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
   final String buttonTitle;
   final Color color;
   final Color fontColor;
@@ -31,7 +32,7 @@ class MainButton extends StatelessWidget {
         child: Center(
           child: SizedBox.expand(
             child: TextButton(
-              onPressed: onTap,
+              onPressed: onPressed,
               child: Text(buttonTitle),
               style: TextButton.styleFrom(
                 primary: fontColor,
@@ -44,6 +45,59 @@ class MainButton extends StatelessWidget {
         padding: EdgeInsets.all(1.0),
         width: 265,
         height: 45,
+      ),
+    );
+  }
+}
+
+class GoogleButton extends StatelessWidget {
+  const GoogleButton(
+      {required this.text,
+      required this.onPressed,
+      this.backgroundColor = Colors.white,
+      this.textColor = kTileColor});
+  final String text;
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+  final Color textColor;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onPressed,
+        child: Ink(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 6,
+                offset: Offset(3, 6),
+              )
+            ],
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(6),
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.google,
+                  color: Colors.red,
+                ),
+                SizedBox(width: 12),
+                Text(text,
+                    style: TextStyle(
+                        color: textColor,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Poppins')),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

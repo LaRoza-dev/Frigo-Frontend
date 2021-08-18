@@ -75,9 +75,9 @@ class SignUpPage extends StatelessWidget {
                     textAction: TextInputAction.done,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 8, top: 20),
                     child: MainButton(
-                      onTap: () {},
+                      onPressed: () {},
                       buttonTitle: 'Sign up',
                       fontColor: kTextColor2,
                     ),
@@ -94,26 +94,11 @@ class SignUpPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    width: 150,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.facebook),
-                          iconSize: 45,
-                          color: Color.fromRGBO(13, 24, 100, 0.9),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.googlePlus),
-                          iconSize: 45,
-                          color: Color.fromRGBO(13, 24, 100, 0.9),
-                        ),
-                      ],
-                    ),
-                  ),
+                  GoogleButton(
+                      text: 'Sign Up with Google',
+                      backgroundColor: Colors.blueAccent,
+                      textColor: Colors.white,
+                      onPressed: () {}),
                   SizedBox(height: height * 0.07),
                 ],
               ),

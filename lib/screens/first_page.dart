@@ -35,14 +35,14 @@ class FirstPage extends StatelessWidget {
                     child: Column(
                       children: [
                         MainButton(
-                          onTap: () {
+                          onPressed: () {
                             Navigator.pushNamed(context, '/signin');
                           },
                           buttonTitle: 'Login',
                           fontColor: kTextColor2,
                         ),
                         MainButton(
-                          onTap: () {
+                          onPressed: () {
                             Navigator.pushNamed(context, '/signup');
                           },
                           buttonTitle: 'Sign up',

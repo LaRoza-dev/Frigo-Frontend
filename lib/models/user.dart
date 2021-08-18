@@ -17,7 +17,6 @@ class User extends GetConnect {
     var reqBody = {"email": email, "password": password};
     var response = await post('/login', reqBody);
 
-    // Map<dynamic, dynamic> decodedRes = json.decode(response.data.toString());
     Map<dynamic, dynamic> decodedRes = response.body;
 
     final String? value = decodedRes["access_token"];
@@ -35,7 +34,6 @@ class User extends GetConnect {
     var reqBody = {"fullname": fullname, "email": email, "password": password};
     var response = await post('/register', reqBody);
 
-    // Map<dynamic, dynamic> decodedRes = json.decode(response.data.toString());
     Map<dynamic, dynamic> decodedRes = response.body;
 
     final String? value = decodedRes["access_token"];

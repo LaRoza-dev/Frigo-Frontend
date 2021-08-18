@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 
 final GetStorage kStorage = GetStorage();
 
-// const kButtonColor = Color.fromRGBO(87, 45, 134, 1);
 const kButtonColor = Color(0xFF572D86);
 const kPrimaryColor = Color.fromRGBO(160, 77, 255, 1);
 const kBackgroundColor = Color.fromRGBO(246, 249, 250, 1);

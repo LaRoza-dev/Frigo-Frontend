@@ -21,7 +21,7 @@ Future<dynamic> modalMenu(BuildContext context) {
           children: [
             ModalTile(
               title: 'Home',
-              onTap: () {},
+              onPressed: () {},
               trailWidget: IconButton(
                 icon: Icon(
                   FontAwesomeIcons.chevronDown,
@@ -33,13 +33,13 @@ Future<dynamic> modalMenu(BuildContext context) {
               ),
             ),
             ModalDivider(),
-            ModalTile(title: 'About Us', onTap: () {}),
+            ModalTile(title: 'About Us', onPressed: () {}),
             ModalDivider(),
-            ModalTile(title: 'Contact', onTap: () {}),
+            ModalTile(title: 'Contact', onPressed: () {}),
             ModalDivider(),
-            ModalTile(title: 'Notification', onTap: () {}),
+            ModalTile(title: 'Notification', onPressed: () {}),
             ModalDivider(),
-            ModalTile(title: 'َSign Out', onTap: () {}),
+            ModalTile(title: 'َSign Out', onPressed: () {}),
           ],
         ),
       ),
@@ -49,14 +49,14 @@ Future<dynamic> modalMenu(BuildContext context) {
 
 class ModalTile extends StatelessWidget {
   final String title;
-  final Function()? onTap;
+  final Function()? onPressed;
   final Widget? trailWidget;
-  ModalTile({required this.title, required this.onTap, this.trailWidget});
+  ModalTile({required this.title, required this.onPressed, this.trailWidget});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: onTap,
+      onTap: onPressed,
       title: Text(
         title,
         style: kHeading3,

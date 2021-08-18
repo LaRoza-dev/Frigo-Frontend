@@ -4,30 +4,36 @@ import 'package:get/get.dart';
 
 class User extends GetConnect {
   User({this.email, this.password});
+
   String? fullname = "";
   String? email = "";
   String? password = "";
-  String? token = "";
+  String? baseUrl = "https://api.laroza.dev";
 
-  void onInit() {
-    httpClient.baseUrl = 'https://api.laroza.dev';
-  }
+  // void onInit() {
+  //   httpClient.baseUrl = 'https://api.laroza.dev';
+  // }
 
-  Future<String?> login() async {
+  Future<bool> login(email, password) async {
     var reqBody = {"email": email, "password": password};
-    var response = await post('/login', reqBody);
+    print({reqBody});
+    var response = await post("/login", reqBody);
+    print(response.body);
 
-    Map<dynamic, dynamic> decodedRes = response.body;
+//TODO: need to get respongse code, not body.
+    if (response.body == "Incorrect email or password") {
+      return false;
+    } else {
+      Map<dynamic, dynamic> decodedRes = response.body;
 
-    final String? value = decodedRes["access_token"];
-    final String key = 'token';
+      final String? value = decodedRes["access_token"];
+      final String key = 'token';
+      await kStorage.write(key, value);
 
-    await kStorage.write(key, value);
-
-    //TODO: it can be removed (or changed with a proper result)
-    final String? testRes = kStorage.read<String?>(key);
-
-    return (testRes);
+      final String? testRes = kStorage.read<String?>(key);
+      print(testRes);
+      return true;
+    }
   }
 
   Future<String?> signup() async {
@@ -53,8 +59,6 @@ class User extends GetConnect {
   }
 
   Future<String?> getToken() async {
-    String? token = kStorage.read("token");
-    token = token;
-    return token;
+    return kStorage.read("token");
   }
 }

@@ -7,12 +7,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/models/user.dart';
 import 'package:get/get.dart';
 import 'package:fridge/controllers/user_controller.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignInPage extends StatelessWidget {
   final UserController controller = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<User>(() => User());
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -65,7 +67,7 @@ class SignInPage extends StatelessWidget {
                   GetBuilder<UserController>(builder: (_) {
                     return InsertTextFlied(
                       width: width,
-                      text: 'mehdi@laroza.dev',
+                      text: 'Username',
                       onChanged: (username) {
                         _.setEmail(username);
                       },
@@ -85,14 +87,38 @@ class SignInPage extends StatelessWidget {
                   }),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8, top: 35),
-                    child: MainButton(
-                      onPressed: () async {
-                        await Get.find<User>().login();
-                        Get.toNamed('/home');
-                      },
-                      buttonTitle: 'Sign in',
-                      fontColor: kTextColor2,
-                    ),
+                    child: GetBuilder<UserController>(builder: (_) {
+                      return MainButton(
+                        onPressed: () async {
+                          bool res = await _.login();
+                          if (res) {
+                            Get.toNamed('/home');
+                          } else {
+                            Alert(
+                              context: context,
+                              type: AlertType.error,
+                              title: "Permission Denied",
+                              desc: "Username or Password is incorrect.",
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  width: 120,
+                                )
+                              ],
+                            ).show();
+                          }
+                        },
+                        buttonTitle: 'Sign in',
+                        fontColor: kTextColor2,
+                      );
+                    }),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 25),

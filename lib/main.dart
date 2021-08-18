@@ -18,17 +18,17 @@ void main() async {
   ));
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut<User>(() => User());
-
+  await GetStorage.init();
   runApp(Main());
 }
 
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    GetStorage box = GetStorage();
-
+    final box = GetStorage();
+    print({"token": box.read("token")});
     return GetMaterialApp(
-        initialRoute: box.hasData('token') ? '/' : '/home',
+        initialRoute: box.hasData('token') ? '/home' : '/',
         getPages: [
           GetPage(
             name: '/',

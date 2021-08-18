@@ -8,6 +8,7 @@ import 'package:fridge/models/user.dart';
 import 'package:fridge/screens/home_page.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
+import 'package:fridge/controllers/user_controller.dart';
 
 class SignInPage extends StatelessWidget {
   final UserController controller = Get.put(UserController());
@@ -89,7 +90,7 @@ class SignInPage extends StatelessWidget {
                     child: MainButton(
                       onTap: () async {
                         await Get.find<User>().login();
-                        Get.to(HomePage());
+                        Get.toNamed('/home');
                       },
                       buttonTitle: 'Sign in',
                       fontColor: kTextColor2,

@@ -27,14 +27,16 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
 
-    return GetMaterialApp(getPages: [
-      GetPage(
-          name: '/',
-          page: () {
-            return box.hasData('token') ? HomePage() : FirstPage();
-          }),
-      GetPage(name: '/signin', page: () => SignInPage()),
-      GetPage(name: '/signup', page: () => SignUpPage()),
-    ]);
+    return GetMaterialApp(
+        initialRoute: box.hasData('token') ? '/' : '/home',
+        getPages: [
+          GetPage(
+            name: '/',
+            page: () => FirstPage(),
+          ),
+          GetPage(name: '/signin', page: () => SignInPage()),
+          GetPage(name: '/signup', page: () => SignUpPage()),
+          GetPage(name: '/home', page: () => HomePage()),
+        ]);
   }
 }

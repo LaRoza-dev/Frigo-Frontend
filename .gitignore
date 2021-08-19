@@ -118,4 +118,10 @@ app.*.map.json
 
 # Additional files
 
+# should be ignored
 pubspec.lock
+
+
+# our google auths config
+ios/Runner/GoogleService-Info.plist
+ios/Podfile.lock

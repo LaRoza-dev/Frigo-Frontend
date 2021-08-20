@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 enum googleLoginStatus { loggedIn, signedUp, error, cancelled }
 
 class User extends GetConnect {
-  User({this.email, this.password});
+  User({this.email, this.password, this.fullname});
 
   String? fullname = "";
   String? email = "";
@@ -80,7 +80,7 @@ class User extends GetConnect {
     }
   }
 
-  Future<String?> signup() async {
+  Future<String?> signup(email, password, fullName) async {
     var reqBody = {"fullname": fullname, "email": email, "password": password};
     var response = await post('/register', reqBody);
 

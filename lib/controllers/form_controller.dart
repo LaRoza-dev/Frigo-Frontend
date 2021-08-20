@@ -42,11 +42,16 @@ class FormController extends GetxController {
     passowrdRepeatController.dispose();
   }
 
-  void checkLogin() {
+  bool checkLogin() {
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
-      return;
+      return false;
     }
     loginFormKey.currentState!.save();
+    if (loginFormKey.isBlank!) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

@@ -14,6 +14,9 @@ class FormController extends GetxController {
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
 
+  final signupPasswordrequiredValidator =
+      RequiredValidator(errorText: 'Password is required');
+
   final passwordValidator = MultiValidator([
     RequiredValidator(errorText: 'Password is required'),
     MinLengthValidator(8, errorText: 'Password must be at least 8 digits long'),

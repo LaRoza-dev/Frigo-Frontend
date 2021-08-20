@@ -24,7 +24,7 @@ class UserController extends GetxController {
     return await user.login(user.email, user.password);
   }
 
-  Future<googleLoginStatus> googleLogin() async {
+  Future<googleLoginStatus?> googleLogin() async {
     return await user.handleSignIn();
   }
 }

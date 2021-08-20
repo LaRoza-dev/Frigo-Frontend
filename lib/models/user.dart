@@ -14,41 +14,47 @@ class User extends GetConnect {
   String? baseUrl = "https://api.laroza.dev";
 
   GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
+    // scopes: [
+      // 'email',
+      // 'https://www.googleapis.com/auth/contacts.readonly',
+    // ],
   );
-  Future<googleLoginStatus> handleSignIn() async {
-    try {
+  Future<googleLoginStatus?> handleSignIn() async {
+    // try {
       GoogleSignInAccount? res = await _googleSignIn.signIn();
+      print(res);
 
       if (res == null) {
         return googleLoginStatus.cancelled;
-      }
-
-      var data = {"email": res.email, "displayName": res.displayName};
-      var response = await post('/google/', data);
-
-      if (response.statusCode == 404) {
-        return googleLoginStatus.error;
-      } else if (response.body["access_token"] != null) {
-        String? value = response.body["access_token"].toString();
-
-        String key = 'token';
-        await kStorage.write(key, value);
-
-        String? testRes = kStorage.read<String?>(key);
-        print({testRes});
-        return googleLoginStatus.loggedIn;
       } else {
-        return googleLoginStatus.signedUp;
+        var data = {"email": res.email, "displayName": res.displayName};
+        var response = await post('/google/', data);
+
+        if (response.statusCode == 404) {
+          return googleLoginStatus.error;
+        } else if (response.body["access_token"] != null) {
+          String? value = response.body["access_token"].toString();
+
+          String key = 'token';
+          await kStorage.write(key, value);
+
+          String? testRes = kStorage.read<String?>(key);
+          print({testRes});
+          return googleLoginStatus.loggedIn;
+        } else {
+          return googleLoginStatus.signedUp;
+        }
       }
-    } catch (error) {
-      return googleLoginStatus.error;
-    }
+    // } catch (error) {
+    //   return googleLoginStatus.error;
+    // }
   }
 
+  Future<GoogleSignInAccount?> handleSignOut() async {
+    kStorage.remove("token");
+    print('logged out');
+    return _googleSignIn.disconnect();
+  }
   // void onInit() {
   //   httpClient.baseUrl = 'https://api.laroza.dev';
   // }

@@ -154,7 +154,7 @@ class SignInPage extends StatelessWidget {
                     return GoogleButton(
                       text: 'Sign in with Google',
                       onPressed: () async {
-                        googleLoginStatus res = await _.googleLogin();
+                        googleLoginStatus? res = await _.googleLogin();
 
                         if (res == googleLoginStatus.error) {
                           Alert(

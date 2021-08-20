@@ -7,13 +7,26 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: TextButton(
-        child: Text('LOG OUT'),
-        onPressed: () {
-          Get.find<User>().logout();
-          Get.toNamed('/');
-        },
-      )),
+        child: Column(
+          children: [
+            TextButton(
+              child: Text('LOG OUT'),
+              onPressed: () {
+                Get.find<User>().logout();
+                Get.toNamed('/');
+              },
+            ),
+            TextButton(
+              child: Text('LOG OUT GOOGLE'),
+              onPressed: () {
+                Get.find<User>().handleSignOut();
+                print('logged out');
+                Get.toNamed('/');
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 }

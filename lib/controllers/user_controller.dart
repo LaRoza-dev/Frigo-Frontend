@@ -2,7 +2,7 @@ import 'package:fridge/models/user.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  var user = User(email: "", password: "");
+  var user = User(email: "", password: "", fullname: "");
 
   void setEmail(email) {
     user.email = email;
@@ -26,5 +26,9 @@ class UserController extends GetxController {
 
   Future<googleLoginStatus> googleLogin() async {
     return await user.handleSignIn();
+  }
+
+  Future<String?> signUp() async {
+    return await user.signup(user.email, user.password, user.fullname);
   }
 }

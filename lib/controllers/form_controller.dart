@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class FormController extends GetxController {
-  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController,
       passwordController,
       passowrdRepeatController;
@@ -13,6 +13,9 @@ class FormController extends GetxController {
 
   final requiredValidator =
       RequiredValidator(errorText: 'This field is required');
+
+  final signupPasswordrequiredValidator =
+      RequiredValidator(errorText: 'Password is required');
 
   final passwordValidator = MultiValidator([
     RequiredValidator(errorText: 'Password is required'),
@@ -46,11 +49,8 @@ class FormController extends GetxController {
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
       return false;
-    }
-    loginFormKey.currentState!.save();
-    if (loginFormKey.isBlank!) {
-      return false;
     } else {
+      loginFormKey.currentState!.save();
       return true;
     }
   }

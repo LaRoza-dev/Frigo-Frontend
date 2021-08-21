@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
               child: Text('LOG OUT'),
               onPressed: () {
                 Get.find<User>().logout();
-                Get.toNamed('/');
+                Get.offAllNamed('/');
               },
             ),
             TextButton(

@@ -43,7 +43,7 @@ class SignUpPage extends GetView {
                             flex: 1,
                             child: IconButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Get.back();
                                 },
                                 icon: FaIcon(FontAwesomeIcons.chevronLeft)),
                           ),

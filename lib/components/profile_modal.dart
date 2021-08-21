@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fridge/components/textFields.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 DateTime selectedDate = DateTime.now();
 
@@ -32,7 +33,7 @@ Future<dynamic> profileModalMenu(BuildContext context) {
                         flex: 1,
                         child: IconButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Get.back();
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.chevronLeft,

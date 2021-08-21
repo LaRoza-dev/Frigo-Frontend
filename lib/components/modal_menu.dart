@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 Future<dynamic> modalMenu(BuildContext context) {
   return showModalBottomSheet(
@@ -28,7 +29,7 @@ Future<dynamic> modalMenu(BuildContext context) {
                   color: kButtonColor,
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
               ),
             ),

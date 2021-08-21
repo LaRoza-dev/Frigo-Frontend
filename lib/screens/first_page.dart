@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/constants.dart';
+import 'package:get/get.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -36,14 +37,14 @@ class FirstPage extends StatelessWidget {
                       children: [
                         MainButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/signin');
+                            Get.toNamed('/signin');
                           },
                           buttonTitle: 'Login',
                           fontColor: kTextColor2,
                         ),
                         MainButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/signup');
+                            Get.toNamed('/signup');
                           },
                           buttonTitle: 'Sign up',
                           color: Colors.white,

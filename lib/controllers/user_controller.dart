@@ -24,11 +24,11 @@ class UserController extends GetxController {
     return await user.login(user.email, user.password);
   }
 
-  Future<googleLoginStatus?> googleLogin() async {
-    return await user.handleSignIn();
+  Future<bool> signUp() async {
+    return await user.signup(user.email, user.password, user.fullname);
   }
 
-  Future<String?> signUp() async {
-    return await user.signup(user.email, user.password, user.fullname);
+  Future<googleLoginStatus?> googleLogin() async {
+    return await user.handleSignIn();
   }
 }

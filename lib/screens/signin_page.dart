@@ -42,7 +42,7 @@ class SignInPage extends StatelessWidget {
                             flex: 1,
                             child: IconButton(
                                 onPressed: () {
-                                  Get.back();
+                                  Get.offAllNamed('/');
                                 },
                                 icon: FaIcon(FontAwesomeIcons.chevronLeft)),
                           ),

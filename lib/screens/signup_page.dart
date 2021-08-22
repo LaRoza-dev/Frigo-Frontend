@@ -8,6 +8,7 @@ import 'package:fridge/controllers/form_controller.dart';
 import 'package:get/get.dart';
 import 'package:fridge/controllers/user_controller.dart';
 import 'package:fridge/models/user.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignUpPage extends GetView {
   // const SignUpPage({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class SignUpPage extends GetView {
                             flex: 1,
                             child: IconButton(
                                 onPressed: () {
-                                  Get.back();
+                                  Get.offAllNamed('/');
                                 },
                                 icon: FaIcon(FontAwesomeIcons.chevronLeft)),
                           ),
@@ -132,7 +133,51 @@ class SignUpPage extends GetView {
                             return MainButton(
                               onPressed: () async {
                                 if (formController.checkLogin()) {
-                                  String? result = await _.signUp();
+                                  bool res = await _.signUp();
+                                  if (res) {
+                                    Alert(
+                                      context: context,
+                                      type: AlertType.success,
+                                      title: "Register Successful",
+                                      desc: "Now you can login.",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "Ok",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () {
+                                            Get.offAllNamed('/');
+                                          },
+                                          width: 120,
+                                        )
+                                      ],
+                                    ).show();
+                                  } else {
+                                    Alert(
+                                      context: context,
+                                      type: AlertType.error,
+                                      title: "Permission Denied",
+                                      desc:
+                                          "Email already exists or some error occured.",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "Ok",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          width: 120,
+                                        )
+                                      ],
+                                    ).show();
+                                  }
                                 }
                               },
                               buttonTitle: 'Sign up',
@@ -152,11 +197,39 @@ class SignUpPage extends GetView {
                         ],
                       ),
                     ),
-                    GoogleButton(
-                        text: 'Sign Up with Google',
-                        backgroundColor: Colors.blueAccent,
-                        textColor: Colors.white,
-                        onPressed: () {}),
+                    GetBuilder<UserController>(builder: (_) {
+                      return GoogleButton(
+                          text: 'Sign in with Google',
+                          onPressed: () async {
+                            googleLoginStatus? res = await _.googleLogin();
+                            print({"res": res});
+                            if (res == googleLoginStatus.error) {
+                              Alert(
+                                context: context,
+                                type: AlertType.error,
+                                title: "Permission Denied",
+                                desc: "Username or Password is incorrect.",
+                                buttons: [
+                                  DialogButton(
+                                    child: Text(
+                                      "Ok",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    width: 120,
+                                  )
+                                ],
+                              ).show();
+                            } else if (res == googleLoginStatus.loggedIn) {
+                              Get.toNamed('/home');
+                            } else {
+                              return Future.value();
+                            }
+                          });
+                    }),
                     SizedBox(height: height * 0.07),
                   ],
                 ),

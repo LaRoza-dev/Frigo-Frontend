@@ -71,21 +71,27 @@ class User extends GetConnect {
     }
   }
 
-  Future<String?> signup(email, password, fullName) async {
+  Future<bool> signup(email, password, fullName) async {
     var reqBody = {"fullname": fullname, "email": email, "password": password};
     var response = await post('/register', reqBody);
+    if (response.body["message"] == "User added successfully.") {
+      // print(response.bodyString);
+      return true;
+    }
+    // Map<dynamic, dynamic> decodedRes = response.body["data"][0];
 
-    Map<dynamic, dynamic> decodedRes = response.body;
+    // final String? value = decodedRes["access_token"];
+    // final String key = 'token';
 
-    final String? value = decodedRes["access_token"];
-    final String key = 'token';
+    // await kStorage.write(key, value);
 
-    await kStorage.write(key, value);
+    // //TODO: it can be removed (or changed with a proper result)
+    // final String? testRes = kStorage.read<String?>(key);
 
-    //TODO: it can be removed (or changed with a proper result)
-    final String? testRes = kStorage.read<String?>(key);
-
-    return (testRes);
+    // print(testRes);
+    else {
+      return false;
+    }
   }
 
   Future<void> logout() async {

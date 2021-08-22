@@ -163,59 +163,36 @@ class SignInPage extends StatelessWidget {
                     ),
                     GetBuilder<UserController>(builder: (_) {
                       return GoogleButton(
-                        text: 'Sign in with Google',
-                        onPressed: () async {
-                          googleLoginStatus? res = await _.googleLogin();
-
-                          if (res == googleLoginStatus.error) {
-                            Alert(
-                              context: context,
-                              type: AlertType.error,
-                              title: "Permission Denied",
-                              desc: "Username or Password is incorrect.",
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "Ok",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  width: 120,
-                                )
-                              ],
-                            ).show();
-                          } else if (res == googleLoginStatus.loggedIn) {
-                            Get.toNamed('/home');
-                          } else if (res == googleLoginStatus.cancelled) {
-                            return Future.value();
-                          } else if (res == googleLoginStatus.signedUp) {
-                            Alert(
-                              context: context,
-                              type: AlertType.success,
-                              title: "Signed up",
-                              desc:
-                                  "Youre signed up successfully ! Now you can login...",
-                              buttons: [
-                                DialogButton(
-                                  child: Text(
-                                    "Ok",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  onPressed: () async {
-                                    await _.googleLogin();
-                                    Get.toNamed('/home');
-                                  },
-                                  width: 120,
-                                )
-                              ],
-                            ).show();
-                          }
-                        },
-                      );
+                          text: 'Sign in with Google',
+                          onPressed: () async {
+                            googleLoginStatus? res = await _.googleLogin();
+                            print({"res":res});
+                            if (res == googleLoginStatus.error) {
+                              Alert(
+                                context: context,
+                                type: AlertType.error,
+                                title: "Permission Denied",
+                                desc: "Username or Password is incorrect.",
+                                buttons: [
+                                  DialogButton(
+                                    child: Text(
+                                      "Ok",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    width: 120,
+                                  )
+                                ],
+                              ).show();
+                            } else if (res == googleLoginStatus.loggedIn) {
+                              Get.toNamed('/home');
+                            } else {
+                              return Future.value();
+                            }
+                          });
                     }),
                     SizedBox(height: height * 0.05),
                   ],

@@ -127,3 +127,5 @@ ios/Runner/GoogleService-Info.plist
 ios/Podfile.lock
 ios/Runner/Info.plist
 ios/Runner.xcodeproj/project.pbxproj
+# Google Client_id
+.env

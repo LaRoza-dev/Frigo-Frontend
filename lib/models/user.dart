@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:get/get_connect/connect.dart';
 import 'package:fridge/constants.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-enum googleLoginStatus { loggedIn, signedUp, error, cancelled }
+enum googleLoginStatus { loggedIn, error, cancelled }
 
 class User extends GetConnect {
   User({this.email, this.password, this.fullname});
@@ -13,41 +16,32 @@ class User extends GetConnect {
   String? password = "";
   String? baseUrl = "https://api.laroza.dev";
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    // scopes: [
-      // 'email',
-      // 'https://www.googleapis.com/auth/contacts.readonly',
-    // ],
-  );
+  GoogleSignIn _googleSignIn =
+      GoogleSignIn(clientId: "${dotenv.env['CLIENT_ID']}");
+
   Future<googleLoginStatus?> handleSignIn() async {
-    // try {
+    try {
       GoogleSignInAccount? res = await _googleSignIn.signIn();
-      print(res);
+      print("ok");
+      GoogleSignInAuthentication? googleKey = await res?.authentication;
+      String? token = googleKey?.idToken.toString();
+      var response = await post('/google/', jsonEncode(token));
 
-      if (res == null) {
-        return googleLoginStatus.cancelled;
+      if (response.body["access_token"] != null) {
+        String? value = response.body["access_token"].toString();
+        String key = 'token';
+        await kStorage.write(key, value);
+
+        String? testRes = kStorage.read<String?>(key);
+        print(testRes);
+        return googleLoginStatus.loggedIn;
       } else {
-        var data = {"email": res.email, "displayName": res.displayName};
-        var response = await post('/google/', data);
-
-        if (response.statusCode == 404) {
-          return googleLoginStatus.error;
-        } else if (response.body["access_token"] != null) {
-          String? value = response.body["access_token"].toString();
-
-          String key = 'token';
-          await kStorage.write(key, value);
-
-          String? testRes = kStorage.read<String?>(key);
-          print({testRes});
-          return googleLoginStatus.loggedIn;
-        } else {
-          return googleLoginStatus.signedUp;
-        }
+        return googleLoginStatus.error;
       }
-    // } catch (error) {
-    //   return googleLoginStatus.error;
-    // }
+    } catch (err) {
+      print(err);
+      return googleLoginStatus.error;
+    }
   }
 
   Future<GoogleSignInAccount?> handleSignOut() async {
@@ -55,9 +49,6 @@ class User extends GetConnect {
     print('logged out');
     return _googleSignIn.disconnect();
   }
-  // void onInit() {
-  //   httpClient.baseUrl = 'https://api.laroza.dev';
-  // }
 
   Future<bool> login(email, password) async {
     var reqBody = {"email": email, "password": password};

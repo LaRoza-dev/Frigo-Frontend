@@ -13,17 +13,10 @@ class HomePage extends StatelessWidget {
               child: Text('LOG OUT'),
               onPressed: () {
                 Get.find<User>().logout();
+                Get.find<User>().handleSignOut();
                 Get.offAllNamed('/');
               },
             ),
-            TextButton(
-              child: Text('LOG OUT GOOGLE'),
-              onPressed: () {
-                Get.find<User>().handleSignOut();
-                print('logged out');
-                Get.toNamed('/');
-              },
-            )
           ],
         ),
       ),

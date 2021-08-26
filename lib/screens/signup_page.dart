@@ -25,7 +25,7 @@ class SignUpPage extends GetView {
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          reverse: true,
+          reverse: false,
           child: Container(
             height: height,
             width: width,

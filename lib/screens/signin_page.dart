@@ -64,6 +64,7 @@ class SignInPage extends StatelessWidget {
                     child: Image.asset(
                       'asset/images/SignInPageImage.png',
                       alignment: Alignment.center,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                   GetBuilder<UserController>(builder: (_) {
@@ -92,58 +93,52 @@ class SignInPage extends StatelessWidget {
                       obscureText: true,
                     );
                   }),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8, top: 35),
-                    child: GetBuilder<UserController>(builder: (_) {
-                      return MainButton(
-                        onPressed: () async {
-                          if (formController.checkLogin()) {
-                            bool res = await _.login();
-                            if (res) {
-                              Get.toNamed('/home');
-                            } else {
-                              Alert(
-                                context: context,
-                                type: AlertType.error,
-                                title: "Permission Denied",
-                                desc: "Username or Password is incorrect.",
-                                buttons: [
-                                  DialogButton(
-                                    child: Text(
-                                      "Ok",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    width: 120,
-                                  )
-                                ],
-                              ).show();
-                            }
+                  GetBuilder<UserController>(builder: (_) {
+                    return MainButton(
+                      onPressed: () async {
+                        if (formController.checkLogin()) {
+                          bool res = await _.login();
+                          if (res) {
+                            Get.toNamed('/home');
+                          } else {
+                            Alert(
+                              context: context,
+                              type: AlertType.error,
+                              title: "Permission Denied",
+                              desc: "Username or Password is incorrect.",
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  width: 120,
+                                )
+                              ],
+                            ).show();
                           }
-                        },
-                        buttonTitle: 'Sign in',
-                        fontColor: kTextColor2,
-                      );
-                    }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 25),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Forgot your password?',
-                        style: ktext2.copyWith(
-                          shadows: [
-                            Shadow(
-                              offset: Offset(3.0, 6.0),
-                              blurRadius: 6.0,
-                              color: Colors.black.withOpacity(0.25),
-                            ),
-                          ],
-                        ),
+                        }
+                      },
+                      buttonTitle: 'Sign in',
+                      fontColor: kTextColor2,
+                    );
+                  }),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Forgot your password?',
+                      style: ktext2.copyWith(
+                        shadows: [
+                          Shadow(
+                            offset: Offset(3.0, 6.0),
+                            blurRadius: 6.0,
+                            color: Colors.black.withOpacity(0.25),
+                          ),
+                        ],
                       ),
                     ),
                   ),

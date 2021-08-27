@@ -55,19 +55,18 @@ class User extends GetConnect {
 
     var response = await post("/login", reqBody);
 
-//TODO: need to get respongse code, not body.
-    if (response.body["code"] == 404) {
-      return false;
-    } else {
+    if (response.statusCode != 404) {
       Map<dynamic, dynamic> decodedRes = response.body;
 
       final String? value = decodedRes["access_token"];
       final String key = 'token';
       await kStorage.write(key, value);
 
-      final String? testRes = kStorage.read<String?>(key);
-      print(testRes);
+      // final String? testRes = kStorage.read<String?>(key);
+
       return true;
+    } else {
+      return false;
     }
   }
 

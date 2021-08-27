@@ -95,14 +95,14 @@ class ModalTile extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       FontAwesomeIcons.heart,
-                      color: kButtonColor,
+                      color: kTextColor1,
                     ),
                     onPressed: () {},
                   ),
                   IconButton(
                     icon: Icon(
                       FontAwesomeIcons.times,
-                      color: kButtonColor,
+                      color: kTextColor1,
                     ),
                     onPressed: () {},
                   ),

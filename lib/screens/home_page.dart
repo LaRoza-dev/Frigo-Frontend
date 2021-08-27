@@ -34,7 +34,8 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               IconButton(
                                   onPressed: () {
@@ -53,12 +54,136 @@ class HomePage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: Text(
-                            'Categories',
+                            'Filter',
                             style: kText1,
                           ),
                         ),
-                        SizedBox(
+                        Container(
                           height: 75,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MaterialButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: kRedColor),
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            blurRadius: 15,
+                                            offset: const Offset(0, 10),
+                                          ),
+                                        ],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.heart,
+                                        color: kRedColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MaterialButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border:
+                                            Border.all(color: kTileItemColor),
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            blurRadius: 15,
+                                            offset: const Offset(0, 10),
+                                          ),
+                                        ],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.shoppingBasket,
+                                        color: kTileItemColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MaterialButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border:
+                                            Border.all(color: kTileStarColor),
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            blurRadius: 15,
+                                            offset: const Offset(0, 10),
+                                          ),
+                                        ],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.solidStar,
+                                        color: kTileStarColor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MaterialButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(color: kFieldTextColor),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.1),
+                                              blurRadius: 15,
+                                              offset: const Offset(0, 10),
+                                            ),
+                                          ],
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          'Cal',
+                                          style:
+                                              TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',),
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -94,12 +219,16 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       CircleIconButton(
                                         icon: FontAwesomeIcons.shoppingBasket,
-                                        onPressed: () {ingredientModal(context);},
+                                        onPressed: () {
+                                          ingredientModal(context);
+                                        },
                                         onColor: kRedColor,
                                       ),
                                       CircleIconButton(
                                         icon: FontAwesomeIcons.storeAlt,
-                                        onPressed: () {fridgeModal(context);},
+                                        onPressed: () {
+                                          fridgeModal(context);
+                                        },
                                         onColor: kTileColor,
                                       )
                                     ],

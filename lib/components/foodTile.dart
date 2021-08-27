@@ -101,7 +101,7 @@ class FoodTile extends StatelessWidget {
                                 ],
                               ),
                               Text('Kcal: $cal',
-                                  style: TextStyle(color: kFieldTextColor))
+                                  style: TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',))
                             ],
                           ),
                           CircleIconButton(

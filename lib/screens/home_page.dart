@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fridge/components/profile_modal.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/textFields.dart';
 import 'package:fridge/components/buttons.dart';
@@ -15,7 +16,9 @@ class HomePage extends StatelessWidget {
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
         reverse: true,
-        child: Container(height: height,width: width,
+        child: Container(
+          height: height,
+          width: width,
           child: SafeArea(
             child: Column(
               children: [
@@ -29,12 +32,18 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Row(
+                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               IconButton(
-                              onPressed: () {modalMenu(context);
-                              },
-                              icon: FaIcon(FontAwesomeIcons.bars)),
+                                  onPressed: () {
+                                    modalMenu(context);
+                                  },
+                                  icon: FaIcon(FontAwesomeIcons.bars)),
+                              IconButton(
+                                  onPressed: () {
+                                    profileModalMenu(context);
+                                  },
+                                  icon: FaIcon(FontAwesomeIcons.userCircle)),
                             ],
                           ),
                         ),
@@ -68,9 +77,11 @@ class HomePage extends StatelessWidget {
                           Expanded(
                             flex: 1,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 25),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Foods',
@@ -98,7 +109,8 @@ class HomePage extends StatelessWidget {
                           Expanded(
                               flex: 7,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
                                 child: ListView(
                                   children: [
                                     FoodTile(
@@ -135,5 +147,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-

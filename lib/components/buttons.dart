@@ -109,7 +109,7 @@ class CircleIconButton extends StatelessWidget {
   final Color color;
   final IconData icon;
   final VoidCallback onPressed;
-  final int size;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class CircleIconButton extends StatelessWidget {
       onPressed: onPressed,
       child: FaIcon(
         icon,
-        size: 25,
+        size: size,
       ),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),

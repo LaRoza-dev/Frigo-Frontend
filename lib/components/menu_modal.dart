@@ -34,13 +34,9 @@ Future<dynamic> modalMenu(BuildContext context) {
                 },
               ),
             ),
-            ModalDivider(),
             ModalTile(title: 'About Us', onPressed: () {}),
-            ModalDivider(),
             ModalTile(title: 'Contact', onPressed: () {}),
-            ModalDivider(),
             ModalTile(title: 'Notification', onPressed: () {}),
-            ModalDivider(),
             ModalTile(
                 title: 'َSign Out',
                 onPressed: () {
@@ -63,23 +59,21 @@ class ModalTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPressed,
-      title: Text(
-        title,
-        style: kHeading3,
-      ),
-      trailing: trailWidget,
-    );
-  }
-}
-
-class ModalDivider extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      indent: 20,
-      endIndent: 20,
+    return Column(
+      children: [
+        ListTile(
+          onTap: onPressed,
+          title: Text(
+            title,
+            style: kHeading3,
+          ),
+          trailing: trailWidget,
+        ),
+        Divider(
+          indent: 20,
+          endIndent: 20,
+        )
+      ],
     );
   }
 }

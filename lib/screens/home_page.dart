@@ -5,7 +5,9 @@ import 'package:fridge/constants.dart';
 import 'package:fridge/components/textFields.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/foodTile.dart';
-import 'package:fridge/components/modal_menu.dart';
+import 'package:fridge/components/menu_modal.dart';
+import 'package:fridge/components/ingredient_modal.dart';
+import 'package:fridge/components/fridge_modal.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -92,12 +94,12 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       CircleIconButton(
                                         icon: FontAwesomeIcons.shoppingBasket,
-                                        onPressed: () {},
+                                        onPressed: () {ingredientModal(context);},
                                         onColor: kRedColor,
                                       ),
                                       CircleIconButton(
                                         icon: FontAwesomeIcons.storeAlt,
-                                        onPressed: () {},
+                                        onPressed: () {fridgeModal(context);},
                                         onColor: kTileColor,
                                       )
                                     ],

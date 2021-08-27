@@ -108,6 +108,7 @@ class FoodTile extends StatelessWidget {
                               color: kButtonColor,
                               onColor: Colors.white,
                               icon: FontAwesomeIcons.heart,
+                              size: 15,
                               onPressed: () {})
                         ],
                       ),

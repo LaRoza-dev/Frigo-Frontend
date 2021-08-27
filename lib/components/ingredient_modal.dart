@@ -17,78 +17,91 @@ Future<dynamic> ingredientModal(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (context) => BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-      child: DraggableScrollableSheet(
-        initialChildSize: 0.8,
-        minChildSize: 0.5,
-        maxChildSize: 1,
-        builder: (_, controller) => Container(
-          width: double.infinity,
-          height: height * 0.8,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25), topRight: Radius.circular(25)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Ingredients',
-                        style: kHeading2,
+      child: Container(
+        width: double.infinity,
+        height: height * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+        ),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Ingredients',
+                      style: kHeading2,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.chevronDown,
+                        color: kButtonColor,
                       ),
-                      IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.chevronDown,
-                          color: kButtonColor,
-                        ),
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
-                    ]),
-              ),
-              Obx(
-                () => SearchField(
-                  controller: sc.searchText,
-                  searchInputDecoration: InputDecoration(
-                    prefixIcon: Icon(FontAwesomeIcons.search),
-                    suffixIcon: IconButton(
-                      icon: Icon(FontAwesomeIcons.timesCircle),
                       onPressed: () {
-                        sc.searchText.clear();
+                        Get.back();
                       },
                     ),
-                  ),
-                  suggestions: sc.test.toList(),
-                  hint: 'Search Ingredients',
-                  onTap: (value) {
-                    sc.favorite.add(value.toString());
-                    sc.searchText.clear();
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
-                child: Obx(
-                  () => ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: sc.favorite.length,
-                    itemBuilder: (context, index) {
-                      return ModalTile(
-                          title: '${sc.favorite[index]}', onPressed: () {});
+                  ]),
+            ),
+            Obx(
+              () => SearchField(
+                controller: sc.searchText,
+                searchInputDecoration: InputDecoration(
+                  prefixIcon: Icon(FontAwesomeIcons.search),
+                  suffixIcon: IconButton(
+                    icon: Icon(FontAwesomeIcons.timesCircle),
+                    onPressed: () {
+                      sc.searchText.clear();
                     },
                   ),
                 ),
-              )
-            ],
-          ),
+                suggestions: sc.test.toList(),
+                hint: 'Search Ingredients',
+                onTap: (value) {
+                  sc.favorite.add(value.toString());
+                  sc.searchText.clear();
+                },
+                suggestionsDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8.0),
+                    bottomRight: Radius.circular(8),
+                  ),
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
+                ),
+                suggestionItemDecoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xff9D50BB).withOpacity(0.5),
+                      Color(0xff6E48AA).withOpacity(0.8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
+              child: Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: sc.favorite.length,
+                  itemBuilder: (context, index) {
+                    return ModalTile(
+                        title: '${sc.favorite[index]}', onPressed: () {});
+                  },
+                ),
+              ),
+            )
+          ],
         ),
       ),
     ),

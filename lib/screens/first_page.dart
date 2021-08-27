@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/constants.dart';
 import 'package:get/get.dart';
@@ -20,8 +19,8 @@ class FirstPage extends StatelessWidget {
             children: [
               Expanded(
                 flex: 2,
-                child: SvgPicture.asset(
-                  'asset/images/FirstPageImage.svg',
+                child: Image.asset(
+                  'asset/images/FirstPageImage.png',
                   alignment: Alignment.bottomCenter,
                 ),
               ),

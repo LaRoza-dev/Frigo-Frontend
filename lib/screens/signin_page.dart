@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
@@ -62,8 +61,8 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: SvgPicture.asset(
-                      'asset/images/SignInPageImage.svg',
+                    child: Image.asset(
+                      'asset/images/SignInPageImage.png',
                       alignment: Alignment.center,
                     ),
                   ),

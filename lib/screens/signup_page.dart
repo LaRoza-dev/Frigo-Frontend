@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
 import 'package:fridge/components/textFields.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/controllers/form_controller.dart';
 import 'package:get/get.dart';
@@ -64,8 +63,8 @@ class SignUpPage extends GetView {
                     ),
                   ),
                   Expanded(
-                    child: SvgPicture.asset(
-                      'asset/images/SignUpPageImage.svg',
+                    child: Image.asset(
+                      'asset/images/SignUpPageImage.png',
                       alignment: Alignment.center,
                     ),
                   ),

@@ -52,9 +52,9 @@ class InsertTextFlied extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withOpacity(0.04),
               blurRadius: 15,
-              offset: const Offset(0, 15),
+              offset: const Offset(0, 10),
             ),
           ],
         ),

@@ -16,6 +16,9 @@ const kTileColor = Color.fromRGBO(146, 163, 197, 1);
 
 const kRedColor = Color.fromRGBO(238, 49, 105, 1);
 
+const kTileItemColor = Color.fromRGBO(195, 214, 27, 1);
+const kTileStarColor = Color.fromRGBO(255, 179, 0, 1);
+
 const kHeading1 = TextStyle(
     color: kTextColor1,
     fontSize: 28.0,

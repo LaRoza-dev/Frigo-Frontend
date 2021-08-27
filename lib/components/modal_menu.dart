@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:fridge/models/user.dart';
 
 Future<dynamic> modalMenu(BuildContext context) {
   return showModalBottomSheet(
@@ -40,7 +41,13 @@ Future<dynamic> modalMenu(BuildContext context) {
             ModalDivider(),
             ModalTile(title: 'Notification', onPressed: () {}),
             ModalDivider(),
-            ModalTile(title: 'َSign Out', onPressed: () {}),
+            ModalTile(
+                title: 'َSign Out',
+                onPressed: () {
+                  Get.find<User>().logout();
+                  Get.find<User>().handleSignOut();
+                  Get.offAllNamed('/');
+                }),
           ],
         ),
       ),

@@ -25,7 +25,7 @@ class InsertTextFlied extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 7),
       child: Container(
         width: width * 0.9,
         //height: 40,

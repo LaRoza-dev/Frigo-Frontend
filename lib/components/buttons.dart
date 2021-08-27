@@ -102,3 +102,29 @@ class GoogleButton extends StatelessWidget {
     );
   }
 }
+
+class CircleIconButton extends StatelessWidget {
+  CircleIconButton({this.onColor:Colors.red,this.color:Colors.white,required this.icon,required this.onPressed,this.size:25});
+  final Color onColor;
+  final Color color;
+  final IconData icon;
+  final VoidCallback onPressed;
+  final int size;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: FaIcon(
+        icon,
+        size: 25,
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+        padding: EdgeInsets.all(10),
+        primary: color, // <-- Button color
+        onPrimary: onColor, // <-- Splash color
+      ),
+    );
+  }
+}

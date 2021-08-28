@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
@@ -26,7 +27,12 @@ class SignUpPage extends GetView {
         child: SingleChildScrollView(
           reverse: false,
           child: Container(
-            height: height - 25,
+            height: height -
+                (Platform.isIOS
+                    ? height / 9
+                    : Platform.isAndroid
+                        ? 25
+                        : 0),
             width: width,
             child: Form(
               //autovalidateMode: AutovalidateMode.always,
@@ -67,7 +73,7 @@ class SignUpPage extends GetView {
                         child: Image.asset(
                           'asset/images/SignUpPageImage.png',
                           alignment: Alignment.center,
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),

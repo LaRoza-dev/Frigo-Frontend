@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
@@ -21,10 +23,16 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(padding: EdgeInsets.zero,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.zero,
           reverse: true,
           child: Container(
-            height: height-25,
+            height: height -
+                (Platform.isIOS
+                    ? height / 9
+                    : Platform.isAndroid
+                        ? 25
+                        : 0),
             width: width,
             child: Form(
               key: formController.loginFormKey,
@@ -61,11 +69,12 @@ class SignInPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 25),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 25),
                         child: Image.asset(
                           'asset/images/SignInPageImage.png',
                           alignment: Alignment.center,
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
@@ -117,13 +126,15 @@ class SignInPage extends StatelessWidget {
                                       context: context,
                                       type: AlertType.error,
                                       title: "Permission Denied",
-                                      desc: "Username or Password is incorrect.",
+                                      desc:
+                                          "Username or Password is incorrect.",
                                       buttons: [
                                         DialogButton(
                                           child: Text(
                                             "Ok",
                                             style: TextStyle(
-                                                color: Colors.white, fontSize: 20),
+                                                color: Colors.white,
+                                                fontSize: 20),
                                           ),
                                           onPressed: () {
                                             Get.back();
@@ -187,7 +198,8 @@ class SignInPage extends StatelessWidget {
                                         child: Text(
                                           "Ok",
                                           style: TextStyle(
-                                              color: Colors.white, fontSize: 20),
+                                              color: Colors.white,
+                                              fontSize: 20),
                                         ),
                                         onPressed: () {
                                           Get.back();

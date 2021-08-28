@@ -241,9 +241,17 @@ class HomePage extends StatelessWidget {
                               flex: 7,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
+                                    const EdgeInsets.symmetric(vertical: 5),
                                 child: ListView(
                                   children: [
+                                    FoodTile(
+                                      title: 'Strawberry tart',
+                                      image: 'asset/images/recipe_image.png',
+                                      items: 28,
+                                      allItems: 34,
+                                      star: 4,
+                                      cal: 377,
+                                    ),
                                     FoodTile(
                                       title: 'Strawberry tart',
                                       image: 'asset/images/recipe_image.png',
@@ -251,10 +259,6 @@ class HomePage extends StatelessWidget {
                                       allItems: 7,
                                       star: 4,
                                       cal: 377,
-                                    ),
-                                    FoodTile(
-                                      title: 'test Tile',
-                                      image: 'asset/images/recipe_image.png',
                                     ),
                                     FoodTile(
                                       title: 'test Tile',

@@ -47,69 +47,75 @@ class FoodTile extends StatelessWidget {
               SizedBox(width: 10),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 15, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        title,
-                        style: kText1,
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: kText1,
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.shoppingBasket,
-                                        size: 20,color: kTileItemColor,
-                                      ),
-                                      Text(' $items / $allItems',
-                                          style: TextStyle(
-                                            color: kTileItemColor,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins',
-                                          )),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.solidStar,
-                                        size: 20,color: kTileStarColor,
-                                      ),
-                                      Text(' $star',
-                                          style: TextStyle(
-                                            color: kTileStarColor,
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins',
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Text('Kcal: $cal',
-                                  style: TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',))
-                            ],
+                          Expanded(flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.shoppingBasket,
+                                          size: 20,color: kTileItemColor,
+                                        ),
+                                        Text(' $items / $allItems',
+                                            style: TextStyle(
+                                              color: kTileItemColor,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Poppins',
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.solidStar,
+                                          size: 20,color: kTileStarColor,
+                                        ),
+                                        Text(' $star',
+                                            style: TextStyle(
+                                              color: kTileStarColor,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Poppins',
+                                            )),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Text('Kcal: $cal',
+                                    style: TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',))
+                              ],
+                            ),
                           ),
-                          CircleIconButton(
-                              color: kButtonColor,
-                              onColor: Colors.white,
-                              icon: FontAwesomeIcons.heart,
-                              size: 15,
-                              onPressed: () {})
+                          Expanded(flex: 1,
+                            child: CircleIconButton(
+                                color: kButtonColor,
+                                onColor: Colors.white,
+                                icon: FontAwesomeIcons.heart,
+                                size: 15,
+                                onPressed: () {}),
+                          )
                         ],
                       ),
                     ],

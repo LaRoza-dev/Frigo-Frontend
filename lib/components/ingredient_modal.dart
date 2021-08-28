@@ -63,7 +63,7 @@ Future<dynamic> ingredientModal(BuildContext context) {
                       ),
                     ],
                   ),
-                  child: SearchField(
+                  child: SearchField(itemHeight: 40,hasOverlay: false,maxSuggestionsInViewPort: 5,
                     searchStyle: kText1,
                     controller: searchController.searchText,
                     searchInputDecoration: InputDecoration(
@@ -94,9 +94,10 @@ Future<dynamic> ingredientModal(BuildContext context) {
                       border: Border.all(
                         color: Colors.grey.withOpacity(0.5),
                       ),
+                      
                     ),
                     suggestionItemDecoration:
-                        BoxDecoration(color: Colors.white),
+                        BoxDecoration(color: Colors.white,),
                     suggestionStyle: ktext2,
                   ),
                 ),

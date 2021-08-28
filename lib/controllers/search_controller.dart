@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class SearchController extends GetxController {
-  List<String> test = [
+  List<String> ingredients = [
     'aa',
     'a',
     'b',
@@ -16,7 +16,8 @@ class SearchController extends GetxController {
     'ghorme sabzi',
   ].obs;
 
-  List favorite = [].obs;
+  List basket = [].obs;
+  List fridge = [].obs;
 
   late TextEditingController searchText;
   @override

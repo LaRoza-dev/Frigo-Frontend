@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:fridge/components/textFields.dart';
+import 'package:searchfield/searchfield.dart';
+import 'package:fridge/controllers/search_controller.dart';
 
 Future<dynamic> fridgeModal(BuildContext context) {
+  SearchController searchController = Get.put(SearchController());
+
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   return showModalBottomSheet(
@@ -45,24 +48,83 @@ Future<dynamic> fridgeModal(BuildContext context) {
                     ),
                   ]),
             ),
-            InsertTextFlied(
-              width: width,
-              text: 'Search',
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ModalTile(
-                    title: 'Fridge item 1',
-                    onPressed: () {},
-                  ),ModalTile(
-                    title: 'Fridge item 2',
-                    onPressed: () {},
-                  )
-                ],
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.04),
+                        blurRadius: 15,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: SearchField(
+                    searchStyle: kText1,
+                    controller: searchController.searchText,
+                    searchInputDecoration: InputDecoration(
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.search,
+                          size: 20,
+                        ),
+                        suffixIcon: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.timesCircle,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              searchController.searchText.clear();
+                            }),
+                        border: InputBorder.none),
+                    suggestions: searchController.ingredients.toList(),
+                    hint: 'Search Ingredients',
+                    onTap: (value) {
+                      searchController.basket.add(value.toString());
+                      searchController.searchText.clear();
+                    },
+                    suggestionsDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8.0),
+                        bottomRight: Radius.circular(8),
+                      ),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.5),
+                      ),
+                    ),
+                    suggestionItemDecoration:
+                        BoxDecoration(color: Colors.white),
+                    suggestionStyle: ktext2,
+                  ),
+                ),
               ),
+            ),
+            Expanded(
+              child: ListView(shrinkWrap: true, children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
+                  child: Obx(
+                    () => ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: searchController.basket.length,
+                      itemBuilder: (context, index) {
+                        return ModalTile(
+                          title: '${searchController.basket[index]}',
+                          onPressed: () {},
+                          crossOnPressed: () {
+                            searchController.basket.removeAt(index);
+                          },
+                          heartOnPressed: () {},
+                        );
+                      },
+                    ),
+                  ),
+                )
+              ]),
             )
           ],
         ),
@@ -72,10 +134,18 @@ Future<dynamic> fridgeModal(BuildContext context) {
 }
 
 class ModalTile extends StatelessWidget {
+  ModalTile(
+      {required this.title,
+      required this.onPressed,
+      this.trailWidget,
+      required this.heartOnPressed,
+      required this.crossOnPressed});
+
   final String title;
   final Function()? onPressed;
+  final Function()? heartOnPressed;
+  final Function()? crossOnPressed;
   final Widget? trailWidget;
-  ModalTile({required this.title, required this.onPressed, this.trailWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -97,14 +167,14 @@ class ModalTile extends StatelessWidget {
                       FontAwesomeIcons.heart,
                       color: kTextColor1,
                     ),
-                    onPressed: () {},
+                    onPressed: heartOnPressed,
                   ),
                   IconButton(
                     icon: Icon(
                       FontAwesomeIcons.times,
                       color: kTextColor1,
                     ),
-                    onPressed: () {},
+                    onPressed: crossOnPressed,
                   ),
                 ],
               ),
@@ -117,5 +187,3 @@ class ModalTile extends StatelessWidget {
     );
   }
 }
-
-

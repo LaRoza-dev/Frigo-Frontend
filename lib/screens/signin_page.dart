@@ -27,13 +27,15 @@ class SignInPage extends StatelessWidget {
           padding: EdgeInsets.zero,
           reverse: true,
           child: Container(
-            height: height -
-                (Platform.isIOS
-                    ? height / 9
-                    : Platform.isAndroid
-                        ? 25
-                        : 0),
-            width: width,
+            // height: height -
+            //     (Platform.isIOS
+            //         ? height / 9
+            //         : Platform.isAndroid
+            //             ? 25
+            //             : 0),
+            // width: width,
+            height:MediaQuery.of(context).size.height*0.9,
+            width:MediaQuery.of(context).size.width,
             child: Form(
               key: formController.loginFormKey,
               child: Padding(

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
@@ -17,8 +16,7 @@ class SignUpPage extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<User>(() => User());
-    double height = MediaQuery.of(context).size.height;
+    Get.put(User());
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(

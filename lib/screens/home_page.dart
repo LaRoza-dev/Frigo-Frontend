@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/components/profile_modal.dart';
 import 'package:fridge/constants.dart';
@@ -8,12 +9,29 @@ import 'package:fridge/components/foodTile.dart';
 import 'package:fridge/components/menu_modal.dart';
 import 'package:fridge/components/ingredient_modal.dart';
 import 'package:fridge/components/fridge_modal.dart';
+import 'package:fridge/controllers/recipe_controller.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
+    Future<List<Widget>> foodList(data) async {
+      int len = (await data).length;
+      List<Widget> foodList = [];
+      for (var i = 0; i < len; i++) {
+        foodList.add(
+          FoodTile(
+            imageId: (await data)[i]["id"],
+            title: (await data)[i]["name"],
+            cal: (await data)[i]["nutritions"]["kcal"],
+          ),
+        );
+      }
+      return foodList;
+    }
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
@@ -161,7 +179,8 @@ class HomePage extends StatelessWidget {
                                     child: Container(
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          border: Border.all(color: kFieldTextColor),
+                                          border: Border.all(
+                                              color: kFieldTextColor),
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           boxShadow: [
@@ -176,8 +195,10 @@ class HomePage extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: Text(
                                           'Cal',
-                                          style:
-                                              TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',),
+                                          style: TextStyle(
+                                            color: kFieldTextColor,
+                                            fontFamily: 'Poppins',
+                                          ),
                                         )),
                                   ),
                                 ),
@@ -240,37 +261,24 @@ class HomePage extends StatelessWidget {
                           Expanded(
                               flex: 7,
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: ListView(
-                                  children: [
-                                    FoodTile(
-                                      title: 'Strawberry tart',
-                                      image: 'asset/images/recipe_image.png',
-                                      items: 28,
-                                      allItems: 34,
-                                      star: 4,
-                                      cal: 377,
-                                    ),
-                                    FoodTile(
-                                      title: 'Strawberry tart',
-                                      image: 'asset/images/recipe_image.png',
-                                      items: 6,
-                                      allItems: 7,
-                                      star: 4,
-                                      cal: 377,
-                                    ),
-                                    FoodTile(
-                                      title: 'test Tile',
-                                      image: 'asset/images/recipe_image.png',
-                                    ),
-                                    FoodTile(
-                                      title: 'test Tile',
-                                      image: 'asset/images/recipe_image.png',
-                                    ),
-                                  ],
-                                ),
-                              ))
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: FutureBuilder(
+                                    future: foodList(
+                                        Get.put(RecipeController()).getAll()),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<List<Widget>> recipes) {
+                                      if (recipes.hasData) {
+                                        return ListView(
+                                            children: recipes.requireData);
+                                      } else if (recipes.hasError) {
+                                        return Text("${recipes.error}");
+                                      }
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                  )))
                         ],
                       ),
                     ))

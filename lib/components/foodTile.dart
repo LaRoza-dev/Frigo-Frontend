@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'buttons.dart';
-
+import 'package:get/get.dart';
+import 'dart:typed_data';
+import 'package:fridge/models/recipe.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile(
-      {required this.image,
+      {required this.imageId,
       required this.title,
       this.items: 0,
       this.allItems: 0,
       this.star: 0,
-      this.cal: 0,
+      this.cal: '0',
       this.favorite: false});
-  final String image;
+  final String imageId;
   final String title;
   final int items;
   final int allItems;
   final int star;
-  final int cal;
+  final String cal;
   final bool favorite;
 
   @override
@@ -43,7 +45,21 @@ class FoodTile extends StatelessWidget {
           ),
           child: Row(
             children: <Widget>[
-              Image.asset(image),
+              FutureBuilder(
+                future: Get.put(DetaImage()).getImage(imageId),
+                builder: (BuildContext context, AsyncSnapshot<Uint8List> img) {
+                  if (img.hasData) {
+                    return Image.memory(img.requireData);
+                  } else if (img.hasError) {
+                    return Text("${img.error}");
+                  }
+                  return Container(width: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
+              ),
               SizedBox(width: 10),
               Expanded(
                 child: Padding(
@@ -61,7 +77,8 @@ class FoodTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(flex: 4,
+                          Expanded(
+                            flex: 4,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -72,7 +89,8 @@ class FoodTile extends StatelessWidget {
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.shoppingBasket,
-                                          size: 20,color: kTileItemColor,
+                                          size: 20,
+                                          color: kTileItemColor,
                                         ),
                                         Text(' $items / $allItems',
                                             style: TextStyle(
@@ -90,7 +108,8 @@ class FoodTile extends StatelessWidget {
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.solidStar,
-                                          size: 20,color: kTileStarColor,
+                                          size: 20,
+                                          color: kTileStarColor,
                                         ),
                                         Text(' $star',
                                             style: TextStyle(
@@ -104,11 +123,15 @@ class FoodTile extends StatelessWidget {
                                   ],
                                 ),
                                 Text('Kcal: $cal',
-                                    style: TextStyle(color: kFieldTextColor,fontFamily: 'Poppins',))
+                                    style: TextStyle(
+                                      color: kFieldTextColor,
+                                      fontFamily: 'Poppins',
+                                    ))
                               ],
                             ),
                           ),
-                          Expanded(flex: 1,
+                          Expanded(
+                            flex: 1,
                             child: CircleIconButton(
                                 color: kButtonColor,
                                 onColor: Colors.white,

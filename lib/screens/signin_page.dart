@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/buttons.dart';
@@ -12,12 +10,11 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:fridge/controllers/form_controller.dart';
 
 class SignInPage extends StatelessWidget {
-  final UserController controller = Get.put(UserController());
+  final UserController usercontroller = Get.put(UserController());
   final FormController formController = Get.put(FormController());
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<User>(() => User());
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -27,13 +24,6 @@ class SignInPage extends StatelessWidget {
           padding: EdgeInsets.zero,
           reverse: true,
           child: Container(
-            // height: height -
-            //     (Platform.isIOS
-            //         ? height / 9
-            //         : Platform.isAndroid
-            //             ? 25
-            //             : 0),
-            // width: width,
             height:MediaQuery.of(context).size.height*0.9,
             width:MediaQuery.of(context).size.width,
             child: Form(

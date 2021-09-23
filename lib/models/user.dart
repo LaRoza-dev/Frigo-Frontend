@@ -52,19 +52,15 @@ class User extends GetConnect {
 
   Future<bool> login(email, password) async {
     var reqBody = {"email": email, "password": password};
-
     var response = await post("/login", reqBody);
 
     if (response.statusCode != 404) {
       Map<dynamic, dynamic> decodedRes = response.body;
-
       final String? value = decodedRes["access_token"];
       final String key = 'token';
       await kStorage.write(key, value);
-
-      // final String? testRes = kStorage.read<String?>(key);
-
       return true;
+
     } else {
       return false;
     }
@@ -74,20 +70,8 @@ class User extends GetConnect {
     var reqBody = {"fullname": fullname, "email": email, "password": password};
     var response = await post('/register', reqBody);
     if (response.body["message"] == "User added successfully.") {
-      // print(response.bodyString);
       return true;
     }
-    // Map<dynamic, dynamic> decodedRes = response.body["data"][0];
-
-    // final String? value = decodedRes["access_token"];
-    // final String key = 'token';
-
-    // await kStorage.write(key, value);
-
-    // //TODO: it can be removed (or changed with a proper result)
-    // final String? testRes = kStorage.read<String?>(key);
-
-    // print(testRes);
     else {
       return false;
     }

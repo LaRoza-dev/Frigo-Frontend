@@ -19,6 +19,7 @@ dependencies:
   searchfield: ^0.5.2
   http:
   lazy_load_scrollview:
+  cached_network_image: ^3.1.0
 
 dev_dependencies:
   flutter_test:

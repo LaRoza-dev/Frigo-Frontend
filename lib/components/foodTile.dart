@@ -3,7 +3,6 @@ import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'buttons.dart';
 import 'package:get/get.dart';
-import 'dart:typed_data';
 import 'package:fridge/models/recipe.dart';
 
 class FoodTile extends StatelessWidget {
@@ -47,17 +46,17 @@ class FoodTile extends StatelessWidget {
             children: <Widget>[
               FutureBuilder(
                 future: Get.put(DetaImage()).getImage(imageId),
-                builder: (BuildContext context, AsyncSnapshot<Uint8List> img) {
+                builder: (BuildContext context, AsyncSnapshot<Widget> img) {
                   if (img.hasData) {
-                    return Image.memory(img.requireData);
-                  } else if (img.hasError) {
-                    return Text("${img.error}");
+                    return img.requireData;
                   }
-                  return Container(width: 100,
+                  return Container(
+                    width: 100,
                     child: Center(
                       child: CircularProgressIndicator(),
                     ),
                   );
+                  // return img.requireData;
                 },
               ),
               SizedBox(width: 10),

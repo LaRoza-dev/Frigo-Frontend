@@ -1,10 +1,10 @@
 import 'package:get/get_connect/connect.dart';
 import 'package:fridge/constants.dart';
 import 'package:get/get.dart';
-import 'dart:typed_data';
-import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class RecipeModel {
   String id = '';
@@ -101,12 +101,17 @@ class PaginationFilter {
 
 class DetaImage {
   Map<String, String> headers = {'X-Api-Key': '${dotenv.env['X_API_KEY']}'};
-  Future<Uint8List> getImage(String id) async {
-    final response = await http.get(
-        Uri.parse(
-          '${dotenv.env["DETA_RECIPE_IMAGES"]}' + '$id',
+  Future<Widget> getImage(String id) async {
+    return CachedNetworkImage(
+      imageUrl: '${dotenv.env["DETA_RECIPE_IMAGES"]}' + '$id',
+      httpHeaders: headers,
+      placeholder: (context, url) => new Container(
+        width: 100,
+        child: Center(
+          child: CircularProgressIndicator(),
         ),
-        headers: headers);
-    return response.bodyBytes;
+      ),
+      errorWidget: (context, url, error) => new Icon(Icons.error),
+    );
   }
 }

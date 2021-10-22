@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fridge/bindings/home_binding.dart';
+import 'package:fridge/components/openFood_modal.dart';
 import 'package:get/get.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';

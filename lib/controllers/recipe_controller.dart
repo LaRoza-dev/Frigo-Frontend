@@ -1,5 +1,6 @@
 import 'package:fridge/models/recipe.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class RecipeController extends GetxController {
   
@@ -44,4 +45,8 @@ class RecipeController extends GetxController {
   }
 
   void loadNextPage() => _changePaginationFilter(_page + 1, limit);
+
+  // Function openFood(){
+  //   return Get.toNamed('/openfood');
+  // }
 }

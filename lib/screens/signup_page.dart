@@ -25,17 +25,9 @@ class SignUpPage extends GetView {
         child: SingleChildScrollView(
           reverse: false,
           child: Container(
-            // height: height -
-            //     (Platform.isIOS
-            //         ? height / 9
-            //         : Platform.isAndroid
-            //             ? 25
-            //             : 0),
-            // width: width,
             height:MediaQuery.of(context).size.height*0.9,
             width:MediaQuery.of(context).size.width,
             child: Form(
-              //autovalidateMode: AutovalidateMode.always,
               key: formController.loginFormKey,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),

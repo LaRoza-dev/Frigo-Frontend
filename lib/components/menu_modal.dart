@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
+import 'package:fridge/components/profile_modal.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:fridge/models/user.dart';
@@ -34,7 +35,11 @@ Future<dynamic> modalMenu(BuildContext context) {
                 },
               ),
             ),
-            ModalTile(title: 'About Us', onPressed: () {}),
+            ModalTile(
+                title: 'Profile',
+                onPressed: () {
+                  profileModalMenu(context);
+                }),
             ModalTile(title: 'Contact', onPressed: () {}),
             ModalTile(title: 'Notification', onPressed: () {}),
             ModalTile(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fridge/components/openFood_modal.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'buttons.dart';
 import 'package:get/get.dart';
 import 'package:fridge/models/recipe.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile({
@@ -93,9 +92,10 @@ class FoodTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      AutoSizeText(
                         title,
-                        style: kText1.copyWith(fontSize: width),
+                        style: kText1,
+                        maxLines: 2
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -133,7 +133,7 @@ class HomePage extends StatelessWidget {
                                             title: recipe.name,
                                             onPressed: () {
                                               openFoodModal(
-                                                  context, recipe.id);
+                                                  context, recipe);
                                             },
                                           );
                                         },

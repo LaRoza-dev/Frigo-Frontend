@@ -9,17 +9,20 @@ const kPrimaryColor = Color.fromRGBO(160, 77, 255, 1);
 const kBackgroundColor = Color.fromRGBO(246, 249, 250, 1);
 
 const kTextColor1 = Color.fromRGBO(13, 24, 99, 1);
+const ktext2Color = Color.fromRGBO(53, 76, 123, 1);
 const kTextColor2 = Colors.white;
 // const kFieldTextColor = Color.fromRGBO(204, 205, 223, 1);
 const kFieldTextColor = Colors.grey;
 
 const kTileColor = Color.fromRGBO(146, 163, 197, 1);
+// const kTileColor = Color.fromRGBO(146, 163, 197, 0.1);
 
 const kRedColor = Color.fromRGBO(238, 49, 105, 1);
 
 // const kTileItemColor = Color.fromRGBO(195, 214, 27, 1);
 const kTileItemColor = Colors.lightGreen;
 const kTileStarColor = Color.fromRGBO(255, 179, 0, 1);
+const kBorderColor = Color.fromRGBO(231, 231, 239, 1);
 
 const kHeading1 = TextStyle(
     color: kTextColor1,

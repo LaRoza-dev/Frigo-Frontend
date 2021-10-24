@@ -1,9 +1,7 @@
 import 'package:fridge/models/recipe.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class RecipeController extends GetxController {
-  
   final RecipeRepository _recipeRepository;
   final _recipes = <RecipeModel>[].obs;
   final _paginationFilter = PaginationFilter().obs;
@@ -24,7 +22,8 @@ class RecipeController extends GetxController {
   }
 
   Future<void> _getAllRecipes() async {
-    final recipesData = await _recipeRepository.getRecipes(_paginationFilter.value);
+    final recipesData =
+        await _recipeRepository.getRecipes(_paginationFilter.value);
     if (recipesData.isEmpty) {
       _lastPage.value = true;
     }
@@ -45,8 +44,4 @@ class RecipeController extends GetxController {
   }
 
   void loadNextPage() => _changePaginationFilter(_page + 1, limit);
-
-  // Function openFood(){
-  //   return Get.toNamed('/openfood');
-  // }
 }

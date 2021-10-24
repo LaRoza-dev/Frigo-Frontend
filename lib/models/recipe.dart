@@ -9,18 +9,42 @@ import 'package:cached_network_image/cached_network_image.dart';
 class RecipeModel {
   String id = '';
   String name = '';
+  List<dynamic> cookSteps = [''];
+  List<dynamic> ingredients =[''];
+  Map<String,dynamic> nutritions = {'':''};
+  String prepTime ='';
+  String serves = '';
+  String skill = '';
+  String stars = '';
+  String userId = '';
 
-  RecipeModel({required this.id, required this.name});
+  RecipeModel({required this.id, required this.name,required this.cookSteps,required this.ingredients,required this.nutritions,required this.prepTime,required this.serves,required this.skill,required this.stars,required this.userId});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    cookSteps = json['cook_steps'];
+    ingredients = json['ingredients'];
+    nutritions = json['nutritions'];
+    prepTime = json['prep_time'];
+    serves = json['serves'];
+    skill = json['skill'];
+    stars = json['stars'];
+    userId = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    data['cook_steps'] = this.cookSteps;
+    data['ingredients'] = this.ingredients;
+    data['nutritions'] = this.nutritions;
+    data['prep_time'] = this.prepTime;
+    data['serves'] = this.serves;
+    data['skill'] = this.skill;
+    data['stars'] = this.stars;
+    data['user_id'] = this.userId;
     return data;
   }
 }

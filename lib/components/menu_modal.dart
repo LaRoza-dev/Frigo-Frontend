@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:fridge/models/user.dart';
 
 Future<dynamic> modalMenu(BuildContext context) {
-  return showModalBottomSheet(
+  return showModalBottomSheet(useRootNavigator: true,
     context: context,
     backgroundColor: Colors.transparent,
     builder: (context) => BackdropFilter(

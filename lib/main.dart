@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fridge/bindings/home_binding.dart';
-import 'package:fridge/components/openFood_modal.dart';
 import 'package:get/get.dart';
 import 'package:fridge/screens/first_page.dart';
 import 'package:fridge/screens/signin_page.dart';
@@ -17,7 +16,7 @@ void main() async {
     systemNavigationBarColor: Color(0xFF000000),
     statusBarColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
     statusBarBrightness: Brightness.light,
   ));
   WidgetsFlutterBinding.ensureInitialized();

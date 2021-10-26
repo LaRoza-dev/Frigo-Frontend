@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RecipeModel {
   String id = '';
@@ -15,7 +16,7 @@ class RecipeModel {
   String prepTime ='';
   String serves = '';
   String skill = '';
-  String stars = '';
+  int stars = 0;
   String userId = '';
 
   RecipeModel({required this.id, required this.name,required this.cookSteps,required this.ingredients,required this.nutritions,required this.prepTime,required this.serves,required this.skill,required this.stars,required this.userId});
@@ -139,3 +140,29 @@ class DetaImage {
     );
   }
 }
+
+
+List<Widget> rating(count) {
+    List<Widget> wList = [];
+    for (var i = 1; i < count + 1; i++) {
+      wList.add(
+        FaIcon(
+          FontAwesomeIcons.solidStar,
+          size: 13,
+          color: kTileStarColor,
+        ),
+      );
+      
+    }
+    for (var i = 1; i < 5-count + 1; i++) {
+      wList.add(
+        FaIcon(
+          FontAwesomeIcons.star,
+          size: 13,
+          color: kTileStarColor,
+        ),
+      );
+      
+    }
+    return wList;
+  }

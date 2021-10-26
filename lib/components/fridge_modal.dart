@@ -10,7 +10,7 @@ Future<dynamic> fridgeModal(BuildContext context) {
   SearchController searchController = Get.put(SearchController());
 
   double height = MediaQuery.of(context).size.height;
-  return showModalBottomSheet(
+  return showModalBottomSheet(useRootNavigator: true,
     isScrollControlled: true,
     context: context,
     backgroundColor: Colors.transparent,

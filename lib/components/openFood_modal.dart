@@ -77,7 +77,7 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                           IconButton(
                             icon: Icon(
                               FontAwesomeIcons.solidTimesCircle,
-                              color: Colors.white.withOpacity(0.5),
+                              color: Colors.grey,size: 30,
                             ),
                             onPressed: () {
                               Get.back();

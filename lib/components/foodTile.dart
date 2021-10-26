@@ -6,17 +6,16 @@ import 'package:fridge/models/recipe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class FoodTile extends StatelessWidget {
-  FoodTile({
-    required this.imageId,
-    required this.title,
-    this.items: 0,
-    this.allItems: 0,
-    this.star: 0,
-    this.cal: '0',
-    this.favorite: false,
-    this.onPressed,
-    this.width
-  });
+  FoodTile(
+      {required this.imageId,
+      required this.title,
+      this.items: 0,
+      this.allItems: 0,
+      this.star: 0,
+      this.cal: '0',
+      this.favorite: false,
+      this.onPressed,
+      this.width});
   final String imageId;
   final String title;
   final int items;
@@ -27,24 +26,10 @@ class FoodTile extends StatelessWidget {
   final onPressed;
   final width;
 
-  List<Widget> rating(count) {
-    List<Widget> wList = [];
-    for (var i = 1; i < count + 1; i++) {
-      wList.add(
-        FaIcon(
-          FontAwesomeIcons.solidStar,
-          size: 13,
-          color: kTileStarColor,
-        ),
-      );
-    }
-    return wList;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 25),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
       child: MaterialButton(
         padding: EdgeInsets.all(0),
         onPressed: onPressed,
@@ -92,11 +77,7 @@ class FoodTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      AutoSizeText(
-                        title,
-                        style: kText1,
-                        maxLines: 2
-                      ),
+                      AutoSizeText(title, style: kText1, maxLines: 2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -108,7 +89,8 @@ class FoodTile extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -126,10 +108,9 @@ class FoodTile extends StatelessWidget {
                                               )),
                                         ],
                                       ),
-                                      
                                       Row(
-                                        // children: rating(star),
-                                        children: rating(5),
+                                        children: rating(star),
+                                        // children: rating(5),
                                       ),
                                     ],
                                   ),

@@ -77,7 +77,8 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                           IconButton(
                             icon: Icon(
                               FontAwesomeIcons.solidTimesCircle,
-                              color: Colors.grey,size: 30,
+                              color: Colors.grey,
+                              size: 30,
                             ),
                             onPressed: () {
                               Get.back();
@@ -108,24 +109,72 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Row(children: rating(recipe.stars),),
+                            child: Row(
+                              children: rating(recipe.stars),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Wrap(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                FoodTag(
-                                  text: "Prep: ${recipe.prepTime}",
-                                  color: kButtonColor,
-                                  textColor: Colors.white,
-                                ),FoodTag(
-                                  text: "Cook: ${recipe.cookTime}",
-                                  color: kButtonColor,
-                                  textColor: Colors.white,
+                                Wrap(
+                                  children: [
+                                    FoodTag(
+                                      text: "Prep: ${recipe.prepTime}",
+                                      color: kButtonColor,
+                                      textColor: Colors.white,
+                                    ),
+                                    FoodTag(
+                                      text: "Cook: ${recipe.cookTime}",
+                                      color: kButtonColor,
+                                      textColor: Colors.white,
+                                    ),
+                                    FoodTag(text: recipe.serves),
+                                    FoodTag(text: recipe.skill),
+                                  ],
                                 ),
-                                FoodTag(text: recipe.serves),
-                                FoodTag(text: recipe.skill),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        "Kcal: ${recipe.nutritions["kcal"]}",
+                                        style: kNutrition,
+                                      ),
+                                      Text(
+                                        "Fat: ${recipe.nutritions["fat"]}",
+                                        style: kNutrition,
+                                      ),
+                                      Text(
+                                        "Saturates: ${recipe.nutritions["saturates"]}",
+                                        style: kNutrition,
+                                      ),
+                                      Text(
+                                        "Carbs: ${recipe.nutritions["carbs"]}",
+                                        style: kNutrition,
+                                      ),
+                                    ],
+                                  ),
+                                ),Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Sugars: ${recipe.nutritions["sugars"]}",
+                                      style: kNutrition,
+                                    ),
+                                    Text(
+                                      "Fibre: ${recipe.nutritions["fibre"]}",
+                                      style: kNutrition,
+                                    ),
+                                    Text(
+                                      "Protein: ${recipe.nutritions["protein"]}",
+                                      style: kNutrition,
+                                    ),
+                                    Text(
+                                      "Salt: ${recipe.nutritions["salt"]}",
+                                      style: kNutrition,
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

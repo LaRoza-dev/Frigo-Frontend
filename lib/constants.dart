@@ -62,3 +62,8 @@ const kFormField = TextStyle(
     fontSize: 13.0,
     fontWeight: FontWeight.w300,
     fontFamily: 'Poppins');
+
+const kNutrition = TextStyle(
+  color: kFieldTextColor,
+  fontFamily: 'Poppins',
+);

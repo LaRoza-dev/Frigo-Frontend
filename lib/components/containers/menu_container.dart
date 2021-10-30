@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/components/profile_modal.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:fridge/models/user.dart';
 
@@ -10,7 +9,7 @@ class MenuContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+      margin: EdgeInsets.fromLTRB(30, 0, 30, 10),
       padding: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -25,8 +24,8 @@ class MenuContainer extends StatelessWidget {
               onPressed: () {
                 profileModalMenu(context);
               }),
-          ModalTile(title: 'Contact', onPressed: () {}),
-          ModalTile(title: 'Notification', onPressed: () {}),
+          ModalTile(title: 'Contact us', onPressed: () {}),
+          ModalTile(title: 'Donate', onPressed: () {}),
           ModalTile(
               title: 'َSign Out',
               onPressed: () {

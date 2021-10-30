@@ -10,24 +10,28 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class RecipeModel {
   String id = '';
   String name = '';
+  String introduction ='';
   List<dynamic> cookSteps = [''];
   List<dynamic> ingredients =[''];
   Map<String,dynamic> nutritions = {'':''};
   String prepTime ='';
+  String cookTime ='';
   String serves = '';
   String skill = '';
   int stars = 0;
   String userId = '';
 
-  RecipeModel({required this.id, required this.name,required this.cookSteps,required this.ingredients,required this.nutritions,required this.prepTime,required this.serves,required this.skill,required this.stars,required this.userId});
+  RecipeModel({required this.id, required this.name,required this.introduction,required this.cookSteps,required this.ingredients,required this.nutritions,required this.prepTime,required this.cookTime,required this.serves,required this.skill,required this.stars,required this.userId});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    introduction = json['introduction'];
     cookSteps = json['cook_steps'];
     ingredients = json['ingredients'];
     nutritions = json['nutritions'];
     prepTime = json['prep_time'];
+    cookTime = json['cook_time'];
     serves = json['serves'];
     skill = json['skill'];
     stars = json['stars'];
@@ -38,10 +42,12 @@ class RecipeModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    data['introduction'] = this.introduction;
     data['cook_steps'] = this.cookSteps;
     data['ingredients'] = this.ingredients;
     data['nutritions'] = this.nutritions;
     data['prep_time'] = this.prepTime;
+    data['cook_time'] = this.cookTime;
     data['serves'] = this.serves;
     data['skill'] = this.skill;
     data['stars'] = this.stars;

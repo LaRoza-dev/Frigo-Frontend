@@ -108,28 +108,31 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Text("Rating"),
+                            child: Row(children: rating(recipe.stars),),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Wrap(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 FoodTag(
-                                  text: '1:30 min',
+                                  text: "Prep: ${recipe.prepTime}",
+                                  color: kButtonColor,
+                                  textColor: Colors.white,
+                                ),FoodTag(
+                                  text: "Cook: ${recipe.cookTime}",
                                   color: kButtonColor,
                                   textColor: Colors.white,
                                 ),
-                                FoodTag(text: 'Serving'),
-                                FoodTag(text: 'Easy'),
-                                FoodTag(text: 'Serving')
+                                FoodTag(text: recipe.serves),
+                                FoodTag(text: recipe.skill),
                               ],
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
-                              'A tried and tested recipe allowing you to make both the pizza dough and sauce completely from scratch',
+                              recipe.introduction,
                               style: ktext2,
                             ),
                           )
@@ -215,6 +218,7 @@ class FoodTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(5),
+        margin: EdgeInsets.all(5),
         child: Text(
           text,
           style: ktext2.copyWith(color: textColor),

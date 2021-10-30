@@ -27,7 +27,7 @@ class WishListContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Fridge',
+                    'Wish List',
                     style: kHeading2,
                   ),
                 ]),

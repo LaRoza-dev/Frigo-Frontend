@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(animationDuration: Duration(milliseconds: 300),
         height: 60,
         backgroundColor: kPrimaryColor2,
         color: Color.fromRGBO(246, 230, 255, 1),

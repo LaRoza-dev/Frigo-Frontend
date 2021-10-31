@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class RecipeController extends GetxController {
   final RecipeRepository _recipeRepository;
   final _recipes = <RecipeModel>[].obs;
+  final _total_number = 0.obs;
   final _paginationFilter = PaginationFilter().obs;
   final _lastPage = false.obs;
 
@@ -27,7 +28,17 @@ class RecipeController extends GetxController {
     if (recipesData.isEmpty) {
       _lastPage.value = true;
     }
-    _recipes.addAll(recipesData);
+
+    var data = recipesData['data'];
+    _recipes.addAll(data);
+  }
+
+  Future<int> getTotalNumber() async {
+    final totalNumber =
+        await _recipeRepository.getRecipes(_paginationFilter.value);
+
+    _total_number.value = totalNumber['total_number'];
+    return totalNumber['total_number'];
   }
 
   void changeTotalPerPage(int limitValue) {

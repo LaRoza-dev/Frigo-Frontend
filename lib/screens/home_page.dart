@@ -42,7 +42,6 @@ class HomePage extends StatelessWidget {
         ],
         onTap: (index) {
           contentsController.updateContents(index);
-          // print(contentsController.pageContents.value.title);
         },
       ),
       body: Container(

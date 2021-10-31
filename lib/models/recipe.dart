@@ -76,7 +76,7 @@ class RecipeRepository extends GetConnect {
     var response = await get(
         "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}",
         headers: {'Authorization': 'Bearer ' + token});
-    if (response.statusCode != 404) {
+    if (response.statusCode == 200) {
       List<RecipeModel> jsonDecoded = response.body['data']
           ?.map<RecipeModel>(
             (u) => RecipeModel.fromJson(u),

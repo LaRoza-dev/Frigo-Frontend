@@ -7,7 +7,6 @@ import 'package:fridge/controllers/recipe_controller.dart';
 import 'package:fridge/constants.dart';
 import 'package:fridge/models/recipe.dart';
 
-
 class FoodsContainer extends StatelessWidget {
   // const FoodsContainer({  });
   final RecipeController _controller =
@@ -32,13 +31,17 @@ class FoodsContainer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Showing ... foods",
-                      style: kFormField.copyWith(
-                          fontSize: 16,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.normal),
-                    ),
+                    FutureBuilder(
+                        future: _controller.getTotalNumber(),
+                        builder: (context, snapshot) {
+                          return Text(
+                            "Showing ${snapshot.requireData} foods",
+                            style: kFormField.copyWith(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.normal),
+                          );
+                        }),
                     DropdownButton(
                       items: [
                         DropdownMenuItem(child: Text("data")),

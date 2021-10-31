@@ -59,7 +59,6 @@ class User extends GetConnect {
       final String key = 'token';
       await kStorage.write(key, value);
       return true;
-
     } else {
       return false;
     }
@@ -70,8 +69,7 @@ class User extends GetConnect {
     var response = await post('/register', reqBody);
     if (response.body["message"] == "User added successfully.") {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

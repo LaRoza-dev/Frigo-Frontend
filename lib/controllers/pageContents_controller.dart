@@ -1,9 +1,9 @@
-import 'package:fridge/models/pageContents.dart';
+import 'package:Frigo/models/pageContents.dart';
 import 'package:get/get.dart';
-import 'package:fridge/components/containers/menu_container.dart';
-import 'package:fridge/components/containers/foods_container.dart';
-import 'package:fridge/components/containers/fridge_container.dart';
-import 'package:fridge/components/containers/wishList_container.dart';
+import 'package:Frigo/components/containers/menu_container.dart';
+import 'package:Frigo/components/containers/foods_container.dart';
+import 'package:Frigo/components/containers/fridge_container.dart';
+import 'package:Frigo/components/containers/wishList_container.dart';
 
 class PageContentsController extends GetxController {
   final pageContents = PageContents().obs;

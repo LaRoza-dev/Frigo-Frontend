@@ -1,4 +1,4 @@
-import 'package:fridge/models/recipe.dart';
+import 'package:Frigo/models/recipe.dart';
 import 'package:get/get.dart';
 
 class RecipeController extends GetxController {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 
 class MainButton extends StatelessWidget {
   MainButton(

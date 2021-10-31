@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:fridge/components/textFields.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/components/textFields.dart';
+import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 

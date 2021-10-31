@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:fridge/models/recipe.dart';
+import 'package:Frigo/models/recipe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fridge/components/stars.dart';
+import 'package:Frigo/components/stars.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile(

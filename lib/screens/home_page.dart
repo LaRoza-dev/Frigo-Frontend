@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fridge/controllers/pageContents_controller.dart';
+import 'package:Frigo/controllers/pageContents_controller.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:fridge/components/containers/foods_container.dart';
-import 'package:fridge/components/foodSearchField.dart';
+import 'package:Frigo/components/containers/foods_container.dart';
+import 'package:Frigo/components/foodSearchField.dart';
 
 class HomePage extends StatelessWidget {
   final PageContentsController contentsController = Get.put(PageContentsController());

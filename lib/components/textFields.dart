@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 
 class InsertTextFlied extends StatelessWidget {
   const InsertTextFlied(

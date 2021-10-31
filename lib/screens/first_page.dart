@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:fridge/components/buttons.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/components/buttons.dart';
+import 'package:Frigo/constants.dart';
 import 'package:get/get.dart';
 
 class FirstPage extends StatelessWidget {

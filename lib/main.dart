@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fridge/bindings/home_binding.dart';
+import 'package:Frigo/bindings/home_binding.dart';
 import 'package:get/get.dart';
-import 'package:fridge/screens/first_page.dart';
-import 'package:fridge/screens/signin_page.dart';
-import 'package:fridge/screens/signup_page.dart';
-import 'package:fridge/screens/home_page.dart';
+import 'package:Frigo/screens/first_page.dart';
+import 'package:Frigo/screens/signin_page.dart';
+import 'package:Frigo/screens/signup_page.dart';
+import 'package:Frigo/screens/home_page.dart';
 import 'package:get_storage/get_storage.dart';
 import 'models/user.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

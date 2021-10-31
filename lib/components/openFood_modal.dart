@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fridge/models/recipe.dart';
-import 'package:fridge/components/stars.dart';
+import 'package:Frigo/models/recipe.dart';
+import 'package:Frigo/components/stars.dart';
 
 Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
   // SearchController searchController = Get.put(SearchController());
@@ -54,15 +54,11 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                   child: FutureBuilder(
                     future: Get.put(DetaImage()).getImage(recipe.id),
                     builder: (BuildContext context, AsyncSnapshot<Widget> img) {
-                      if (img.hasData) {
+                      if (img.connectionState != ConnectionState.done) {
+                        return CircularProgressIndicator();
+                      } else {
                         return img.requireData;
                       }
-                      return Container(
-                        width: 100,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
                       // return img.requireData;
                     },
                   ),
@@ -116,7 +112,8 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Wrap(
                                   children: [
@@ -135,8 +132,11 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5),
-                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
                                         "Kcal: ${recipe.nutritions["kcal"]}",
@@ -156,7 +156,10 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                                       ),
                                     ],
                                   ),
-                                ),Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
                                       "Sugars: ${recipe.nutritions["sugars"]}",

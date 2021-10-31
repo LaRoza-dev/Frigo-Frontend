@@ -1,4 +1,4 @@
-import 'package:fridge/models/user.dart';
+import 'package:Frigo/models/user.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {

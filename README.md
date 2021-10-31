@@ -1,4 +1,4 @@
-# fridge
+# Frigo
 
 A new Flutter project.
   

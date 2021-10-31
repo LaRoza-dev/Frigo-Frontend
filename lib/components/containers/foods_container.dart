@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:get/get.dart';
-import 'package:fridge/components/foodTile.dart';
-import 'package:fridge/components/openFood_modal.dart';
-import 'package:fridge/controllers/recipe_controller.dart';
-import 'package:fridge/constants.dart';
-import 'package:fridge/models/recipe.dart';
+import 'package:Frigo/components/foodTile.dart';
+import 'package:Frigo/components/openFood_modal.dart';
+import 'package:Frigo/controllers/recipe_controller.dart';
+import 'package:Frigo/constants.dart';
+import 'package:Frigo/models/recipe.dart';
 
 class FoodsContainer extends StatelessWidget {
   // const FoodsContainer({  });
@@ -34,13 +34,24 @@ class FoodsContainer extends StatelessWidget {
                     FutureBuilder(
                         future: _controller.getTotalNumber(),
                         builder: (context, snapshot) {
-                          return Text(
-                            "Showing ${snapshot.requireData} foods",
-                            style: kFormField.copyWith(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.normal),
-                          );
+                          if (snapshot.connectionState !=
+                              ConnectionState.done) {
+                            return Text(
+                              "Loading ...",
+                              style: kFormField.copyWith(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.normal),
+                            );
+                          } else {
+                            return Text(
+                              "Showing ${snapshot.requireData} foods",
+                              style: kFormField.copyWith(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.normal),
+                            );
+                          }
                         }),
                     DropdownButton(
                       items: [

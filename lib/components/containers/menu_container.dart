@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:fridge/constants.dart';
-import 'package:fridge/components/profile_modal.dart';
+import 'package:Frigo/constants.dart';
+import 'package:Frigo/components/profile_modal.dart';
 import 'package:get/get.dart';
-import 'package:fridge/models/user.dart';
+import 'package:Frigo/models/user.dart';
 
 class MenuContainer extends StatelessWidget {
   @override

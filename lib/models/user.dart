@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:get/get_connect/connect.dart';
-import 'package:fridge/constants.dart';
+import 'package:Frigo/constants.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

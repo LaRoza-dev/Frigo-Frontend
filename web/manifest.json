@@ -1,6 +1,6 @@
 {
-    "name": "fridge",
-    "short_name": "fridge",
+    "name": "Frigo",
+    "short_name": "Frigo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -19,7 +19,6 @@ class RecipeModel {
   String skill = '';
   int stars = 0;
   String userId = '';
-  int totalNumber =0;
 
   RecipeModel(
       {required this.id,
@@ -33,7 +32,7 @@ class RecipeModel {
       required this.serves,
       required this.skill,
       required this.stars,
-      required this.userId,this.totalNumber=0});
+      required this.userId});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -89,21 +88,7 @@ class RecipeRepository extends GetConnect {
     }
   }
 
-  //Get all Recipes total number
-  Future<int> getRecipesTotalNumber(PaginationFilter filter) async {
-    var token = kStorage.read("token");
-    var response = await get(
-        "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}",
-        headers: {'Authorization': 'Bearer ' + token});
-    if (response.statusCode != 404) {
-      int jsonDecoded = response.body['total_number'];
-      return jsonDecoded;
-    } else {
-      return Future.error('error');
-    }
-  }
-
-  //Get Recipes by Ingredients
+    //Get Recipes by Ingredients
   Future<List<RecipeModel>> searchByIng(query, PaginationFilter filter) async {
     var token = kStorage.read("token");
     var response = await post(

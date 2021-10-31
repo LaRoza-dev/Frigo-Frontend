@@ -6,18 +6,18 @@ class UserController extends GetxController {
 
   void setEmail(email) {
     user.email = email;
-    update();
+    // update();
   }
 
   void setPassword(password) {
     user.password = password;
     print({user.email});
-    update();
+    // update();
   }
 
   void setFullname(fullname) {
     user.fullname = fullname;
-    update();
+    // update();
   }
 
   Future<bool> login() async {

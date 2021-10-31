@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:fridge/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fridge/models/recipe.dart';
+import 'package:fridge/components/stars.dart';
 
 Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
   // SearchController searchController = Get.put(SearchController());

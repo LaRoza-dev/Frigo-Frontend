@@ -5,23 +5,35 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RecipeModel {
   String id = '';
   String name = '';
-  String introduction ='';
+  String introduction = '';
   List<dynamic> cookSteps = [''];
-  List<dynamic> ingredients =[''];
-  Map<String,dynamic> nutritions = {'':''};
-  String prepTime ='';
-  String cookTime ='';
+  List<dynamic> ingredients = [''];
+  Map<String, dynamic> nutritions = {'': ''};
+  String prepTime = '';
+  String cookTime = '';
   String serves = '';
   String skill = '';
   int stars = 0;
   String userId = '';
+  int totalNumber =0;
 
-  RecipeModel({required this.id, required this.name,required this.introduction,required this.cookSteps,required this.ingredients,required this.nutritions,required this.prepTime,required this.cookTime,required this.serves,required this.skill,required this.stars,required this.userId});
+  RecipeModel(
+      {required this.id,
+      required this.name,
+      required this.introduction,
+      required this.cookSteps,
+      required this.ingredients,
+      required this.nutritions,
+      required this.prepTime,
+      required this.cookTime,
+      required this.serves,
+      required this.skill,
+      required this.stars,
+      required this.userId,this.totalNumber=0});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -59,13 +71,11 @@ class RecipeModel {
 class RecipeRepository extends GetConnect {
   String? baseUrl = "https://api.laroza.dev";
 
+  //Get all Recipes
   Future<List<RecipeModel>> getRecipes(PaginationFilter filter) async {
     var token = kStorage.read("token");
     var response = await get(
-        "/recipe/?pageNumber=" +
-            filter.page.toString() +
-            "&nPerPage=" +
-            filter.limit.toString(),
+        "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}",
         headers: {'Authorization': 'Bearer ' + token});
     if (response.statusCode != 404) {
       List<RecipeModel> jsonDecoded = response.body['data']
@@ -79,13 +89,45 @@ class RecipeRepository extends GetConnect {
     }
   }
 
-  Future<List<RecipeModel>> search(query, PaginationFilter filter) async {
+  //Get all Recipes total number
+  Future<int> getRecipesTotalNumber(PaginationFilter filter) async {
+    var token = kStorage.read("token");
+    var response = await get(
+        "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}",
+        headers: {'Authorization': 'Bearer ' + token});
+    if (response.statusCode != 404) {
+      int jsonDecoded = response.body['total_number'];
+      return jsonDecoded;
+    } else {
+      return Future.error('error');
+    }
+  }
+
+  //Get Recipes by Ingredients
+  Future<List<RecipeModel>> searchByIng(query, PaginationFilter filter) async {
     var token = kStorage.read("token");
     var response = await post(
-        "/recipe/search?pageNumber=" +
-            filter.page.toString() +
-            "&nPerPage=" +
-            filter.limit.toString(),
+        "/recipe/search?pageNumber=${filter.page}&nPerPage=${filter.limit}",
+        query,
+        headers: {'Authorization': 'Bearer ' + token});
+
+    if (response.statusCode != 404) {
+      Future<List<RecipeModel>> jsonDecoded = await response.body['data']
+          ?.map<RecipeModel>(
+            (u) => RecipeModel.fromJson(u),
+          )
+          ?.toList();
+      return jsonDecoded;
+    } else {
+      return Future.error('error');
+    }
+  }
+
+  //Get Recipes by Ingredients
+  Future<List<RecipeModel>> searchByName(query, PaginationFilter filter) async {
+    var token = kStorage.read("token");
+    var response = await post(
+        "/recipe/$query?pageNumber=${filter.page}&nPerPage=${filter.limit}",
         query,
         headers: {'Authorization': 'Bearer ' + token});
 
@@ -146,29 +188,3 @@ class DetaImage {
     );
   }
 }
-
-
-List<Widget> rating(count) {
-    List<Widget> wList = [];
-    for (var i = 1; i < count + 1; i++) {
-      wList.add(
-        FaIcon(
-          FontAwesomeIcons.solidStar,
-          size: 13,
-          color: kTileStarColor,
-        ),
-      );
-      
-    }
-    for (var i = 1; i < 5-count + 1; i++) {
-      wList.add(
-        FaIcon(
-          FontAwesomeIcons.star,
-          size: 13,
-          color: kTileStarColor,
-        ),
-      );
-      
-    }
-    return wList;
-  }

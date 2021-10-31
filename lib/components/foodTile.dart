@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:fridge/models/recipe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fridge/components/stars.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile(

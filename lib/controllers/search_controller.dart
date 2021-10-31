@@ -1,23 +1,19 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class SearchController extends GetxController {
-  List<String> ingredients = [
-    'aa',
-    'a',
-    'b',
-    'bb',
-    'testtest',
-    'roshan',
-    'flutter',
-    'london',
-    'united kingdom',
-    'food1',
-    'ghorme sabzi',
-  ].obs;
+class Search {
+  Search({this.text=''});
+  String text;
+}
 
-  List basket = [].obs;
-  List fridge = [].obs;
+class SearchController extends GetxController {
+  final name = Search().obs;
+
+  updateName(String input) {
+    name.update((val) {
+        val!.text = input;
+      });
+  }
 
   late TextEditingController searchText;
   @override

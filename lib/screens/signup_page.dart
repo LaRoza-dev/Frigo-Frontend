@@ -75,7 +75,7 @@ class SignUpPage extends GetView {
                         GetBuilder<UserController>(builder: (_) {
                           return InsertTextFlied(
                               width: width,
-                              text: 'User name',
+                              text: 'Email',
                               validator: formController.emailValidator,
                               controller: formController.emailController,
                               onSaved: (value) {

@@ -96,7 +96,7 @@ class RecipeRepository extends GetConnect {
         query,
         headers: {'Authorization': 'Bearer ' + token});
 
-    if (response.statusCode != 404) {
+    if (response.statusCode == 200) {
       Future<List<RecipeModel>> jsonDecoded = await response.body['data']
           ?.map<RecipeModel>(
             (u) => RecipeModel.fromJson(u),
@@ -116,7 +116,7 @@ class RecipeRepository extends GetConnect {
         query,
         headers: {'Authorization': 'Bearer ' + token});
 
-    if (response.statusCode != 404) {
+    if (response.statusCode == 200) {
       Future<List<RecipeModel>> jsonDecoded = await response.body['data']
           ?.map<RecipeModel>(
             (u) => RecipeModel.fromJson(u),

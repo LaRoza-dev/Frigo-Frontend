@@ -76,7 +76,7 @@ class SignInPage extends StatelessWidget {
                         GetBuilder<UserController>(builder: (_) {
                           return InsertTextFlied(
                             width: width,
-                            text: 'Username',
+                            text: 'Username (Email)',
                             validator: formController.emailValidator,
                             controller: formController.emailController,
                             onSaved: (value) {

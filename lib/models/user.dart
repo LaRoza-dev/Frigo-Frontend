@@ -53,7 +53,7 @@ class User extends GetConnect {
     var reqBody = {"email": email, "password": password};
     var response = await post("/login", reqBody);
 
-    if (response.statusCode != 404) {
+    if (response.statusCode == 200) {
       Map<dynamic, dynamic> decodedRes = response.body;
       final String? value = decodedRes["access_token"];
       final String key = 'token';

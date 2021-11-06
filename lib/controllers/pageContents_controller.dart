@@ -2,6 +2,7 @@ import 'package:Frigo/models/pageContents.dart';
 import 'package:get/get.dart';
 import 'package:Frigo/components/containers/menu_container.dart';
 import 'package:Frigo/components/containers/foods_container.dart';
+import 'package:Frigo/components/containers/foods_container2.dart';
 import 'package:Frigo/components/containers/fridge_container.dart';
 import 'package:Frigo/components/containers/wishList_container.dart';
 
@@ -11,7 +12,7 @@ class PageContentsController extends GetxController {
   updateContents(int input) {
     if (input == 0) {
       pageContents.update((val) {
-        val!.title = 'Foods';
+        val!.title = 'All Foods';
         val.container = FoodsContainer();
         val.visibility = true;
       });
@@ -32,6 +33,19 @@ class PageContentsController extends GetxController {
         val!.title = 'Menu';
         val.container = MenuContainer();
         val.visibility = false;
+      });
+    }
+  }
+
+  updateCondition(String input) {
+    if (input == 'all') {
+      pageContents.update((val) {
+        val!.container = FoodsContainer();
+      });
+    } else if (input == 'searchByIng') {
+      pageContents.update((val) {
+        val!.title = "Search By Ing";
+        val.container = FoodsContainer2();
       });
     }
   }

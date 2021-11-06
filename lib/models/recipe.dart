@@ -164,10 +164,6 @@ class PaginationFilter {
   int get hashCode => page.hashCode ^ limit.hashCode;
 }
 
-class GetCondition {
-  GetCondition({this.c = 'all'});
-  String c;
-}
 
 class DetaImage {
   Map<String, String> headers = {'X-Api-Key': '${dotenv.env['X_API_KEY']}'};

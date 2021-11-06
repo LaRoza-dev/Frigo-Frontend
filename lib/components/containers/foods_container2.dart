@@ -3,18 +3,16 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:get/get.dart';
 import 'package:Frigo/components/foodTile.dart';
 import 'package:Frigo/components/openFood_modal.dart';
-import 'package:Frigo/controllers/recipe_controller.dart';
+import 'package:Frigo/controllers/recipe_controller2.dart';
+import 'package:Frigo/controllers/pageContents_controller.dart';
 import 'package:Frigo/constants.dart';
 import 'package:Frigo/models/recipe.dart';
-import 'package:Frigo/controllers/pageContents_controller.dart';
 
-class FoodsContainer extends StatelessWidget {
+class FoodsContainer2 extends StatelessWidget {
   // const FoodsContainer({  });
-  final RecipeController _controller =
-      Get.put(RecipeController(Get.find<RecipeRepository>()));
-
-  final PageContentsController contentsController =
-      Get.put(PageContentsController());
+  final RecipeController2 _controller =
+      Get.put(RecipeController2(Get.find<RecipeRepository>()));
+      final PageContentsController contentsController = Get.put(PageContentsController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,11 +65,7 @@ class FoodsContainer extends StatelessWidget {
                       isDense: true,
                       hint: Text("Filters"),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          contentsController.updateCondition('searchByIng');
-                        },
-                        child: Text('test'))
+                    ElevatedButton(onPressed: () {contentsController.updateCondition('all');}, child: Text('test'))
                   ],
                 ),
               )),

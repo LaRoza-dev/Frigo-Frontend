@@ -19,7 +19,7 @@ class RecipeModel {
   String skill = '';
   int stars = 0;
   String userId = '';
-  int total_number = 0;
+  int totalNumber = 0;
 
   RecipeModel(
       {required this.id,
@@ -34,7 +34,7 @@ class RecipeModel {
       required this.skill,
       required this.stars,
       required this.userId,
-      required this.total_number});
+      required this.totalNumber});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -84,8 +84,8 @@ class RecipeRepository extends GetConnect {
             (u) => RecipeModel.fromJson(u),
           )
           ?.toList();
-      int total_number = response.body['total_number'];
-      Map result = {'data': jsonDecoded, 'total_number': total_number};
+      int totalNumber = response.body['total_number'];
+      Map result = {'data': jsonDecoded, 'total_number': totalNumber};
       return result;
     } else {
       return Future.error('error');
@@ -93,7 +93,8 @@ class RecipeRepository extends GetConnect {
   }
 
   //Get Recipes by Ingredients
-  Future<List<RecipeModel>> searchByIng(query, PaginationFilter filter) async {
+  Future<Map<dynamic, dynamic>> searchByIng(
+      query, PaginationFilter filter) async {
     var token = kStorage.read("token");
     var response = await post(
         "/recipe/search?pageNumber=${filter.page}&nPerPage=${filter.limit}",
@@ -101,12 +102,14 @@ class RecipeRepository extends GetConnect {
         headers: {'Authorization': 'Bearer ' + token});
 
     if (response.statusCode == 200) {
-      Future<List<RecipeModel>> jsonDecoded = await response.body['data']
+      List<RecipeModel> jsonDecoded = await response.body['data']
           ?.map<RecipeModel>(
             (u) => RecipeModel.fromJson(u),
           )
           ?.toList();
-      return jsonDecoded;
+      int totalNumber = response.body['total_number'];
+      Map result = {'data': jsonDecoded, 'total_number': totalNumber};
+      return result;
     } else {
       return Future.error('error');
     }
@@ -159,6 +162,11 @@ class PaginationFilter {
 
   @override
   int get hashCode => page.hashCode ^ limit.hashCode;
+}
+
+class GetCondition {
+  GetCondition({this.c = 'all'});
+  String c;
 }
 
 class DetaImage {

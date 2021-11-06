@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
   final PageContentsController contentsController = Get.put(PageContentsController());
   @override
   Widget build(BuildContext context) {
-    // print(contentsController.pageContents.value.container.runtimeType);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(

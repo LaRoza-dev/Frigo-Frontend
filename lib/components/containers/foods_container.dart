@@ -31,7 +31,8 @@ class FoodsContainer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FutureBuilder(
+                    Obx(
+                      () => FutureBuilder(
                         future: _controller.getTotalNumber(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState !=
@@ -52,39 +53,84 @@ class FoodsContainer extends StatelessWidget {
                                   fontWeight: FontWeight.normal),
                             );
                           }
-                        }),
+                        },
+                      ),
+                    ),
                     DropdownButton(
                       items: [
                         DropdownMenuItem(child: Text("data")),
                       ],
                       isDense: true,
                       hint: Text("Filters"),
-                    )
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          // _controller.changePaginationFilter(0,7);
+                          _controller.resetRecipe();
+                          _controller.updateCondition('searchByIng');
+                          print(_controller.condition);
+                        },
+                        child: Text('test'))
                   ],
                 ),
               )),
           Expanded(
             flex: 15,
+            // child: Obx(
+            //   () => FutureBuilder(
+            //     future: _controller.getTotalNumber(),
+            //     builder: (context, snapshot) {
+            //       return LazyLoadScrollView(
+            //         onEndOfPage: _controller.loadNextPage,
+            //         isLoading: _controller.lastPage,
+            //         child: ListView.builder(
+            //           itemCount: _controller.recipes.length,
+            //           itemBuilder: (context, index) {
+            //             final recipe = _controller.recipes[index];
+            //             print(recipe.name);
+            //             return FoodTile(
+            //               imageId: recipe.id,
+            //               title: recipe.name,
+            //               allItems: recipe.ingredients.length,
+            //               star: recipe.stars,
+            //               cal: recipe.nutritions["kcal"],
+            //               onPressed: () {
+            //                 openFoodModal(context, recipe);
+            //               },
+            //             );
+            //           },
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
             child: Obx(
-              () => LazyLoadScrollView(
-                onEndOfPage: _controller.loadNextPage,
-                isLoading: _controller.lastPage,
-                child: ListView.builder(
-                  itemCount: _controller.recipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = _controller.recipes[index];
-                    return FoodTile(
-                      imageId: recipe.id,
-                      title: recipe.name,
-                      allItems: recipe.ingredients.length,
-                      star: recipe.stars,
-                      cal: recipe.nutritions["kcal"],
-                      onPressed: () {
-                        openFoodModal(context, recipe);
+              () => FutureBuilder(initialData: [],
+                future: _controller.getAllRecipes(_controller.condition),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    var recipes = snapshot.requireData! as List;
+                    return ListView.builder(
+                      itemCount: recipes.length,
+                      itemBuilder: (context, index) {
+                        final recipe = recipes[index];
+                        print(recipe.name);
+                        return FoodTile(
+                          imageId: recipe.id,
+                          title: recipe.name,
+                          allItems: recipe.ingredients.length,
+                          star: recipe.stars,
+                          cal: recipe.nutritions["kcal"],
+                          onPressed: () {
+                            openFoodModal(context, recipe);
+                          },
+                        );
                       },
                     );
-                  },
-                ),
+                  }
+                },
               ),
             ),
           ),

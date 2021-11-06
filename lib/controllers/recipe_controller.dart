@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 
 class RecipeController extends GetxController {
   final RecipeRepository _recipeRepository;
-  final _recipes = <RecipeModel>[].obs;
-  final _total_number = 0.obs;
+  List<RecipeModel> _recipes = <RecipeModel>[].obs;
+  final _totalNumber = 0.obs;
   final _paginationFilter = PaginationFilter().obs;
   final _lastPage = false.obs;
+  final _condition = GetCondition().obs;
 
   RecipeController(this._recipeRepository);
 
@@ -14,45 +15,94 @@ class RecipeController extends GetxController {
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;
   bool get lastPage => _lastPage.value;
+  String get condition => _condition.value.c;
 
   @override
   onInit() {
-    ever(_paginationFilter, (_) => _getAllRecipes());
-    _changePaginationFilter(1, 15);
+    ever(_paginationFilter, (_) => getAllRecipes(condition));
+    changePaginationFilter(0, 10);
     super.onInit();
   }
 
-  Future<void> _getAllRecipes() async {
-    final recipesData =
-        await _recipeRepository.getRecipes(_paginationFilter.value);
-    if (recipesData.isEmpty) {
-      _lastPage.value = true;
-    }
+  updateCondition(String input) {
+    _condition.update((val) {
+      val!.c = input;
+    });
+  }
 
-    var data = recipesData['data'];
-    _recipes.addAll(data);
+  resetRecipe() {
+    // _recipes = <RecipeModel>[].obs;
+    _recipes.clear();
+    // _lastPage.value = true;
+  }
+
+  // Future<void> getAllRecipes(condition) async {
+  Future<List> getAllRecipes(condition) async {
+
+    if (condition == 'all') {
+      // reseter();
+
+      final recipesData =
+          await _recipeRepository.getRecipes(_paginationFilter.value);
+      if (recipesData.isEmpty) {
+        _lastPage.value = true;
+      }
+
+      var data = recipesData['data'];
+      _recipes.addAll(data);
+      return _recipes;
+    } else if (condition == 'searchByIng') {
+      final recipesData = await _recipeRepository.searchByIng(
+          '["avocado"]', _paginationFilter.value);
+      if (recipesData.isEmpty) {
+        _lastPage.value = true;
+      }
+
+      var data = recipesData['data'];
+      _recipes.addAll(data);
+      return _recipes;
+    }
+    else {
+    return [];
+    }
   }
 
   Future<int> getTotalNumber() async {
-    final totalNumber =
-        await _recipeRepository.getRecipes(_paginationFilter.value);
+    if (condition == 'all') {
+      final totalNumber =
+          await _recipeRepository.getRecipes(_paginationFilter.value);
+      _totalNumber.value = totalNumber['total_number'];
 
-    _total_number.value = totalNumber['total_number'];
-    return totalNumber['total_number'];
+      return totalNumber['total_number'];
+    } else if (condition == 'searchByIng') {
+      final totalNumber = await _recipeRepository.searchByIng(
+          '["bread","cheese"]', _paginationFilter.value);
+
+      _totalNumber.value = totalNumber['total_number'];
+
+      return totalNumber['total_number'];
+    } else {
+      return 0;
+    }
   }
 
   void changeTotalPerPage(int limitValue) {
     _recipes.clear();
     _lastPage.value = false;
-    _changePaginationFilter(1, limitValue);
+    changePaginationFilter(0, limitValue);
   }
 
-  void _changePaginationFilter(int page, int limit) {
+  void changePaginationFilter(int page, int limit) {
     _paginationFilter.update((val) {
       val?.page = page;
       val?.limit = limit;
     });
   }
 
-  void loadNextPage() => _changePaginationFilter(_page + 1, limit);
+  // void loadNextPage() => changePaginationFilter(_page + 1, limit);
+
+  void loadNextPage() {
+    print(_page);
+    return changePaginationFilter(_page + 1, limit);
+  }
 }

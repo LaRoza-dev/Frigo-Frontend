@@ -35,31 +35,13 @@ class FoodsContainer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Obx(
-                      () => FutureBuilder(
-                        future: _controller.getTotalNumber(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState !=
-                              ConnectionState.done) {
-                            return Text(
-                              "Loading ...",
-                              style: kFormField.copyWith(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.normal),
-                            );
-                          } else {
-                            return Text(
-                              "Showing ${snapshot.requireData} foods",
-                              style: kFormField.copyWith(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.normal),
-                            );
-                          }
-                        },
-                      ),
-                    ),
+                    Obx(() => Text(
+                          "Showing ${_controller.totalNumber} foods",
+                          style: kFormField.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.normal),
+                        )),
                     DropdownButton(
                       items: [
                         DropdownMenuItem(child: Text("data")),

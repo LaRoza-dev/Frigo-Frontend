@@ -13,6 +13,7 @@ class RecipeController extends GetxController {
   List<RecipeModel> get recipes => _recipes.toList();
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;
+  int get totalNumber => _totalNumber.value;
   bool get lastPage => _lastPage.value;
 
   @override
@@ -31,16 +32,17 @@ class RecipeController extends GetxController {
     }
 
     var data = recipesData['data'];
+    _totalNumber.value = recipesData['total_number'];
     _recipes.addAll(data);
   }
 
-  Future<int> getTotalNumber() async {
-    final totalNumber =
-        await _recipeRepository.getRecipes(_paginationFilter.value);
-    _totalNumber.value = totalNumber['total_number'];
+  // Future<int> getTotalNumber() async {
+  //   final totalNumber =
+  //       await _recipeRepository.getRecipes(_paginationFilter.value);
+  //   _totalNumber.value = totalNumber['total_number'];
 
-    return totalNumber['total_number'];
-  }
+  //   return totalNumber['total_number'];
+  // }
 
   void changeTotalPerPage(int limitValue) {
     _recipes.clear();

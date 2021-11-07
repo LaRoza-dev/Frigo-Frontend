@@ -51,7 +51,7 @@ class FoodsContainer extends StatelessWidget {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          contentsController.updateCondition('searchByIng');
+                          contentsController.updateFindType('searchByIng');
                         },
                         child: Text('test'))
                   ],

@@ -37,7 +37,7 @@ class PageContentsController extends GetxController {
     }
   }
 
-  updateCondition(String input) {
+  updateFindType(String input) {
     if (input == 'all') {
       pageContents.update((val) {
         val!.container = FoodsContainer();

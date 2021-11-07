@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:searchfield/searchfield.dart';
-import 'package:Frigo/controllers/search_controller.dart';
 
 class FridgeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SearchController searchController = Get.put(SearchController());
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.only(bottom: 10),
@@ -49,25 +46,6 @@ class FridgeContainer extends StatelessWidget {
             ),
           ),
 
-          // ListView(shrinkWrap: true, children: [
-          //   Padding(
-          //     padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
-          //     child:
-          // () => ListView.builder(
-          //   shrinkWrap: true,
-          //   physics: NeverScrollableScrollPhysics(),
-          //   itemCount: searchController.basket.length,
-          //   itemBuilder: (context, index) {
-          //     return ModalTile(
-          //       title: '${searchController.basket[index]}',
-          //       onPressed: () {},
-          //       crossOnPressed: () {
-          //         searchController.basket.removeAt(index);
-          //       },
-          //       heartOnPressed: () {},
-          //     );
-          //   },
-          // ),
         ],
       ),
     );

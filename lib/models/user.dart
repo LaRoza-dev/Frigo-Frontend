@@ -21,7 +21,6 @@ class User extends GetConnect {
   Future<googleLoginStatus?> handleSignIn() async {
     try {
       GoogleSignInAccount? res = await _googleSignIn.signIn();
-      print("ok");
       GoogleSignInAuthentication? googleKey = await res?.authentication;
       String? token = googleKey?.idToken.toString();
       var response = await post('/google/', jsonEncode(token));
@@ -31,8 +30,6 @@ class User extends GetConnect {
         String key = 'token';
         await kStorage.write(key, value);
 
-        String? testRes = kStorage.read<String?>(key);
-        print(testRes);
         return googleLoginStatus.loggedIn;
       } else {
         return googleLoginStatus.error;

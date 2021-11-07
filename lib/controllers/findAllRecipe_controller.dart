@@ -1,14 +1,14 @@
 import 'package:Frigo/models/recipe.dart';
 import 'package:get/get.dart';
 
-class RecipeController extends GetxController {
+class FindAllRecipeController extends GetxController {
   final RecipeRepository _recipeRepository;
   List<RecipeModel> _recipes = <RecipeModel>[].obs;
   final _totalNumber = 0.obs;
   final _paginationFilter = PaginationFilter().obs;
   final _lastPage = false.obs;
 
-  RecipeController(this._recipeRepository);
+  FindAllRecipeController(this._recipeRepository);
 
   List<RecipeModel> get recipes => _recipes.toList();
   int get limit => _paginationFilter.value.limit;
@@ -19,7 +19,7 @@ class RecipeController extends GetxController {
   @override
   onInit() {
     ever(_paginationFilter, (_) => getAllRecipes());
-    changePaginationFilter(0, 7);
+    changePaginationFilter(0, 15);
     super.onInit();
   }
 
@@ -36,14 +36,7 @@ class RecipeController extends GetxController {
     _recipes.addAll(data);
   }
 
-  // Future<int> getTotalNumber() async {
-  //   final totalNumber =
-  //       await _recipeRepository.getRecipes(_paginationFilter.value);
-  //   _totalNumber.value = totalNumber['total_number'];
-
-  //   return totalNumber['total_number'];
-  // }
-
+  
   void changeTotalPerPage(int limitValue) {
     _recipes.clear();
     _lastPage.value = false;

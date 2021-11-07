@@ -1,20 +1,23 @@
 import 'package:Frigo/models/pageContents.dart';
 import 'package:get/get.dart';
 import 'package:Frigo/components/containers/menu_container.dart';
-import 'package:Frigo/components/containers/foods_container.dart';
-import 'package:Frigo/components/containers/foods_container2.dart';
+import 'package:Frigo/components/containers/allFoods_container.dart';
+import 'package:Frigo/components/containers/searchByIng_container.dart';
 import 'package:Frigo/components/containers/fridge_container.dart';
 import 'package:Frigo/components/containers/wishList_container.dart';
 
 class PageContentsController extends GetxController {
   final pageContents = PageContents().obs;
+  // final PageContentsController contentsController =
+  //     Get.put(PageContentsController());
 
   updateContents(int input) {
     if (input == 0) {
       pageContents.update((val) {
         val!.title = 'All Foods';
-        val.container = FoodsContainer();
+        val.container = AllFoodsContainer();
         val.visibility = true;
+        updateFindType('all');
       });
     } else if (input == 1) {
       pageContents.update((val) {
@@ -40,12 +43,12 @@ class PageContentsController extends GetxController {
   updateFindType(String input) {
     if (input == 'all') {
       pageContents.update((val) {
-        val!.container = FoodsContainer();
+        val!.container = AllFoodsContainer();
       });
     } else if (input == 'searchByIng') {
       pageContents.update((val) {
         val!.title = "Search By Ing";
-        val.container = FoodsContainer2();
+        val.container = SearchByIng();
       });
     }
   }

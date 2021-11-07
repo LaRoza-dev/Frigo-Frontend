@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Frigo/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:Frigo/components/containers/foods_container.dart';
+import 'package:Frigo/components/containers/allFoods_container.dart';
 import 'package:Frigo/components/foodSearchField.dart';
 
 class HomePage extends StatelessWidget {
@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                   flex: 20,
                   child: Obx(() {
                     return contentsController.pageContents.value.container ??
-                        FoodsContainer();
+                        AllFoodsContainer();
                   }),
                 )
               ],

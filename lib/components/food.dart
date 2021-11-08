@@ -52,11 +52,6 @@ class Food extends StatelessWidget {
                       isDense: true,
                       hint: Text("Filters"),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          contentsController.updateFindType('searchByIng');
-                        },
-                        child: Text('test'))
                   ],
                 ),
               )),

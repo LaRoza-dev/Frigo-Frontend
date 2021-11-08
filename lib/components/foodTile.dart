@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:Frigo/models/recipe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:Frigo/components/stars.dart';
+import 'package:Frigo/controllers/pageContents_controller.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile(
@@ -29,6 +30,8 @@ class FoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PageContentsController contentsController =
+        Get.put(PageContentsController());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
       child: MaterialButton(
@@ -95,18 +98,34 @@ class FoodTile extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          FaIcon(
-                                            FontAwesomeIcons.shoppingBasket,
-                                            size: 18,
-                                            color: kTileItemColor,
+                                          SizedBox(
+                                            width: 1,
+                                            height: 1,
                                           ),
-                                          Text(' $items / $allItems',
-                                              style: TextStyle(
-                                                color: kTileItemColor,
-                                                fontSize: 14.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Poppins',
-                                              )),
+                                          Visibility(
+                                            visible: contentsController
+                                                .pageContents
+                                                .value
+                                                .itemsVisibility,
+                                            child: FaIcon(
+                                              FontAwesomeIcons.shoppingBasket,
+                                              size: 18,
+                                              color: kTileItemColor,
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: contentsController
+                                                .pageContents
+                                                .value
+                                                .itemsVisibility,
+                                            child: Text(' $items / $allItems',
+                                                style: TextStyle(
+                                                  color: kTileItemColor,
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Poppins',
+                                                )),
+                                          ),
                                         ],
                                       ),
                                       Row(

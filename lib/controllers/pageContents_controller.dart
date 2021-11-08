@@ -5,37 +5,44 @@ import 'package:Frigo/components/containers/allFoods_container.dart';
 import 'package:Frigo/components/containers/searchByIng_container.dart';
 import 'package:Frigo/components/containers/fridge_container.dart';
 import 'package:Frigo/components/containers/wishList_container.dart';
+import 'package:Frigo/components/foodSearchField.dart';
+import 'package:Frigo/components/addFridgeTextFiels.dart';
+import 'package:Frigo/components/addWishlistTextFiels.dart';
+
+
 
 class PageContentsController extends GetxController {
   final pageContents = PageContents().obs;
-  // final PageContentsController contentsController =
-  //     Get.put(PageContentsController());
 
   updateContents(int input) {
     if (input == 0) {
       pageContents.update((val) {
         val!.title = 'All Foods';
         val.container = AllFoodsContainer();
-        val.visibility = true;
+        val.textField = FoodSearchFlied();
+        val.searchbarVisibility = true;
         updateFindType('all');
       });
     } else if (input == 1) {
       pageContents.update((val) {
         val!.title = 'Fridge';
         val.container = FridgeContainer();
-        val.visibility = true;
+        val.textField = AddFridgeTextField();
+        val.searchbarVisibility = true;
+        updateFindType('fridge');
       });
     } else if (input == 2) {
       pageContents.update((val) {
         val!.title = 'Wish List';
-        val.container = WishListContainer();
-        val.visibility = true;
+        val.container = WishlistContainer();
+        val.textField = AddWishlistTextField();
+        val.searchbarVisibility = true;
       });
     } else if (input == 3) {
       pageContents.update((val) {
         val!.title = 'Menu';
         val.container = MenuContainer();
-        val.visibility = false;
+        val.searchbarVisibility = false;
       });
     }
   }

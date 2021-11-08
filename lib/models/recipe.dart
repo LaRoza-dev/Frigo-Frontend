@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:Frigo/models/user.dart';
 
 class RecipeModel {
   String id = '';
@@ -138,6 +139,56 @@ class RecipeRepository extends GetConnect {
   Future<String?> getToken() async {
     return kStorage.read("token");
   }
+
+  Future<List> getFridge() async {
+    var token = kStorage.read("token");
+    var response =
+        await get("/users/me", headers: {'Authorization': 'Bearer ' + token});
+    if (response.statusCode == 200) {
+      List jsonDecoded = await response.body['data'][0]["fridge"];
+      return jsonDecoded;
+    } else {
+      return Future.error('error');
+    }
+  }
+
+  Future<void> updateFridge(query) async {
+    var token = kStorage.read("token");
+    var response = await post("/users/fridge/", query,
+        headers: {'Authorization': 'Bearer ' + token});
+    print(response);
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print(response.body);
+      print('error');
+    }
+  }
+
+  Future<List> getWishlist() async {
+    var token = kStorage.read("token");
+    var response =
+        await get("/users/me", headers: {'Authorization': 'Bearer ' + token});
+    if (response.statusCode == 200) {
+      List jsonDecoded = await response.body['data'][0]["wishlist"];
+      return jsonDecoded;
+    } else {
+      return Future.error('error');
+    }
+  }
+
+  Future<void> updateWishlist(query) async {
+    var token = kStorage.read("token");
+    var response = await post("/users/ingredients/", query,
+        headers: {'Authorization': 'Bearer ' + token});
+    print(response);
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      print(response.body);
+      print('error');
+    }
+  }
 }
 
 List<RecipeModel> recipeModelFromJson(String str) => List<RecipeModel>.from(
@@ -163,7 +214,6 @@ class PaginationFilter {
   @override
   int get hashCode => page.hashCode ^ limit.hashCode;
 }
-
 
 class DetaImage {
   Map<String, String> headers = {'X-Api-Key': '${dotenv.env['X_API_KEY']}'};

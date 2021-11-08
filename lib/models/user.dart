@@ -8,12 +8,21 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 enum googleLoginStatus { loggedIn, error, cancelled }
 
 class User extends GetConnect {
-  User({this.email, this.password, this.fullname});
+  User({this.email, this.password, this.fullname, this.fridge});
 
+  String? id = "";
   String? fullname = "";
   String? email = "";
   String? password = "";
+  List? fridge = [];
   String? baseUrl = "https://api.laroza.dev";
+
+  User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullname = json['fullname'];
+    email = json['email'];
+    fridge = json['fridge'];
+    }
 
   GoogleSignIn _googleSignIn =
       GoogleSignIn(clientId: "${dotenv.env['CLIENT_ID']}");
@@ -79,4 +88,7 @@ class User extends GetConnect {
   Future<String?> getToken() async {
     return kStorage.read("token");
   }
+
+
+  
 }

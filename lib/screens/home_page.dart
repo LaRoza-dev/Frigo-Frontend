@@ -8,7 +8,8 @@ import 'package:Frigo/components/containers/allFoods_container.dart';
 import 'package:Frigo/components/foodSearchField.dart';
 
 class HomePage extends StatelessWidget {
-  final PageContentsController contentsController = Get.put(PageContentsController());
+  final PageContentsController contentsController =
+      Get.put(PageContentsController());
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -75,12 +76,10 @@ class HomePage extends StatelessWidget {
                   child: Obx(
                     () => Visibility(
                         visible:
-                            contentsController.pageContents.value.visibility ??
-                                false,
-                        child: FoodSearchFlied(
-                          width: width,
-                          text: "Search here",
-                        )),
+                            contentsController.pageContents.value.searchbarVisibility ,
+                        child:
+                            contentsController.pageContents.value.textField ??
+                                FoodSearchFlied(width: width,text: "Search here",)),
                   ),
                 ),
                 Expanded(

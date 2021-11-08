@@ -2,14 +2,18 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:Frigo/controllers/wishList_controller.dart';
 import 'package:get/get.dart';
-import 'package:searchfield/searchfield.dart';
-import 'package:Frigo/controllers/search_controller.dart';
+import 'package:Frigo/controllers/pageContents_controller.dart';
+import 'package:Frigo/models/recipe.dart';
 
-class WishListContainer extends StatelessWidget {
+class WishlistContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SearchController searchController = Get.put(SearchController());
+    final WishlistController _controller =
+        Get.put(WishlistController(Get.find<RecipeRepository>()));
+    final PageContentsController contentsController =
+        Get.put(PageContentsController());
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.only(bottom: 10),
@@ -20,54 +24,50 @@ class WishListContainer extends StatelessWidget {
           )),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Wish List',
-                    style: kHeading2,
+          Expanded(
+            flex: 6,
+            child: ListView(shrinkWrap: true, children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 5, 5),
+                child: Obx(
+                  () => ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: _controller.wishlistItems.length,
+                    itemBuilder: (context, index) {
+                      final item = _controller.wishlistItems[index];
+                      return ModalTile(
+                        title: item,
+                        onPressed: () {},
+                        crossOnPressed: () {
+                          _controller.remove(index);
+                        },
+                        heartOnPressed: () {},
+                      );
+                    },
                   ),
-                ]),
+                ),
+              )
+            ]),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    blurRadius: 15,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              child: FloatingActionButton(
+                backgroundColor: Colors.green,
+                onPressed: () {
+                  contentsController.updateFindType('searchByIng');
+                },
+                child: Icon(
+                  FontAwesomeIcons.check,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-
-          // ListView(shrinkWrap: true, children: [
-          //   Padding(
-          //     padding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
-          //     child:
-          // () => ListView.builder(
-          //   shrinkWrap: true,
-          //   physics: NeverScrollableScrollPhysics(),
-          //   itemCount: searchController.basket.length,
-          //   itemBuilder: (context, index) {
-          //     return ModalTile(
-          //       title: '${searchController.basket[index]}',
-          //       onPressed: () {},
-          //       crossOnPressed: () {
-          //         searchController.basket.removeAt(index);
-          //       },
-          //       heartOnPressed: () {},
-          //     );
-          //   },
-          // ),
         ],
       ),
     );
@@ -103,13 +103,6 @@ class ModalTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: Icon(
-                      FontAwesomeIcons.heart,
-                      color: kTextColor1,
-                    ),
-                    onPressed: heartOnPressed,
-                  ),
                   IconButton(
                     icon: Icon(
                       FontAwesomeIcons.times,

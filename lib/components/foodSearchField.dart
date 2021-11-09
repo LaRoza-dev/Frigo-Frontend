@@ -5,12 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class FoodSearchFlied extends StatelessWidget {
   const FoodSearchFlied(
       {this.width,
-      this.text='Search here',
+      this.text = 'Search here',
       this.textAction: TextInputAction.next,
       this.onPressed,
       this.onChanged,
       this.validator,
       this.controller,
+      this.textController,
       this.onSaved,
       this.obscureText = false});
 
@@ -21,7 +22,8 @@ class FoodSearchFlied extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final String? Function(String?)? onSaved;
-  final TextEditingController? controller;
+  final textController;
+  final controller;
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
@@ -36,13 +38,26 @@ class FoodSearchFlied extends StatelessWidget {
         onSaved: onSaved,
         style: kFormField.copyWith(
             fontSize: 18, fontWeight: FontWeight.normal, color: Colors.white),
-        controller: controller,
+        controller: textController.searchText,
         validator: validator,
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.center,
         textInputAction: textAction,
-        onChanged: onChanged,
+        onChanged: (String input) {
+          controller.changeName(input);
+        },
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () {
+              controller.clearName();
+              textController.searchText.clear();
+            },
+            icon: FaIcon(
+              FontAwesomeIcons.times,
+              color: Colors.white.withOpacity(0.7),
+              size: 20,
+            ),
+          ),
           icon: FaIcon(
             FontAwesomeIcons.search,
             color: Colors.white.withOpacity(0.7),

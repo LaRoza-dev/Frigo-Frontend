@@ -1,5 +1,4 @@
 import 'package:Frigo/models/recipe.dart';
-import 'package:Frigo/models/user.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +7,9 @@ class Fridge {
 }
 
 class SearchByIngTextController extends GetxController {
-late TextEditingController searchText;
+  late TextEditingController searchText;
 
-  void clearController(){
+  void clearController() {
     searchText.clear();
   }
 
@@ -19,6 +18,7 @@ late TextEditingController searchText;
     super.onInit();
     searchText = TextEditingController();
   }
+
   @override
   void onClose() {
     super.onClose();
@@ -34,15 +34,13 @@ class SearchByIngController extends GetxController {
   final _totalNumber = 0.obs;
   final _paginationFilter = PaginationFilter().obs;
   final _lastPage = false.obs;
+  final _name = ''.obs;
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;
   int get totalNumber => _totalNumber.value;
+  String get name => _name.value;
   bool get lastPage => _lastPage.value;
   List<RecipeModel> get recipes => _recipes.toList();
-
-  
-
-  // List<String> get fridgeItems => _fridgeItems.toList();
 
   final _fridge = Fridge().obs;
   List get fridgeItems => _fridge.value.fridge;
@@ -51,20 +49,23 @@ class SearchByIngController extends GetxController {
   onInit() {
     getFridgeItems();
     ever(_fridge, (_) => updateFridgeItems(fridgeItems));
-    ever(_paginationFilter, (_) => getAllRecipes(fridgeItems));
+    ever(_paginationFilter, (_) => getAllRecipes(fridgeItems, name));
     ever(_fridge, (_) => recipeClear());
-    ever(_fridge, (_) => getAllRecipes(fridgeItems));
+    ever(_fridge, (_) => getAllRecipes(fridgeItems, name));
+    ever(_name, (_) => recipeClear());
+    ever(_name, (_) => getAllRecipes(fridgeItems, name));
     changePaginationFilter(0, 15);
 
     super.onInit();
-    // searchText = TextEditingController();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  //   searchText.dispose();
-  // }
+  void changeName(String input) {
+    _name.value = input;
+  }
+
+  void clearName() {
+    _name.value = '';
+  }
 
   void addFridge(String input) {
     _fridge.update((val) {
@@ -82,9 +83,9 @@ class SearchByIngController extends GetxController {
     });
   }
 
-  Future<void> getAllRecipes(list) async {
-    final recipesData =
-        await _recipeRepository.searchByIng(list, _paginationFilter.value);
+  Future<void> getAllRecipes(list, name) async {
+    final recipesData = await _recipeRepository.searchByIng(
+        list, _paginationFilter.value, name);
     if (recipesData.isEmpty) {
       _lastPage.value = true;
     }
@@ -96,7 +97,6 @@ class SearchByIngController extends GetxController {
 
   Future<void> getFridgeItems() async {
     final fridgeData = await _recipeRepository.getFridge();
-    print(fridgeData);
     if (fridgeData.isEmpty) {
       _fridge.update((val) {
         val!.fridge = [];
@@ -109,7 +109,6 @@ class SearchByIngController extends GetxController {
 
   Future<void> updateFridgeItems(items) async {
     await _recipeRepository.updateFridge(items);
-    // print(fridgeData);
   }
 
   void changeTotalPerPage(int limitValue) {

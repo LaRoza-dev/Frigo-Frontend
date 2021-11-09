@@ -6,10 +6,29 @@ import 'package:Frigo/components/containers/searchByIng_container.dart';
 import 'package:Frigo/components/containers/fridge_container.dart';
 import 'package:Frigo/components/containers/wishList_container.dart';
 import 'package:Frigo/components/foodSearchField.dart';
-import 'package:Frigo/components/addFridgeTextFiels.dart';
-import 'package:Frigo/components/addWishlistTextFiels.dart';
+import 'package:Frigo/components/addItemTextFiels.dart';
+import 'package:Frigo/controllers/searchByIng_controller.dart';
+import 'package:Frigo/models/recipe.dart';
+import 'package:Frigo/controllers/wishList_controller.dart';
+import 'package:Frigo/controllers/findAllRecipe_controller.dart';
 
+final FindAllRecipeController findAllRecipeController =
+    Get.put(FindAllRecipeController(Get.find<RecipeRepository>()));
 
+final FindAllRecipeTextController findAllRecipeTextController =
+    Get.put(FindAllRecipeTextController());
+  
+final SearchByIngController searchByIngController =
+    Get.put(SearchByIngController(Get.find<RecipeRepository>()));
+
+final SearchByIngTextController searchByIngTextController =
+    Get.put(SearchByIngTextController());
+
+final WishlistController wishlistController =
+    Get.put(WishlistController(Get.find<RecipeRepository>()));
+
+final WishlistTextController wishlistTextController =
+    Get.put(WishlistTextController());
 
 class PageContentsController extends GetxController {
   final pageContents = PageContents().obs;
@@ -19,7 +38,7 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = 'All Foods';
         val.container = AllFoodsContainer();
-        val.textField = FoodSearchFlied();
+        val.textField = FoodSearchFlied(controller: findAllRecipeController,textController: findAllRecipeTextController,);
         val.searchbarVisibility = true;
         val.itemsVisibility = false;
         updateFindType('all');
@@ -28,7 +47,10 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = 'Fridge';
         val.container = FridgeContainer();
-        val.textField = AddFridgeTextField();
+        val.textField = AddItemTextField(
+          controller: searchByIngController,
+          textController: searchByIngTextController,
+        );
         val.searchbarVisibility = true;
         updateFindType('fridge');
       });
@@ -36,7 +58,10 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = 'Wish List';
         val.container = WishlistContainer();
-        val.textField = AddWishlistTextField();
+        val.textField = AddItemTextField(
+          controller: wishlistController,
+          textController: wishlistTextController,
+        );
         val.searchbarVisibility = true;
       });
     } else if (input == 3) {
@@ -52,12 +77,13 @@ class PageContentsController extends GetxController {
     if (input == 'all') {
       pageContents.update((val) {
         val!.container = AllFoodsContainer();
+        val.textField = FoodSearchFlied(controller: findAllRecipeController,textController: findAllRecipeTextController,);
       });
     } else if (input == 'searchByIng') {
       pageContents.update((val) {
         val!.title = "Search By Ing";
         val.container = SearchByIng();
-        val.textField = FoodSearchFlied();
+        val.textField = FoodSearchFlied(controller: searchByIngController,textController: searchByIngTextController,);
         val.itemsVisibility = true;
       });
     }

@@ -53,15 +53,14 @@ class WishlistController extends GetxController {
   }
 
   Future<void> getWishlistItems() async {
-    final fridgeData = await _recipeRepository.getWishlist();
-    print(fridgeData);
-    if (fridgeData.isEmpty) {
+    final wishlistData = await _recipeRepository.getWishlist();
+    if (wishlistData.isEmpty) {
       _wishlist.update((val) {
         val!.wishlist = [];
       });
     }
     _wishlist.update((val) {
-      val!.wishlist = fridgeData;
+      val!.wishlist = wishlistData;
     });
   }
 

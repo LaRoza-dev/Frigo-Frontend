@@ -4,7 +4,6 @@ import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Frigo/controllers/wishList_controller.dart';
 import 'package:get/get.dart';
-import 'package:Frigo/controllers/pageContents_controller.dart';
 import 'package:Frigo/models/recipe.dart';
 
 class WishlistContainer extends StatelessWidget {
@@ -12,8 +11,6 @@ class WishlistContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final WishlistController _controller =
         Get.put(WishlistController(Get.find<RecipeRepository>()));
-    final PageContentsController contentsController =
-        Get.put(PageContentsController());
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.only(bottom: 10),

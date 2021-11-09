@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:Frigo/controllers/wishList_controller.dart';
-import 'package:Frigo/models/recipe.dart';
 
-class AddWishlistTextField extends StatelessWidget {
-  const AddWishlistTextField(
+class AddItemTextField extends StatelessWidget {
+  const AddItemTextField(
       {this.width,
       this.text = 'Add Ingredients',
       this.textAction: TextInputAction.next,
@@ -14,6 +11,7 @@ class AddWishlistTextField extends StatelessWidget {
       this.onChanged,
       this.validator,
       this.controller,
+      this.textController,
       this.onSaved,
       this.obscureText = false,
       this.onFieldSubmitted});
@@ -27,14 +25,10 @@ class AddWishlistTextField extends StatelessWidget {
   final String? Function(String?)? onSaved;
   final String? Function(String?)? onFieldSubmitted;
   final controller;
+  final textController;
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
-    final WishlistController _controller =
-        Get.put(WishlistController(Get.find<RecipeRepository>()));
-
-    final WishlistTextController _textController =
-        Get.put(WishlistTextController());
 
     return Container(
       width: width,
@@ -44,14 +38,14 @@ class AddWishlistTextField extends StatelessWidget {
       ),
       child: TextFormField(
         onFieldSubmitted: (String input) {
-          _controller.addWishlist(input);
-          _textController.searchText.clear();
+          controller.addFridge(input);
+          textController.searchText.clear();
         },
         obscureText: obscureText,
         onSaved: onSaved,
         style: kFormField.copyWith(
             fontSize: 18, fontWeight: FontWeight.normal, color: Colors.white),
-        controller: _textController.searchText,
+        controller: textController.searchText,
         validator: validator,
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.center,
@@ -59,7 +53,7 @@ class AddWishlistTextField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-            onPressed: () => _textController.searchText.clear(),
+            onPressed: () => textController.searchText.clear(),
             icon: FaIcon(
               FontAwesomeIcons.times,
               color: Colors.white.withOpacity(0.7),

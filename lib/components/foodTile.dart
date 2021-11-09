@@ -70,80 +70,56 @@ class FoodTile extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                   );
-                  // return img.requireData;
                 },
               ),
               SizedBox(width: 10),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 15, 5, 5),
+                  padding: const EdgeInsets.fromLTRB(0, 15, 15, 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      AutoSizeText(title, style: kText1, maxLines: 2),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 1,
-                                            height: 1,
-                                          ),
-                                          Visibility(
-                                            visible: contentsController
-                                                .pageContents
-                                                .value
-                                                .itemsVisibility,
-                                            child: FaIcon(
-                                              FontAwesomeIcons.shoppingBasket,
-                                              size: 18,
-                                              color: kTileItemColor,
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible: contentsController
-                                                .pageContents
-                                                .value
-                                                .itemsVisibility,
-                                            child: Text(' $items / $allItems',
-                                                style: TextStyle(
-                                                  color: kTileItemColor,
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Poppins',
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: rating(star),
-                                        // children: rating(5),
-                                      ),
-                                    ],
-                                  ),
-                                  Text('Kcal: $cal',
+                      Expanded(
+                          child:
+                              AutoSizeText(title, style: kText1, maxLines: 2)),
+                      Expanded(
+                        child: Wrap(children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Kcal: $cal',
+                                  style: TextStyle(
+                                    color: kFieldTextColor,
+                                    fontFamily: 'Poppins',
+                                  )),
+                              Visibility(
+                                visible: contentsController
+                                    .pageContents.value.itemsVisibility,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.shoppingBasket,
+                                      size: 18,
+                                      color: kTileItemColor,
+                                    ),
+                                    Text(
+                                      ' $items / $allItems',
                                       style: TextStyle(
-                                        color: kFieldTextColor,
+                                        color: kTileItemColor,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w500,
                                         fontFamily: 'Poppins',
-                                      ))
-                                ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                          ...rating(star),
+                        ]),
                       ),
                     ],
                   ),

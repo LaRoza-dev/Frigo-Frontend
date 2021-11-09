@@ -27,7 +27,6 @@ class WishlistContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
-            flex: 6,
             child: ListView(shrinkWrap: true, children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 5, 5),
@@ -52,22 +51,7 @@ class WishlistContainer extends StatelessWidget {
               )
             ]),
           ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: FloatingActionButton(
-                backgroundColor: Colors.green,
-                onPressed: () {
-                  contentsController.updateFindType('searchByIng');
-                },
-                child: Icon(
-                  FontAwesomeIcons.check,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
+          
         ],
       ),
     );

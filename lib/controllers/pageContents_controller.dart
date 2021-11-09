@@ -21,6 +21,7 @@ class PageContentsController extends GetxController {
         val.container = AllFoodsContainer();
         val.textField = FoodSearchFlied();
         val.searchbarVisibility = true;
+        val.itemsVisibility = false;
         updateFindType('all');
       });
     } else if (input == 1) {
@@ -56,6 +57,8 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = "Search By Ing";
         val.container = SearchByIng();
+        val.textField = FoodSearchFlied();
+        val.itemsVisibility = true;
       });
     }
   }

@@ -12,13 +12,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 void main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xFF000000),
-    statusBarColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.light,
-    statusBarBrightness: Brightness.light,
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   systemNavigationBarColor: Color(0xFF000000),
+  //   statusBarColor: Colors.transparent,
+  //   systemNavigationBarIconBrightness: Brightness.light,
+  //   statusBarIconBrightness: Brightness.light,
+  //   statusBarBrightness: Brightness.light,
+  // ));
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   Get.lazyPut<User>(() => User());

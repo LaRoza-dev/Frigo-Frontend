@@ -21,6 +21,7 @@ class RecipeModel {
   int stars = 0;
   String userId = '';
   int totalNumber = 0;
+  int findedIngCount = 0;
 
   RecipeModel(
       {required this.id,
@@ -35,7 +36,8 @@ class RecipeModel {
       required this.skill,
       required this.stars,
       required this.userId,
-      required this.totalNumber});
+      required this.totalNumber,
+      this.findedIngCount = 0});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -49,6 +51,7 @@ class RecipeModel {
     serves = json['serves'];
     skill = json['skill'];
     stars = json['stars'];
+    findedIngCount = json['finded_ing_count']??0;
     userId = json['user_id'];
   }
 
@@ -65,6 +68,7 @@ class RecipeModel {
     data['serves'] = this.serves;
     data['skill'] = this.skill;
     data['stars'] = this.stars;
+    data['finded_ing_count'] = this.findedIngCount;
     data['user_id'] = this.userId;
     return data;
   }
@@ -158,10 +162,8 @@ class RecipeRepository extends GetConnect {
         headers: {'Authorization': 'Bearer ' + token});
     print(response);
     if (response.statusCode == 200) {
-      print(response.body);
     } else {
-      print(response.body);
-      print('error');
+      return Future.error('error');
     }
   }
 

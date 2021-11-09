@@ -68,6 +68,7 @@ class Food extends StatelessWidget {
                     return FoodTile(
                       imageId: recipe.id,
                       title: recipe.name,
+                      items: recipe.findedIngCount,
                       allItems: recipe.ingredients.length,
                       star: recipe.stars,
                       cal: recipe.nutritions["kcal"],

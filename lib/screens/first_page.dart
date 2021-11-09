@@ -12,7 +12,7 @@ class FirstPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      // backgroundColor: kPrimaryColor,
       body: SafeArea(
         child: Stack(
           children: [

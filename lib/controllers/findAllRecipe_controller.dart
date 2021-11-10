@@ -32,7 +32,7 @@ class FindAllRecipeController extends GetxController {
   final _lastPage = false.obs;
   final _name = ''.obs;
   final _sort = 'name'.obs;
-  final sortItems = {'name':'Name','star':'Star'};
+  final sortItems = {'name': 'Name', 'star': 'Star'};
 
   List<RecipeModel> get recipes => _recipes.toList();
   int get limit => _paginationFilter.value.limit;
@@ -45,11 +45,15 @@ class FindAllRecipeController extends GetxController {
 
   @override
   onInit() {
-    ever(_name, (_) => recipeClear());
-    ever(_name, (_) => getAllRecipes(name,sort));
-    ever(_sort, (_) => recipeClear());
-    ever(_sort, (_) => getAllRecipes(name,sort));
-    ever(_paginationFilter, (_) => getAllRecipes(name,sort));
+    ever(_name, (_) {
+      recipeClear();
+      changePaginationFilter(0, 15);
+    });
+    ever(_sort, (_) {
+      recipeClear();
+      changePaginationFilter(0, 15);
+    });
+    ever(_paginationFilter, (_) => getAllRecipes(name, sort));
     changePaginationFilter(0, 15);
     super.onInit();
   }
@@ -70,9 +74,9 @@ class FindAllRecipeController extends GetxController {
     _recipes.clear();
   }
 
-  Future<void> getAllRecipes(name,sort) async {
+  Future<void> getAllRecipes(name, sort) async {
     final recipesData =
-        await _recipeRepository.getRecipes(_paginationFilter.value,name,sort);
+        await _recipeRepository.getRecipes(_paginationFilter.value, name, sort);
     if (recipesData.isEmpty) {
       _lastPage.value = true;
     }

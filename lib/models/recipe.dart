@@ -78,10 +78,10 @@ class RecipeRepository extends GetConnect {
   String? baseUrl = "https://api.laroza.dev";
 
   //Get all Recipes
-  Future<Map<dynamic, dynamic>> getRecipes(PaginationFilter filter,name) async {
+  Future<Map<dynamic, dynamic>> getRecipes(PaginationFilter filter,name,sort) async {
     var token = kStorage.read("token");
     var response = await get(
-        "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name",
+        "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name&sort=$sort",
         headers: {'Authorization': 'Bearer ' + token});
     if (response.statusCode == 200) {
       List<RecipeModel> jsonDecoded = response.body['data']
@@ -99,10 +99,10 @@ class RecipeRepository extends GetConnect {
 
   //Get Recipes by Ingredients
   Future<Map<dynamic, dynamic>> searchByIng(
-      query, PaginationFilter filter,name) async {
+      query, PaginationFilter filter,name,sort) async {
     var token = kStorage.read("token");
     var response = await post(
-        "/recipe/search?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name",
+        "/recipe/search?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name&sort=$sort",
         query,
         headers: {'Authorization': 'Bearer ' + token});
 
@@ -160,7 +160,6 @@ class RecipeRepository extends GetConnect {
     var token = kStorage.read("token");
     var response = await post("/users/fridge/", query,
         headers: {'Authorization': 'Bearer ' + token});
-    print(response);
     if (response.statusCode == 200) {
     } else {
       return Future.error('error');
@@ -183,11 +182,8 @@ class RecipeRepository extends GetConnect {
     var token = kStorage.read("token");
     var response = await post("/users/ingredients/", query,
         headers: {'Authorization': 'Bearer ' + token});
-    print(response);
     if (response.statusCode == 200) {
-      print(response.body);
     } else {
-      print(response.body);
       print('error');
     }
   }

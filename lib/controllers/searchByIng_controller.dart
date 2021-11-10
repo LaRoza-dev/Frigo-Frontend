@@ -35,10 +35,15 @@ class SearchByIngController extends GetxController {
   final _paginationFilter = PaginationFilter().obs;
   final _lastPage = false.obs;
   final _name = ''.obs;
+  final _sort ='ing_count'.obs;
+  final sortItems = {'ing_count':'Item count','name':'Name','star':'Star'};
+
+
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;
   int get totalNumber => _totalNumber.value;
   String get name => _name.value;
+  String get sort => _sort.value;
   bool get lastPage => _lastPage.value;
   List<RecipeModel> get recipes => _recipes.toList();
 
@@ -49,11 +54,13 @@ class SearchByIngController extends GetxController {
   onInit() {
     getFridgeItems();
     ever(_fridge, (_) => updateFridgeItems(fridgeItems));
-    ever(_paginationFilter, (_) => getAllRecipes(fridgeItems, name));
+    ever(_paginationFilter, (_) => getAllRecipes(fridgeItems, name,sort));
     ever(_fridge, (_) => recipeClear());
-    ever(_fridge, (_) => getAllRecipes(fridgeItems, name));
+    ever(_fridge, (_) => getAllRecipes(fridgeItems, name,sort));
     ever(_name, (_) => recipeClear());
-    ever(_name, (_) => getAllRecipes(fridgeItems, name));
+    ever(_name, (_) => getAllRecipes(fridgeItems, name,sort));
+    ever(_sort, (_) => recipeClear());
+    ever(_sort, (_) => getAllRecipes(fridgeItems, name,sort));
     changePaginationFilter(0, 15);
 
     super.onInit();
@@ -65,6 +72,10 @@ class SearchByIngController extends GetxController {
 
   void clearName() {
     _name.value = '';
+  }
+
+  void changeSort(String input) {
+    _sort.value = input;
   }
 
   void addFridge(String input) {
@@ -83,9 +94,9 @@ class SearchByIngController extends GetxController {
     });
   }
 
-  Future<void> getAllRecipes(list, name) async {
+  Future<void> getAllRecipes(list, name,sort) async {
     final recipesData = await _recipeRepository.searchByIng(
-        list, _paginationFilter.value, name);
+        list, _paginationFilter.value, name,sort);
     if (recipesData.isEmpty) {
       _lastPage.value = true;
     }

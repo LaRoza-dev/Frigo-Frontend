@@ -18,6 +18,7 @@ class Food extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> sortItems = _controller.sortItems.keys.toList();
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.only(bottom: 10),
@@ -45,13 +46,39 @@ class Food extends StatelessWidget {
                             fontWeight: FontWeight.normal),
                       ),
                     ),
-                    DropdownButton(
-                      items: [
-                        DropdownMenuItem(child: Text("data")),
-                      ],
-                      isDense: true,
-                      hint: Text("Filters"),
-                    ),
+                    Obx(
+                      () => Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blueGrey),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: DropdownButton(
+                          hint: Text(
+                            _controller.sortItems[_controller.sort],
+                            style: ktext2,
+                          ),
+                          icon: Icon(Icons.arrow_drop_down),
+                          iconSize: 21,
+                          underline: SizedBox(),
+                          // isExpanded: true,
+
+                          items: sortItems.map((value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                _controller.sortItems[value],
+                                style: ktext2,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (val) {
+                            _controller.changeSort(val);
+                          },
+                          // isDense: true,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )),

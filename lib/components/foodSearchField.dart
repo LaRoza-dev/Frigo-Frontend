@@ -34,6 +34,9 @@ class FoodSearchFlied extends StatelessWidget {
         horizontal: 17,
       ),
       child: TextFormField(
+        onFieldSubmitted: (String input) {
+          controller.changeName(input);
+        },
         obscureText: obscureText,
         onSaved: onSaved,
         style: kFormField.copyWith(
@@ -43,9 +46,7 @@ class FoodSearchFlied extends StatelessWidget {
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.center,
         textInputAction: textAction,
-        onChanged: (String input) {
-          controller.changeName(input);
-        },
+        // onChanged:
         decoration: InputDecoration(
           suffixIcon: IconButton(
             onPressed: () {

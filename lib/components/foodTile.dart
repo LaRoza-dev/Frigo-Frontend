@@ -52,28 +52,30 @@ class FoodTile extends StatelessWidget {
           ),
           child: Row(
             children: <Widget>[
-              FutureBuilder(
-                future: Get.put(DetaImage()).getImage(imageId),
-                builder: (BuildContext context, AsyncSnapshot<Widget> img) {
-                  if (img.hasData) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        child: img.requireData,
-                        borderRadius: BorderRadius.circular(15),
+              Expanded(flex: 7,
+                child: FutureBuilder(
+                  future: Get.put(DetaImage()).getImage(imageId),
+                  builder: (BuildContext context, AsyncSnapshot<Widget> img) {
+                    if (img.hasData) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          child: img.requireData,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      );
+                    }
+                    return Container(
+                      width: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
                     );
-                  }
-                  return Container(
-                    width: 100,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
               SizedBox(width: 10),
-              Expanded(
+              Expanded(flex: 13,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 15, 15, 5),
                   child: Column(

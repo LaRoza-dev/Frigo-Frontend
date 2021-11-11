@@ -37,6 +37,7 @@ class SearchByIngController extends GetxController {
   final _name = ''.obs;
   final _sort = 'ing_count'.obs;
   final sortItems = {'ing_count': 'Item count', 'name': 'Name', 'star': 'Star'};
+  final bool checkVisibility = true; 
 
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;

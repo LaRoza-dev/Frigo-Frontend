@@ -7,20 +7,30 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Frigo/models/recipe.dart';
 import 'package:Frigo/components/stars.dart';
 
-Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
-  // SearchController searchController = Get.put(SearchController());
+Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe,bool checkisibility) {
 
-  double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
 
-  List<Widget> ingredientItems(data) {
+  List<Widget> ingredientItems(data, indexList) {
     List<Widget> list = [];
     for (var i = 0; i < data.length; i++) {
-      list.add(
-        IngredientItem(
-          text: data[i],
-        ),
-      );
+      if (indexList.contains(i)) {
+        list.add(
+          IngredientItem(
+            text: data[i],
+            icon: FontAwesomeIcons.checkCircle,
+            iconColor: Colors.green,
+            checkVisibility: checkisibility,
+          ),
+        );
+      } else {
+        list.add(
+          IngredientItem(
+            text: data[i],
+            checkVisibility: checkisibility,
+          ),
+        );
+      }
     }
     return list;
   }
@@ -215,7 +225,8 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe) {
                             ),
                           ),
                           Column(
-                            children: ingredientItems(recipe.ingredients),
+                            children: ingredientItems(
+                                recipe.ingredients, recipe.findedIngIndex),
                           )
                         ],
                       ),
@@ -286,9 +297,14 @@ class FoodTag extends StatelessWidget {
 
 class IngredientItem extends StatelessWidget {
   const IngredientItem(
-      {required this.text, this.icon = FontAwesomeIcons.circle});
+      {required this.text,
+      this.icon = FontAwesomeIcons.circle,
+      this.iconColor = kTileColor,
+      this.checkVisibility=false});
   final String text;
   final IconData? icon;
+  final Color iconColor;
+  final bool checkVisibility;
 
   @override
   Widget build(BuildContext context) {
@@ -305,17 +321,22 @@ class IngredientItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: AutoSizeText(
-                text,
-                style: ktext2,
-                maxLines: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: AutoSizeText(
+                  text,
+                  style: ktext2,
+                  maxLines: 2,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: FaIcon(
-                icon,
-                color: kTileColor,
+              child: Visibility(visible: checkVisibility,
+                child: FaIcon(
+                  icon,
+                  color: iconColor,
+                ),
               ),
             )
           ],

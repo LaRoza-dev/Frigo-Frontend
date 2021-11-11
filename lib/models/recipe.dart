@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:Frigo/models/user.dart';
 
 class RecipeModel {
   String id = '';
@@ -22,6 +21,7 @@ class RecipeModel {
   String userId = '';
   int totalNumber = 0;
   int findedIngCount = 0;
+  List findedIngIndex = [];
 
   RecipeModel(
       {required this.id,
@@ -52,6 +52,7 @@ class RecipeModel {
     skill = json['skill'];
     stars = json['stars'];
     findedIngCount = json['finded_ing_count']??0;
+    findedIngIndex = json['finded_ing_index']??[];
     userId = json['user_id'];
   }
 
@@ -69,6 +70,7 @@ class RecipeModel {
     data['skill'] = this.skill;
     data['stars'] = this.stars;
     data['finded_ing_count'] = this.findedIngCount;
+    data['finded_ing_index'] = this.findedIngIndex;
     data['user_id'] = this.userId;
     return data;
   }
@@ -115,26 +117,6 @@ class RecipeRepository extends GetConnect {
       int totalNumber = response.body['total_number'];
       Map result = {'data': jsonDecoded, 'total_number': totalNumber};
       return result;
-    } else {
-      return Future.error('error');
-    }
-  }
-
-  //Get Recipes by Ingredients
-  Future<List<RecipeModel>> searchByName(query, PaginationFilter filter) async {
-    var token = kStorage.read("token");
-    var response = await post(
-        "/recipe/$query?pageNumber=${filter.page}&nPerPage=${filter.limit}",
-        query,
-        headers: {'Authorization': 'Bearer ' + token});
-
-    if (response.statusCode == 200) {
-      Future<List<RecipeModel>> jsonDecoded = await response.body['data']
-          ?.map<RecipeModel>(
-            (u) => RecipeModel.fromJson(u),
-          )
-          ?.toList();
-      return jsonDecoded;
     } else {
       return Future.error('error');
     }

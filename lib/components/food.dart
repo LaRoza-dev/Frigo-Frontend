@@ -92,7 +92,7 @@ class Food extends StatelessWidget {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     final recipe = _controller.recipes[index];
-                    if (index + 1 == _controller.recipes.length) {
+                    if (index + 1 == _controller.recipes.length && _controller.recipes.length != 1) {
                       return Center(child: CupertinoActivityIndicator());
                     }
                     return FoodTile(
@@ -103,7 +103,7 @@ class Food extends StatelessWidget {
                       star: recipe.stars,
                       cal: recipe.nutritions["kcal"],
                       onPressed: () {
-                        openFoodModal(context, recipe);
+                        openFoodModal(context, recipe,_controller.checkVisibility);
                       },
                     );
                   },

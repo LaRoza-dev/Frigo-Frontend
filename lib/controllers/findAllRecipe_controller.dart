@@ -33,6 +33,7 @@ class FindAllRecipeController extends GetxController {
   final _name = ''.obs;
   final _sort = 'name'.obs;
   final sortItems = {'name': 'Name', 'star': 'Star'};
+  final bool checkVisibility = false; 
 
   List<RecipeModel> get recipes => _recipes.toList();
   int get limit => _paginationFilter.value.limit;

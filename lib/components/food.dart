@@ -34,7 +34,7 @@ class Food extends StatelessWidget {
               flex: 2,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -50,7 +50,7 @@ class Food extends StatelessWidget {
                     Obx(
                       () => Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(10)),

@@ -4,6 +4,7 @@ import 'package:Frigo/constants.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:Frigo/components/foodTile.dart';
 import 'package:Frigo/components/openFood_modal.dart';
+import 'package:flutter/cupertino.dart';
 
 class Food extends StatelessWidget {
   const Food({
@@ -89,9 +90,11 @@ class Food extends StatelessWidget {
                 onEndOfPage: _controller.loadNextPage,
                 isLoading: _controller.lastPage,
                 child: ListView.builder(
-                  itemCount: _controller.recipes.length,
                   itemBuilder: (context, index) {
                     final recipe = _controller.recipes[index];
+                    if (index + 1 == _controller.recipes.length) {
+                      return Center(child: CupertinoActivityIndicator());
+                    }
                     return FoodTile(
                       imageId: recipe.id,
                       title: recipe.name,
@@ -104,6 +107,7 @@ class Food extends StatelessWidget {
                       },
                     );
                   },
+                  itemCount: _controller.recipes.length,
                 ),
               ),
             ),

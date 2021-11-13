@@ -19,11 +19,11 @@ class SearchByIngTextController extends GetxController {
     searchText = TextEditingController();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    searchText.dispose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  //   searchText.dispose();
+  // }
 }
 
 class SearchByIngController extends GetxController {

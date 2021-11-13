@@ -15,11 +15,11 @@ class FindAllRecipeTextController extends GetxController {
     searchText = TextEditingController();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    searchText.dispose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  //   searchText.dispose();
+  // }
 }
 
 class FindAllRecipeController extends GetxController {

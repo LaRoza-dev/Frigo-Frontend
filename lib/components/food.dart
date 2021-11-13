@@ -51,6 +51,7 @@ class Food extends StatelessWidget {
                       () => Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 10),
+                            height: 30,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(10)),

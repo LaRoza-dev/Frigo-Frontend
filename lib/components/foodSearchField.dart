@@ -36,6 +36,7 @@ class FoodSearchFlied extends StatelessWidget {
       child: TextFormField(
         onFieldSubmitted: (String input) {
           controller.changeName(input);
+          textController.searchText.clear();
         },
         obscureText: obscureText,
         onSaved: onSaved,

@@ -19,11 +19,6 @@ class WishlistTextController extends GetxController {
     searchText = TextEditingController();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    searchText.dispose();
-  }
 }
 
 class WishlistController extends GetxController {

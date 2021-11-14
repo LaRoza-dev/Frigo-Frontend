@@ -6,6 +6,7 @@ class HomeBindings implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => RecipeRepository());
-    Get.lazyPut(() => FindAllRecipeController(Get.find()));
+    Get.lazyPut(() => FindAllRecipeController(Get.find<RecipeRepository>()));
+    Get.lazyPut(() => FindAllRecipeTextController());
   }
 }

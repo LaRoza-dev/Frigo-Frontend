@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:Frigo/bindings/home_binding.dart';
 import 'package:get/get.dart';
 import 'package:Frigo/screens/first_page.dart';
@@ -12,13 +11,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 void main() async {
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   systemNavigationBarColor: Color(0xFF000000),
-  //   statusBarColor: Colors.transparent,
-  //   systemNavigationBarIconBrightness: Brightness.light,
-  //   statusBarIconBrightness: Brightness.light,
-  //   statusBarBrightness: Brightness.light,
-  // ));
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   Get.lazyPut<User>(() => User());

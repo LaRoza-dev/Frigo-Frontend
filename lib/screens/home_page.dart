@@ -1,3 +1,4 @@
+import 'package:Frigo/controllers/findAllRecipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:Frigo/controllers/pageContents_controller.dart';
 import 'package:get/get.dart';
@@ -75,13 +76,17 @@ class HomePage extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: Obx(
                     () => Visibility(
-                        visible:
-                            contentsController.pageContents.value.searchbarVisibility ,
-                        child:
-                            contentsController.pageContents.value.textField ??
-                                FoodSearchFlied(controller: findAllRecipeController,textController: findAllRecipeTextController,width: width,text: "Search here",)
-                                
-                                ),
+                      visible: contentsController
+                          .pageContents.value.searchbarVisibility,
+                      child: contentsController.pageContents.value.textField ??
+                          FoodSearchFlied(
+                            controller: Get.find<FindAllRecipeController>(),
+                            textController:
+                                Get.find<FindAllRecipeTextController>(),
+                            width: width,
+                            text: "Search here",
+                          ),
+                    ),
                   ),
                 ),
                 Expanded(

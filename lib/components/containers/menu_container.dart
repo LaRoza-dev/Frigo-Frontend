@@ -31,7 +31,7 @@ class MenuContainer extends StatelessWidget {
               onPressed: () {
                 Get.find<User>().logout();
                 Get.find<User>().handleSignOut();
-                Get.offAllNamed('/');
+                Get.offAllNamed('/signin');
               }),
         ],
       ),

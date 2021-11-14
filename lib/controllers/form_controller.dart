@@ -37,13 +37,6 @@ class FormController extends GetxController {
     passowrdRepeatController = TextEditingController();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    emailController.dispose();
-    passwordController.dispose();
-    passowrdRepeatController.dispose();
-  }
 
   bool checkLogin() {
     final isValid = loginFormKey.currentState!.validate();

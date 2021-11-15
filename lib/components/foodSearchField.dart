@@ -52,7 +52,7 @@ class FoodSearchFlied extends StatelessWidget {
           suffixIcon: IconButton(
             onPressed: () {
               controller.clearName();
-              textController.searchText.clear();
+              // textController.searchText.clear();
             },
             icon: FaIcon(
               FontAwesomeIcons.times,

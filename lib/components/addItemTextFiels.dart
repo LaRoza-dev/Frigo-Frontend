@@ -38,7 +38,7 @@ class AddItemTextField extends StatelessWidget {
       ),
       child: TextFormField(
         onFieldSubmitted: (String input) {
-          controller.addFridge(input);
+          controller.addItem(input);
           textController.searchText.clear();
         },
         obscureText: obscureText,

@@ -35,7 +35,7 @@ class WishlistController extends GetxController {
     super.onInit();
   }
 
-  void addWishlist(String input) {
+  void addItem(String input) {
     _wishlist.update((val) {
       val!.wishlist.add(input);
     });

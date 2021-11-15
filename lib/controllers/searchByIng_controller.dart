@@ -84,7 +84,7 @@ class SearchByIngController extends GetxController {
     _sort.value = input;
   }
 
-  void addFridge(String input) {
+  void addItem(String input) {
     _fridge.update((val) {
       val!.fridge.add(input);
     });

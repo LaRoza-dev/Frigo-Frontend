@@ -1,12 +1,14 @@
 import 'package:Frigo/models/recipe.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Wishlist {
   List wishlist = [];
 }
 
 class WishlistTextController extends GetxController {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController searchText;
 
   void clearController() {
@@ -19,6 +21,18 @@ class WishlistTextController extends GetxController {
     searchText = TextEditingController();
   }
 
+  final addIngValidator = PatternValidator(r'(.|\s)*\S(.|\s)*',
+      errorText: 'Recipe name must have at least one letter.');
+
+  bool checkFoodField() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      formKey.currentState!.save();
+      return true;
+    }
+  }
 }
 
 class WishlistController extends GetxController {

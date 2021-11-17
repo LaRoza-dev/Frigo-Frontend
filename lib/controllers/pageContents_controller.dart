@@ -35,6 +35,7 @@ class PageContentsController extends GetxController {
         val.textField = AddItemTextField(
           controller: Get.put(SearchByIngController(Get.find<RecipeRepository>())),
           textController: Get.put(SearchByIngTextController()),
+          validator: Get.put(SearchByIngTextController()).addIngValidator,
         );
         val.searchbarVisibility = true;
         updateFindType('fridge');
@@ -46,6 +47,7 @@ class PageContentsController extends GetxController {
         val.textField = AddItemTextField(
           controller: Get.put(WishlistController(Get.find<RecipeRepository>())),
           textController: Get.put(WishlistTextController()),
+          validator: Get.put(WishlistTextController()).addIngValidator,
         );
         val.searchbarVisibility = true;
       });

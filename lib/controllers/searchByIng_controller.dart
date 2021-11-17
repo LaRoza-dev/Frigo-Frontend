@@ -1,12 +1,14 @@
 import 'package:Frigo/models/recipe.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Fridge {
   List fridge = [];
 }
 
 class SearchByIngTextController extends GetxController {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController searchText;
 
   void clearController() {
@@ -19,11 +21,22 @@ class SearchByIngTextController extends GetxController {
     searchText = TextEditingController();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  //   searchText.dispose();
-  // }
+  // final addIngValidator = PatternValidator(r'(.|\s)*\S(.|\s)*',
+  //     errorText: 'Recipe name must have at least one letter.');
+
+  final addIngValidator = PatternValidator(
+      r'^(?=.*[a-zA-Z])(?=\S+$).+$',
+      errorText: 'Recipe name must have at least one letter.');
+
+  bool checkFoodField() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      formKey.currentState!.save();
+      return true;
+    }
+  }
 }
 
 class SearchByIngController extends GetxController {
@@ -37,7 +50,7 @@ class SearchByIngController extends GetxController {
   final _name = ''.obs;
   final _sort = 'ing_count'.obs;
   final sortItems = {'ing_count': 'Item count', 'name': 'Name', 'star': 'Star'};
-  final bool checkVisibility = true; 
+  final bool checkVisibility = true;
 
   int get limit => _paginationFilter.value.limit;
   int get _page => _paginationFilter.value.page;

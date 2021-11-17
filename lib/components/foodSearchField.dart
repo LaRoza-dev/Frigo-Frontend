@@ -29,10 +29,11 @@ class FoodSearchFlied extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 35,
+      // height: 35,
       padding: EdgeInsets.symmetric(
         horizontal: 17,
       ),
+      margin: EdgeInsets.all(5),
       child: TextFormField(
         onFieldSubmitted: (String input) {
           controller.changeName(input);

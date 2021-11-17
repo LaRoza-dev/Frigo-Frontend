@@ -49,9 +49,8 @@ class Food extends StatelessWidget {
                     ),
                     Obx(
                       () => Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10),
-                            height: 30,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 30,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blueGrey),
                             borderRadius: BorderRadius.circular(10)),
@@ -93,8 +92,14 @@ class Food extends StatelessWidget {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     final recipe = _controller.recipes[index];
-                    if (index + 1 == _controller.recipes.length && _controller.recipes.length != 1) {
-                      return Center(child: CupertinoActivityIndicator());
+                    if (index + 1 == _controller.recipes.length &&
+                        index + 1 != _controller.totalNumber) {
+                      return Center(
+                          child: Container(
+                        child: CircularProgressIndicator(),
+                        height: 20,
+                        width: 20,
+                      ));
                     }
                     return FoodTile(
                       imageId: recipe.id,

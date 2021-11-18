@@ -82,7 +82,7 @@ class AddItemTextField extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 color: Colors.white.withOpacity(0.7)),
             isCollapsed: true,
-            errorStyle: TextStyle(fontSize: 12, color: Colors.white),
+            errorStyle: TextStyle(fontSize: 10, color: Colors.white),
           ),
           onTap: onPressed,
         ),

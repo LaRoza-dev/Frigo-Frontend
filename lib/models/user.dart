@@ -1,11 +1,15 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 import 'package:get/get_connect/connect.dart';
 import 'package:Frigo/constants.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum googleLoginStatus { loggedIn, error, cancelled }
+
+bool isIos = Platform?.isIOS;
 
 class User extends GetConnect {
   User({this.email, this.password, this.fullname, this.fridge});
@@ -22,10 +26,12 @@ class User extends GetConnect {
     fullname = json['fullname'];
     email = json['email'];
     fridge = json['fridge'];
-    }
+  }
 
-  GoogleSignIn _googleSignIn =
-      GoogleSignIn(clientId: "${dotenv.env['CLIENT_ID']}");
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+      clientId: !kIsWeb && isIos
+          ? "${dotenv.env['IOS_CLIENT_ID']}"
+          : "${dotenv.env['CLIENT_ID']}");
 
   Future<googleLoginStatus?> handleSignIn() async {
     try {
@@ -88,7 +94,4 @@ class User extends GetConnect {
   Future<String?> getToken() async {
     return kStorage.read("token");
   }
-
-
-  
 }

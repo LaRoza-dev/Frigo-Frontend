@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.Frigo">
+    package="dev.laroza.frigo">
    <application
         android:label="Frigo"
         android:icon="@mipmap/ic_launcher">

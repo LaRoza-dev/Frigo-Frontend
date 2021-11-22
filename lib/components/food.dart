@@ -103,11 +103,11 @@ class Food extends StatelessWidget {
                     }
                     return FoodTile(
                       imageId: recipe.id,
-                      title: recipe.name,
-                      items: recipe.findedIngCount,
-                      allItems: recipe.ingredients.length,
-                      star: recipe.stars,
-                      cal: recipe.nutritions["kcal"],
+                      title: recipe.name??'',
+                      items: recipe.findedIngCount??0,
+                      allItems: recipe.ingredients.length??0,
+                      star: recipe.stars??0,
+                      cal: recipe.nutritions["kcal"]??'',
                       onPressed: () {
                         openFoodModal(context, recipe,_controller.checkVisibility);
                       },

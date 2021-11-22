@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum googleLoginStatus { loggedIn, error, cancelled }
 
-bool isIos = Platform?.isIOS;
+bool isIos = Platform.isIOS;
 
 class User extends GetConnect {
   User({this.email, this.password, this.fullname, this.fridge});
@@ -35,10 +35,12 @@ class User extends GetConnect {
 
   Future<googleLoginStatus?> handleSignIn() async {
     try {
+      print(Platform.operatingSystem);
       GoogleSignInAccount? res = await _googleSignIn.signIn();
       GoogleSignInAuthentication? googleKey = await res?.authentication;
       String? token = googleKey?.idToken.toString();
       var response = await post('/google/', jsonEncode(token));
+      print(response.body);
 
       if (response.body["access_token"] != null) {
         String? value = response.body["access_token"].toString();

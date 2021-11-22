@@ -1,4 +1,4 @@
-package com.example.Frigo
+package dev.laroza.frigo
 
 import io.flutter.embedding.android.FlutterActivity
 

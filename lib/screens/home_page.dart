@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                       visible: contentsController
                           .pageContents.value.searchbarVisibility,
                       child: contentsController.pageContents.value.textField ??
-                          FoodSearchFlied(
+                          FoodSearchField(
                             controller: Get.find<FindAllRecipeController>(),
                             textController:
                                 Get.find<FindAllRecipeTextController>(),

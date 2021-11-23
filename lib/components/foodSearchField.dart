@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class FoodSearchFlied extends StatelessWidget {
-  const FoodSearchFlied(
+class FoodSearchField extends StatelessWidget {
+  const FoodSearchField(
       {this.width,
       this.text = 'Search here',
       this.textAction: TextInputAction.next,
@@ -38,7 +39,7 @@ class FoodSearchFlied extends StatelessWidget {
         onFieldSubmitted: (String input) {
           if (input.isNotEmpty) {
             controller.changeName(input);
-            textController.searchText.clear();
+            // textController.searchText.clear();
           }
         },
         obscureText: obscureText,
@@ -50,18 +51,31 @@ class FoodSearchFlied extends StatelessWidget {
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.center,
         textInputAction: textAction,
-        // onChanged:
+        onChanged: (text) {
+          if (text.isEmpty) {
+            textController.hasText.value = false;
+          } else {
+            textController.hasText.value = true;
+          }
+        },
         decoration: InputDecoration(
-          suffixIcon: IconButton(
-            onPressed: () {
-              controller.clearName();
-              // textController.searchText.clear();
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.times,
-              color: Colors.white.withOpacity(0.7),
-              size: 20,
-            ),
+          suffixIcon: Obx(
+            () => textController.hasText.value
+                ? IconButton(
+                    onPressed: () {
+                      controller.clearName();
+                      textController.searchText.clear();
+                    },
+                    icon: FaIcon(
+                      FontAwesomeIcons.times,
+                      color: Colors.white.withOpacity(0.7),
+                      size: 20,
+                    ),
+                  )
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
           ),
           icon: FaIcon(
             FontAwesomeIcons.search,

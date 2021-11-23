@@ -20,8 +20,9 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = 'All Foods';
         val.container = AllFoodsContainer();
-        val.textField = FoodSearchFlied(
-          controller: Get.put(FindAllRecipeController(Get.find<RecipeRepository>())),
+        val.textField = FoodSearchField(
+          controller:
+              Get.put(FindAllRecipeController(Get.find<RecipeRepository>())),
           textController: Get.put(FindAllRecipeTextController()),
         );
         val.searchbarVisibility = true;
@@ -33,7 +34,8 @@ class PageContentsController extends GetxController {
         val!.title = 'Fridge';
         val.container = FridgeContainer();
         val.textField = AddItemTextField(
-          controller: Get.put(SearchByIngController(Get.find<RecipeRepository>())),
+          controller:
+              Get.put(SearchByIngController(Get.find<RecipeRepository>())),
           textController: Get.put(SearchByIngTextController()),
           validator: Get.put(SearchByIngTextController()).addIngValidator,
         );
@@ -64,7 +66,7 @@ class PageContentsController extends GetxController {
     if (input == 'all') {
       pageContents.update((val) {
         val!.container = AllFoodsContainer();
-        val.textField = FoodSearchFlied(
+        val.textField = FoodSearchField(
           controller: Get.find<FindAllRecipeController>(),
           textController: Get.find<FindAllRecipeTextController>(),
         );
@@ -73,8 +75,9 @@ class PageContentsController extends GetxController {
       pageContents.update((val) {
         val!.title = 'Found By Fridge Items';
         val.container = SearchByIng();
-        val.textField = FoodSearchFlied(
-          controller: Get.put(SearchByIngController(Get.find<RecipeRepository>())),
+        val.textField = FoodSearchField(
+          controller:
+              Get.put(SearchByIngController(Get.find<RecipeRepository>())),
           textController: Get.put(SearchByIngTextController()),
         );
         val.itemsVisibility = true;

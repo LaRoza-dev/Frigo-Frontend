@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class FindAllRecipeTextController extends GetxController {
   late TextEditingController searchText;
-
+  late RxBool hasText = false.obs;
   void clearController() {
     searchText.clear();
   }
@@ -33,7 +33,7 @@ class FindAllRecipeController extends GetxController {
   final _name = ''.obs;
   final _sort = 'name'.obs;
   final sortItems = {'name': 'Name', 'star': 'Star'};
-  final bool checkVisibility = false; 
+  final bool checkVisibility = false;
 
   List<RecipeModel> get recipes => _recipes.toList();
   int get limit => _paginationFilter.value.limit;

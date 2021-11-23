@@ -24,8 +24,7 @@ class SearchByIngTextController extends GetxController {
   // final addIngValidator = PatternValidator(r'(.|\s)*\S(.|\s)*',
   //     errorText: 'Recipe name must have at least one letter.');
 
-  final addIngValidator = PatternValidator(
-      r'^(?=.*[a-zA-Z])(?=\S+$).+$',
+  final addIngValidator = PatternValidator(r'^(?=.*[a-zA-Z])(?=\S+$).+$',
       errorText: 'Recipe name must have at least one letter.');
 
   bool checkFoodField() {

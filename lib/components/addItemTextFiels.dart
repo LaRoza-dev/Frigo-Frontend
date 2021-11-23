@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class AddItemTextField extends StatelessWidget {
   const AddItemTextField(
@@ -44,26 +46,46 @@ class AddItemTextField extends StatelessWidget {
               controller.addItem(input);
               textController.searchText.clear();
             }
+
+            textController.hasText.value = false;
           },
           obscureText: obscureText,
           onSaved: onSaved,
           style: kFormField.copyWith(
-              fontSize: 18, fontWeight: FontWeight.normal, color: Colors.white),
+              fontSize: ScreenUtil().scaleText * 25,
+              fontWeight: FontWeight.normal,
+              color: Colors.white),
           controller: textController.searchText,
           validator: validator,
           autovalidateMode: AutovalidateMode.always,
           textAlign: TextAlign.left,
           textAlignVertical: TextAlignVertical.center,
           textInputAction: textAction,
-          onChanged: onChanged,
+          onChanged: (text) {
+            if (text.isEmpty) {
+              textController.hasText.value = false;
+            } else {
+              textController.hasText.value = true;
+            }
+            onChanged!(text);
+          },
           decoration: InputDecoration(
-            suffixIcon: IconButton(
-              onPressed: () => textController.searchText.clear(),
-              icon: FaIcon(
-                FontAwesomeIcons.times,
-                color: Colors.white.withOpacity(0.7),
-                size: 20,
-              ),
+            suffixIcon: Obx(
+              () => textController.hasText.value
+                  ? IconButton(
+                      onPressed: () => {
+                        textController.hasText.value = false,
+                        textController.searchText.clear()
+                      },
+                      icon: FaIcon(
+                        FontAwesomeIcons.times,
+                        color: Colors.white.withOpacity(0.7),
+                        size: 20,
+                      ),
+                    )
+                  : SizedBox(
+                      width: 0,
+                    ),
             ),
             icon: FaIcon(
               FontAwesomeIcons.search,
@@ -78,7 +100,7 @@ class AddItemTextField extends StatelessWidget {
             // contentPadding: EdgeInsets.all(5.0),
             hintText: text,
             hintStyle: kFormField.copyWith(
-                fontSize: 18,
+                fontSize: ScreenUtil().scaleText * 25,
                 fontWeight: FontWeight.normal,
                 color: Colors.white.withOpacity(0.7)),
             isCollapsed: true,

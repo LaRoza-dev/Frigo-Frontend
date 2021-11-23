@@ -9,7 +9,7 @@ class MenuContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(30, 0, 30, 10),
+      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
           color: Colors.white,

@@ -1,15 +1,24 @@
 import 'dart:ui';
+import 'package:Frigo/controllers/user_controller.dart';
+import 'package:Frigo/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:Frigo/components/textFields.dart';
 import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-DateTime selectedDate = DateTime.now();
-
-Future<dynamic> profileModalMenu(BuildContext context) {
+Future<dynamic> profileModalMenu(BuildContext context) async {
   // double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
+  User user = await Get.find<User>().getMe();
+
+  DateTime now = DateTime.now();
+  DateTime selectedDate = DateTime(
+      int.parse(user.birthdate?.split('/')[0] ?? now.year.toString()),
+      int.parse(user.birthdate?.split('/')[1] ?? now.month.toString()),
+      int.parse(user.birthdate?.split('/')[2] ?? now.day.toString()));
+
+  print(selectedDate);
   return showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -92,21 +101,25 @@ Future<dynamic> profileModalMenu(BuildContext context) {
                     children: [
                       FormField(
                         text: 'Name',
-                        textFieldHint: 'Enter your name',
+                        textFieldHint: user.fullname ?? 'Enter your name',
                       ),
                       FormField(
                         text: 'Email',
-                        textFieldHint: 'Enter your Email address',
+                        textFieldHint: user.email ?? 'Enter your Email address',
                       ),
                       FormField(
+                        readOnly: true,
                         text: 'Date',
-                        textFieldHint: 'Tap to choose the date',
+                        textFieldHint:
+                            user.birthdate ?? 'Tap to choose the date',
                         onPressed: () async {
+                          print('Clicked!');
                           final DateTime? picked = await showDatePicker(
                               context: context,
                               initialDate: selectedDate,
-                              firstDate: DateTime(2015, 8),
-                              lastDate: DateTime(2101));
+                              firstDate: DateTime.now()
+                                  .subtract(Duration(days: 365 * 150)),
+                              lastDate: DateTime.now());
                         },
                       ),
                       Column(
@@ -132,7 +145,26 @@ Future<dynamic> profileModalMenu(BuildContext context) {
                                   ],
                                 )),
                             SizedBox(height: 20),
-                          ])
+                          ]),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 40,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Colors.purple,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            child: Center(
+                                child: Text(
+                              "Save",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -175,10 +207,14 @@ class GenderButton extends StatelessWidget {
 
 class FormField extends StatelessWidget {
   const FormField(
-      {required this.text, this.textFieldHint = 'data', this.onPressed});
+      {required this.text,
+      this.textFieldHint = 'data',
+      this.onPressed,
+      this.readOnly = false});
   final String text;
   final String textFieldHint;
   final VoidCallback? onPressed;
+  final bool readOnly;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -189,6 +225,7 @@ class FormField extends StatelessWidget {
           style: kText1,
         ),
         InsertTextFlied(
+          readOnly: this.readOnly,
           text: textFieldHint,
           width: 20,
           onPressed: onPressed,

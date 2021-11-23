@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'models/user.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,18 +27,26 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     final box = GetStorage();
     print({"token": box.read("token")});
-    return GetMaterialApp(
-        initialRoute: isTokenValid ? '/home' : '/',
-        getPages: [
-          GetPage(
-            name: '/',
-            page: () => FirstPage(),
-          ),
-          GetPage(name: '/signin', page: () => SignInPage()),
-          GetPage(name: '/signup', page: () => SignUpPage()),
-          GetPage(
-              name: '/home', page: () => HomePage(), binding: HomeBindings()),
-        ]);
+    return ScreenUtilInit(
+      designSize: Size(375, 812),
+      builder: () => GetMaterialApp(
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              textTheme: TextTheme(
+                bodyText2: TextStyle(fontSize: 45.sp),
+              )),
+          initialRoute: isTokenValid ? '/home' : '/',
+          getPages: [
+            GetPage(
+              name: '/',
+              page: () => FirstPage(),
+            ),
+            GetPage(name: '/signin', page: () => SignInPage()),
+            GetPage(name: '/signup', page: () => SignUpPage()),
+            GetPage(
+                name: '/home', page: () => HomePage(), binding: HomeBindings()),
+          ]),
+    );
   }
 }
 

@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
               children: [
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 0),
                     child: Obx(
                       () => Text(
                         '${contentsController.pageContents.value.title}',
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   child: Obx(
                     () => Visibility(
                       visible: contentsController

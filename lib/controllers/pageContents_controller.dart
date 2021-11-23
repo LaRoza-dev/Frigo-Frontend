@@ -73,7 +73,7 @@ class PageContentsController extends GetxController {
       });
     } else if (input == 'searchByIng') {
       pageContents.update((val) {
-        val!.title = 'Found By Fridge Items';
+        val!.title = 'Found Items';
         val.container = SearchByIng();
         val.textField = FoodSearchField(
           controller:

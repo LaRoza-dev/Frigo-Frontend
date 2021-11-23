@@ -25,8 +25,8 @@ class SignUpPage extends GetView {
         child: SingleChildScrollView(
           reverse: false,
           child: Container(
-            height:MediaQuery.of(context).size.height*0.9,
-            width:MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.9,
+            width: MediaQuery.of(context).size.width,
             child: Form(
               key: formController.loginFormKey,
               child: Padding(
@@ -218,8 +218,8 @@ class SignUpPage extends GetView {
                                   Alert(
                                     context: context,
                                     type: AlertType.error,
-                                    title: "Permission Denied",
-                                    desc: "Username or Password is incorrect.",
+                                    title: "Something happened!",
+                                    desc: "Please try again",
                                     buttons: [
                                       DialogButton(
                                         child: Text(

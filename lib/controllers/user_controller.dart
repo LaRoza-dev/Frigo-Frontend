@@ -2,7 +2,7 @@ import 'package:Frigo/models/user.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  var user = User(email: "", password: "", fullname: "");
+  User user = User();
 
   void setEmail(email) {
     user.email = email;
@@ -14,6 +14,10 @@ class UserController extends GetxController {
 
   void setFullname(fullname) {
     user.fullname = fullname;
+  }
+
+  void setBirthday(birthdate) {
+    user.birthdate = birthdate;
   }
 
   Future<bool> login() async {

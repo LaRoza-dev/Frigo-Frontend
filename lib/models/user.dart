@@ -12,7 +12,13 @@ enum googleLoginStatus { loggedIn, error, cancelled }
 bool isIos = Platform.isIOS;
 
 class User extends GetConnect {
-  User({this.email, this.password, this.fullname, this.fridge});
+  User(
+      {this.email,
+      this.password,
+      this.fullname,
+      this.fridge,
+      this.gender,
+      this.birthdate});
 
   String? id = "";
   String? fullname = "";
@@ -20,13 +26,20 @@ class User extends GetConnect {
   String? password = "";
   List? fridge = [];
   String? baseUrl = "https://api.laroza.dev";
+  String? birthdate;
+  String? gender;
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullname = json['fullname'];
+    gender = json['gender'];
+    birthdate = json['birthdate'];
     email = json['email'];
     fridge = json['fridge'];
   }
+
+  @override
+  String toString() => "User:,$id, $fullname, $email ,$birthdate ,$gender";
 
   GoogleSignIn _googleSignIn = GoogleSignIn(
       clientId: !kIsWeb && isIos
@@ -86,6 +99,18 @@ class User extends GetConnect {
     } else {
       return false;
     }
+  }
+
+  Future<User> getMe({tokenStr}) async {
+    String token = await getToken() ?? tokenStr ?? '';
+    var response =
+        await get("/users/me", headers: {'Authorization': 'Bearer ' + token});
+
+    var res = response.body["data"][0];
+
+    User user = User.fromJson(res);
+
+    return user;
   }
 
   Future<void> logout() async {

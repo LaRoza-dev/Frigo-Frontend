@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -45,7 +46,9 @@ class FoodSearchField extends StatelessWidget {
         obscureText: obscureText,
         onSaved: onSaved,
         style: kFormField.copyWith(
-            fontSize: 18, fontWeight: FontWeight.normal, color: Colors.white),
+            fontSize: ScreenUtil().scaleText * 18,
+            fontWeight: FontWeight.normal,
+            color: Colors.white),
         controller: textController.searchText,
         validator: validator,
         textAlign: TextAlign.left,
@@ -90,7 +93,7 @@ class FoodSearchField extends StatelessWidget {
           contentPadding: EdgeInsets.all(5.0),
           hintText: text,
           hintStyle: kFormField.copyWith(
-              fontSize: 18,
+              fontSize: ScreenUtil().scaleText * 25,
               fontWeight: FontWeight.normal,
               color: Colors.white.withOpacity(0.7)),
           isCollapsed: true,

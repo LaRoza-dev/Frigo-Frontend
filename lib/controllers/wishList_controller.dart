@@ -10,6 +10,7 @@ class Wishlist {
 class WishlistTextController extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController searchText;
+  late RxBool hasText = false.obs;
 
   void clearController() {
     searchText.clear();

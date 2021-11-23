@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:Frigo/constants.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -42,7 +43,7 @@ class Food extends StatelessWidget {
                       () => Text(
                         "Showing ${_controller.totalNumber} foods",
                         style: kFormField.copyWith(
-                            fontSize: 16,
+                            fontSize: ScreenUtil().scaleText * 18,
                             color: Colors.grey,
                             fontWeight: FontWeight.normal),
                       ),
@@ -103,13 +104,14 @@ class Food extends StatelessWidget {
                     }
                     return FoodTile(
                       imageId: recipe.id,
-                      title: recipe.name??'',
-                      items: recipe.findedIngCount??0,
-                      allItems: recipe.ingredients.length??0,
-                      star: recipe.stars??0,
-                      cal: recipe.nutritions["kcal"]??'',
+                      title: recipe.name ?? '',
+                      items: recipe.findedIngCount ?? 0,
+                      allItems: recipe.ingredients.length ?? 0,
+                      star: recipe.stars ?? 0,
+                      cal: recipe.nutritions["kcal"] ?? '',
                       onPressed: () {
-                        openFoodModal(context, recipe,_controller.checkVisibility);
+                        openFoodModal(
+                            context, recipe, _controller.checkVisibility);
                       },
                     );
                   },

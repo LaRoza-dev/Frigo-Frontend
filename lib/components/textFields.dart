@@ -11,7 +11,9 @@ class InsertTextFlied extends StatelessWidget {
       this.validator,
       this.controller,
       this.onSaved,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.enabled = true,
+      this.readOnly = false});
 
   final double width;
   final String text;
@@ -22,14 +24,18 @@ class InsertTextFlied extends StatelessWidget {
   final String? Function(String?)? onSaved;
   final TextEditingController? controller;
   final bool obscureText;
+  final bool enabled;
+  final bool readOnly;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       child: Container(
         width: width * 0.9,
         //height: 40,
         child: TextFormField(
+          readOnly: this.readOnly,
+          enabled: this.enabled,
           obscureText: obscureText,
           onSaved: onSaved,
           controller: controller,
@@ -62,5 +68,3 @@ class InsertTextFlied extends StatelessWidget {
     );
   }
 }
-
-

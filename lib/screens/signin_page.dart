@@ -24,8 +24,8 @@ class SignInPage extends StatelessWidget {
           padding: EdgeInsets.zero,
           reverse: true,
           child: Container(
-            height:MediaQuery.of(context).size.height*0.9,
-            width:MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.9,
+            width: MediaQuery.of(context).size.width,
             child: Form(
               key: formController.loginFormKey,
               child: Padding(
@@ -177,14 +177,17 @@ class SignInPage extends StatelessWidget {
                           return GoogleButton(
                               text: 'Sign in with Google',
                               onPressed: () async {
-                                googleLoginStatus? res = await _.googleLogin();
+                                googleLoginStatus? res;
+
+                                res = await _.googleLogin();
+
                                 print({"res": res});
                                 if (res == googleLoginStatus.error) {
                                   Alert(
                                     context: context,
                                     type: AlertType.error,
-                                    title: "Permission Denied",
-                                    desc: "Username or Password is incorrect.",
+                                    title: "Something happened!",
+                                    desc: "Please try again",
                                     buttons: [
                                       DialogButton(
                                         child: Text(

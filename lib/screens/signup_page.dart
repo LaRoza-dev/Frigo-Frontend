@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:Frigo/controllers/user_controller.dart';
 import 'package:Frigo/models/user.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpPage extends GetView {
   // const SignUpPage({Key? key}) : super(key: key);
@@ -153,7 +154,9 @@ class SignUpPage extends GetView {
                                               "Ok",
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 20),
+                                                  fontSize:
+                                                      ScreenUtil().scaleText *
+                                                          21),
                                             ),
                                             onPressed: () {
                                               Get.offAllNamed('/');
@@ -175,7 +178,9 @@ class SignUpPage extends GetView {
                                               "Ok",
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 20),
+                                                  fontSize:
+                                                      ScreenUtil().scaleText *
+                                                          21),
                                             ),
                                             onPressed: () {
                                               Get.back();
@@ -226,7 +231,8 @@ class SignUpPage extends GetView {
                                           "Ok",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 20),
+                                              fontSize:
+                                                  ScreenUtil().scaleText * 21),
                                         ),
                                         onPressed: () {
                                           Get.back();

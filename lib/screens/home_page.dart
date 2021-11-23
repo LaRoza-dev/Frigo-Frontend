@@ -7,6 +7,7 @@ import 'package:Frigo/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:Frigo/components/containers/allFoods_container.dart';
 import 'package:Frigo/components/foodSearchField.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatelessWidget {
   final PageContentsController contentsController =
@@ -53,6 +54,7 @@ class HomePage extends StatelessWidget {
                 end: Alignment.bottomCenter)),
         child: SafeArea(
           child: Container(
+            padding: EdgeInsets.only(top: 10),
             height: height,
             width: width,
             child: Column(
@@ -66,7 +68,8 @@ class HomePage extends StatelessWidget {
                       () => Text(
                         '${contentsController.pageContents.value.title}',
                         style: kHeading2.copyWith(
-                            fontSize: 26, color: Colors.white),
+                            fontSize: ScreenUtil().scaleText * 27,
+                            color: Colors.white),
                       ),
                     ),
                   ),

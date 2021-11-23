@@ -6,9 +6,10 @@ import 'package:Frigo/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Frigo/models/recipe.dart';
 import 'package:Frigo/components/stars.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe,bool checkisibility) {
-
+Future<dynamic> openFoodModal(
+    BuildContext context, RecipeModel recipe, bool checkisibility) {
   double width = MediaQuery.of(context).size.width;
 
   List<Widget> ingredientItems(data, indexList) {
@@ -85,7 +86,7 @@ Future<dynamic> openFoodModal(BuildContext context, RecipeModel recipe,bool chec
                             icon: Icon(
                               FontAwesomeIcons.solidTimesCircle,
                               color: Colors.grey,
-                              size: 30,
+                              size: ScreenUtil().scaleText * 31,
                             ),
                             onPressed: () {
                               Get.back();
@@ -300,7 +301,7 @@ class IngredientItem extends StatelessWidget {
       {required this.text,
       this.icon = FontAwesomeIcons.circle,
       this.iconColor = kTileColor,
-      this.checkVisibility=false});
+      this.checkVisibility = false});
   final String text;
   final IconData? icon;
   final Color iconColor;
@@ -332,7 +333,8 @@ class IngredientItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: Visibility(visible: checkVisibility,
+              child: Visibility(
+                visible: checkVisibility,
                 child: FaIcon(
                   icon,
                   color: iconColor,
@@ -381,7 +383,7 @@ class CookStep extends StatelessWidget {
                 child: Center(
                   child: Text(
                     index,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: ScreenUtil().scaleText *15),
                   ),
                 ),
               ),

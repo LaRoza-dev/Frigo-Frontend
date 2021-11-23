@@ -24,8 +24,8 @@ class FoodSearchField extends StatelessWidget {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final String? Function(String?)? onSaved;
-  final textController;
   final controller;
+  final textController;
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class FoodSearchField extends StatelessWidget {
         obscureText: obscureText,
         onSaved: onSaved,
         style: kFormField.copyWith(
-            fontSize: ScreenUtil().scaleText * 18,
+            fontSize: ScreenUtil().scaleText * 24,
             fontWeight: FontWeight.normal,
             color: Colors.white),
         controller: textController.searchText,
@@ -54,36 +54,35 @@ class FoodSearchField extends StatelessWidget {
         textAlign: TextAlign.left,
         textAlignVertical: TextAlignVertical.center,
         textInputAction: textAction,
-        onChanged: (text) {
-          if (text.isEmpty) {
-            textController.hasText.value = false;
-          } else {
+        onChanged: (String text) {
+          if (text.isNotEmpty) {
             textController.hasText.value = true;
+          } else {
+            textController.hasText.value = false;
           }
         },
         decoration: InputDecoration(
           suffixIcon: Obx(
-            () => textController.hasText.value
-                ? IconButton(
-                    onPressed: () {
-                      controller.clearName();
-                      textController.searchText.clear();
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.times,
-                      color: Colors.white.withOpacity(0.7),
-                      size: 20,
-                    ),
-                  )
-                : SizedBox(
-                    height: 0,
-                    width: 0,
-                  ),
+            () => Visibility(
+              visible: textController.hasText.value,
+              child: IconButton(
+                onPressed: () {
+                  controller.clearName();
+                  textController.searchText.clear();
+                  textController.hasText.value = false;
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.times,
+                  color: Colors.white.withOpacity(0.7),
+                  size: ScreenUtil().scaleText * 21,
+                ),
+              ),
+            ),
           ),
           icon: FaIcon(
             FontAwesomeIcons.search,
             color: Colors.white.withOpacity(0.7),
-            size: 20,
+            size: ScreenUtil().scaleText * 21,
           ),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -97,7 +96,8 @@ class FoodSearchField extends StatelessWidget {
               fontWeight: FontWeight.normal,
               color: Colors.white.withOpacity(0.7)),
           isCollapsed: true,
-          errorStyle: TextStyle(fontSize: 10, color: kPrimaryColor),
+          errorStyle: TextStyle(
+              fontSize: ScreenUtil().scaleText * 11, color: kPrimaryColor),
         ),
         onTap: onPressed,
       ),

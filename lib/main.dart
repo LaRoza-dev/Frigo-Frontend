@@ -33,7 +33,7 @@ class Main extends StatelessWidget {
           theme: ThemeData(
               primarySwatch: Colors.blue,
               textTheme: TextTheme(
-                bodyText2: TextStyle(fontSize: 45.sp),
+                // bodyText2: TextStyle(fontSize: 45.sp),
               )),
           initialRoute: isTokenValid ? '/home' : '/',
           getPages: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
 final GetStorage kStorage = GetStorage();
@@ -26,49 +26,49 @@ const kTileItemColor = Colors.lightGreen;
 const kTileStarColor = Color.fromRGBO(255, 179, 0, 1);
 const kBorderColor = Color.fromRGBO(231, 231, 239, 1);
 
-const kHeading1 = TextStyle(
-    color: kTextColor1,
-    fontSize: 28.0,
-    fontWeight: FontWeight.w500,
-    // fontFamily: 'Poppins'
-    );
-
-const kHeading2 = TextStyle(
-    color: kTextColor1,
-    fontSize: 22.0,
-    fontWeight: FontWeight.w500,
-    // fontFamily: 'Poppins'
-    );
-
-const kHeading3 = TextStyle(
-    color: kTextColor1,
-    fontSize: 18.0,
-    fontWeight: FontWeight.w500,
-    // fontFamily: 'Poppins'
-    );
-
-const kText1 = TextStyle(
+final kHeading1 = TextStyle(
   color: kTextColor1,
-  fontSize: 16.0,
+  fontSize: ScreenUtil().scaleText * 29.0,
+  fontWeight: FontWeight.w500,
+  // fontFamily: 'Poppins'
+);
+
+final kHeading2 = TextStyle(
+  color: kTextColor1,
+  fontSize: ScreenUtil().scaleText * 25.0,
+  fontWeight: FontWeight.w500,
+  // fontFamily: 'Poppins'
+);
+
+final kHeading3 = TextStyle(
+  color: kTextColor1,
+  fontSize: ScreenUtil().scaleText * 23.0,
+  fontWeight: FontWeight.w500,
+  // fontFamily: 'Poppins'
+);
+
+final kText1 = TextStyle(
+  color: kTextColor1,
+  fontSize: ScreenUtil().scaleText * 21.0,
   fontWeight: FontWeight.w500,
   // fontFamily: 'Poppins',
 );
 
-const ktext2 = TextStyle(
-    color: Color.fromRGBO(53, 76, 123, 1),
-    fontSize: 13.0,
-    fontWeight: FontWeight.w300,
-    // fontFamily: 'Poppins'
-    );
-
-const kFormField = TextStyle(
-    color: kFieldTextColor,
-    fontSize: 13.0,
-    fontWeight: FontWeight.w300,
-    // fontFamily: 'Poppins'
-    );
-
-const kNutrition = TextStyle(
-  color: kFieldTextColor,
-  // fontFamily: 'Poppins',
+final ktext2 = TextStyle(
+  color: Color.fromRGBO(53, 76, 123, 1),
+  fontSize: ScreenUtil().scaleText * 17.0,
+  fontWeight: FontWeight.w300,
+  // fontFamily: 'Poppins'
 );
+
+final kFormField = TextStyle(
+  color: kFieldTextColor,
+  fontSize: ScreenUtil().scaleText * 15.0,
+  fontWeight: FontWeight.w300,
+  // fontFamily: 'Poppins'
+);
+
+final kNutrition =
+    TextStyle(color: kFieldTextColor, fontSize: ScreenUtil().scaleText * 17
+        // fontFamily: 'Poppins',
+        );

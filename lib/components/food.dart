@@ -61,7 +61,7 @@ class Food extends StatelessWidget {
                             style: ktext2,
                           ),
                           icon: Icon(Icons.arrow_drop_down),
-                          iconSize: 21,
+                          iconSize: ScreenUtil().scaleText * 22,
                           underline: SizedBox(),
                           // isExpanded: true,
 

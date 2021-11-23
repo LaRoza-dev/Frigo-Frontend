@@ -37,7 +37,6 @@ class FormController extends GetxController {
     passowrdRepeatController = TextEditingController();
   }
 
-
   bool checkLogin() {
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {

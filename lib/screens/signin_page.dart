@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:Frigo/controllers/user_controller.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:Frigo/controllers/form_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignInPage extends StatelessWidget {
   final UserController usercontroller = Get.put(UserController());
@@ -126,7 +127,9 @@ class SignInPage extends StatelessWidget {
                                             "Ok",
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 20),
+                                                fontSize:
+                                                    ScreenUtil().scaleText *
+                                                        21),
                                           ),
                                           onPressed: () {
                                             Get.back();
@@ -194,7 +197,8 @@ class SignInPage extends StatelessWidget {
                                           "Ok",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 20),
+                                              fontSize:
+                                                  ScreenUtil().scaleText * 20),
                                         ),
                                         onPressed: () {
                                           Get.back();

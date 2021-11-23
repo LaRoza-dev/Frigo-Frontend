@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:Frigo/controllers/user_controller.dart';
 import 'package:Frigo/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:Frigo/components/textFields.dart';

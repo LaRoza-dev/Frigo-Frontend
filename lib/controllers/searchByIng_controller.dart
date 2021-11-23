@@ -11,6 +11,7 @@ class SearchByIngTextController extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController searchText;
   late RxBool hasText = false.obs;
+
   void clearController() {
     searchText.clear();
   }
@@ -20,9 +21,6 @@ class SearchByIngTextController extends GetxController {
     super.onInit();
     searchText = TextEditingController();
   }
-
-  // final addIngValidator = PatternValidator(r'(.|\s)*\S(.|\s)*',
-  //     errorText: 'Recipe name must have at least one letter.');
 
   final addIngValidator = PatternValidator(r'^(?=.*[a-zA-Z])(?=\S+$).+$',
       errorText: 'Recipe name must have at least one letter.');

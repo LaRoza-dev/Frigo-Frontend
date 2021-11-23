@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Frigo/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainButton extends StatelessWidget {
   MainButton(
@@ -91,7 +92,7 @@ class GoogleButton extends StatelessWidget {
                 Text(text,
                     style: TextStyle(
                         color: textColor,
-                        fontSize: 13.0,
+                        fontSize: ScreenUtil().scaleText * 14.0,
                         fontWeight: FontWeight.w300,
                         fontFamily: 'Poppins')),
               ],
@@ -104,7 +105,12 @@ class GoogleButton extends StatelessWidget {
 }
 
 class CircleIconButton extends StatelessWidget {
-  CircleIconButton({this.onColor:Colors.red,this.color:Colors.white,required this.icon,required this.onPressed,this.size:25});
+  CircleIconButton(
+      {this.onColor: Colors.red,
+      this.color: Colors.white,
+      required this.icon,
+      required this.onPressed,
+      this.size: 25});
   final Color onColor;
   final Color color;
   final IconData icon;

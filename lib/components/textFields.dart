@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Frigo/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InsertTextFlied extends StatelessWidget {
   const InsertTextFlied(
@@ -49,7 +50,8 @@ class InsertTextFlied extends StatelessWidget {
             hintText: text,
             hintStyle: kFormField,
             isCollapsed: true,
-            errorStyle: TextStyle(fontSize: 10, color: kPrimaryColor),
+            errorStyle: TextStyle(
+                fontSize: ScreenUtil().scaleText * 11, color: kPrimaryColor),
           ),
           onTap: onPressed,
         ),

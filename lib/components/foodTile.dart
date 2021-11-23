@@ -6,6 +6,7 @@ import 'package:Frigo/models/recipe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:Frigo/components/stars.dart';
 import 'package:Frigo/controllers/pageContents_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FoodTile extends StatelessWidget {
   FoodTile(
@@ -52,7 +53,8 @@ class FoodTile extends StatelessWidget {
           ),
           child: Row(
             children: <Widget>[
-              Expanded(flex: 7,
+              Expanded(
+                flex: 7,
                 child: FutureBuilder(
                   future: Get.put(DetaImage()).getImage(imageId),
                   builder: (BuildContext context, AsyncSnapshot<Widget> img) {
@@ -75,7 +77,8 @@ class FoodTile extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              Expanded(flex: 13,
+              Expanded(
+                flex: 13,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 15, 15, 5),
                   child: Column(
@@ -92,9 +95,9 @@ class FoodTile extends StatelessWidget {
                             children: [
                               Text('Kcal: $cal',
                                   style: TextStyle(
-                                    color: kFieldTextColor,
-                                    fontFamily: 'Poppins',
-                                  )),
+                                      color: kFieldTextColor,
+                                      fontFamily: 'Poppins',
+                                      fontSize: ScreenUtil().scaleText * 18)),
                               Visibility(
                                 visible: contentsController
                                     .pageContents.value.itemsVisibility,
@@ -103,14 +106,14 @@ class FoodTile extends StatelessWidget {
                                   children: [
                                     FaIcon(
                                       FontAwesomeIcons.shoppingBasket,
-                                      size: 18,
+                                      size: ScreenUtil().scaleText * 19,
                                       color: kTileItemColor,
                                     ),
                                     Text(
                                       ' $items / $allItems',
                                       style: TextStyle(
                                         color: kTileItemColor,
-                                        fontSize: 14.0,
+                                        fontSize: ScreenUtil().scaleText * 17.0,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'Poppins',
                                       ),

@@ -61,36 +61,34 @@ class AddItemTextField extends StatelessWidget {
           textAlign: TextAlign.left,
           textAlignVertical: TextAlignVertical.center,
           textInputAction: textAction,
-          onChanged: (text) {
-            if (text.isEmpty) {
-              textController.hasText.value = false;
-            } else {
+          onChanged: (String text) {
+            if (text.isNotEmpty) {
               textController.hasText.value = true;
+            } else {
+              textController.hasText.value = false;
             }
-            onChanged!(text);
           },
           decoration: InputDecoration(
             suffixIcon: Obx(
-              () => textController.hasText.value
-                  ? IconButton(
-                      onPressed: () => {
-                        textController.hasText.value = false,
-                        textController.searchText.clear()
-                      },
-                      icon: FaIcon(
-                        FontAwesomeIcons.times,
-                        color: Colors.white.withOpacity(0.7),
-                        size: 20,
-                      ),
-                    )
-                  : SizedBox(
-                      width: 0,
-                    ),
+              () => Visibility(
+                visible: textController.hasText.value,
+                child: IconButton(
+                  onPressed: () {
+                    textController.searchText.clear();
+                    textController.hasText.value = false;
+                  },
+                  icon: FaIcon(
+                    FontAwesomeIcons.times,
+                    color: Colors.white.withOpacity(0.7),
+                    size: ScreenUtil().scaleText * 21,
+                  ),
+                ),
+              ),
             ),
             icon: FaIcon(
               FontAwesomeIcons.search,
               color: Colors.white.withOpacity(0.7),
-              size: 20,
+              size: ScreenUtil().scaleText * 21,
             ),
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -104,7 +102,8 @@ class AddItemTextField extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 color: Colors.white.withOpacity(0.7)),
             isCollapsed: true,
-            errorStyle: TextStyle(fontSize: 10, color: Colors.white),
+            errorStyle: TextStyle(
+                fontSize: ScreenUtil().scaleText * 11, color: Colors.white,),
           ),
           onTap: onPressed,
         ),

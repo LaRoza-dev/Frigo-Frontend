@@ -51,8 +51,8 @@ class RecipeModel {
     serves = json['serves'];
     skill = json['skill'];
     stars = json['stars'];
-    findedIngCount = json['finded_ing_count']??0;
-    findedIngIndex = json['finded_ing_index']??[];
+    findedIngCount = json['finded_ing_count'] ?? 0;
+    findedIngIndex = json['finded_ing_index'] ?? [];
     userId = json['user_id'];
   }
 
@@ -80,7 +80,8 @@ class RecipeRepository extends GetConnect {
   String? baseUrl = "https://api.laroza.dev";
 
   //Get all Recipes
-  Future<Map<dynamic, dynamic>> getRecipes(PaginationFilter filter,name,sort) async {
+  Future<Map<dynamic, dynamic>> getRecipes(
+      PaginationFilter filter, name, sort) async {
     var token = kStorage.read("token");
     var response = await get(
         "/recipe/?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name&sort=$sort",
@@ -101,7 +102,7 @@ class RecipeRepository extends GetConnect {
 
   //Get Recipes by Ingredients
   Future<Map<dynamic, dynamic>> searchByIng(
-      query, PaginationFilter filter,name,sort) async {
+      query, PaginationFilter filter, name, sort) async {
     var token = kStorage.read("token");
     var response = await post(
         "/recipe/search?pageNumber=${filter.page}&nPerPage=${filter.limit}&name=$name&sort=$sort",
